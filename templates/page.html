@@ -7,9 +7,62 @@
     <title>SuperGameh5 - Gaming Reviews & Insights</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
     <style>
+        .content-hidden {
+            max-height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .fade-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+        }
+
         .star-rating {
             color: #FFD700;
+        }
+
+        .animate-ping {
+            animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes ping {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            75%,
+            100% {
+                transform: scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        .animate-pulse {
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+        }
+
+        .game-btn:hover .btn-wave {
+            display: block;
         }
     </style>
 </head>
@@ -80,16 +133,36 @@
             <!-- Main Column -->
             <div class="w-full lg:w-2/3 px-4">
                 <!-- Game Header -->
-                <div class="flex mb-6">
-                    <div class="mr-4">
-                        <img src="https://piccologame.com/wp-content/uploads/2024/08/logo-gtav-150x150.jpg"
-                            alt="Call of Duty" class="rounded-md">
-                    </div>
-                    <div class="flex-1">
-                        <h1 class="text-2xl font-bold mb-2">Grand Theft Auto V</h1>
-                        <p class="text-gray-600 mb-4 text-sm">All trademarks belong to their respective owners.</p>
-                        <button class="bg-blue-400 text-white px-8 py-2 rounded-md uppercase font-medium">Get
-                            Game</button>
+
+
+
+
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md max-w-2xl w-full">
+                    <div class="flex flex-col sm:flex-row items-center sm:items-start">
+                        <div class="mr-0 sm:mr-6 mb-4 sm:mb-0">
+                            <img src="https://piccologame.com/wp-content/uploads/2024/08/logo-gtav-150x150.jpg"
+                                alt="GTA V Cover" class="rounded-md w-24 h-24 md:w-32 md:h-32">
+                        </div>
+                        <div class="flex-1 text-center sm:text-left">
+                            <h1 class="text-2xl font-bold mb-1">GRAND THEFT AUTO V</h1>
+                            <div class="flex justify-center sm:justify-start text-yellow-400 mb-2">
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                            </div>
+                            <p class="text-gray-600 mb-4 text-sm">All trademarks belong to their respective owners.</p>
+                            <div class="relative inline-block game-btn">
+                                <button
+                                    class="bg-blue-400 hover:bg-blue-500 text-white px-8 py-3 rounded-md uppercase font-bold tracking-wide animate-pulse">
+                                    GET GAME
+                                </button>
+                                <div
+                                    class="btn-wave absolute inset-0 rounded-md border-2 border-blue-400 animate-ping opacity-75 hidden">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -163,41 +236,57 @@
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="flex space-x-2 mb-8">
-                    <button class="bg-blue-400 text-white px-6 py-2 rounded-md">Read Review</button>
-                    <button class="bg-white border border-gray-300 text-gray-700 px-6 py-2 rounded-md">Download</button>
+                <div class="flex flex-wrap gap-2 mb-8">
                     <button
-                        class="bg-white border border-gray-300 text-gray-700 px-6 py-2 rounded-md">Screenshot</button>
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-300 text-sm md:text-base">Read
+                        Review</button>
+                    <button
+                        class="bg-white hover:bg-gray-100 border border-gray-300 text-gray-700 px-4 py-2 rounded-md transition duration-300 text-sm md:text-base">Download</button>
+                    <button
+                        class="bg-white hover:bg-gray-100 border border-gray-300 text-gray-700 px-4 py-2 rounded-md transition duration-300 text-sm md:text-base">Screenshot</button>
                 </div>
 
                 <!-- Review Content -->
                 <div class="prose max-w-none mb-8">
-                    <p class="mb-4 text-gray-700">
-                        "Call of Duty" continues to be a dominant force in the gaming industry. Since its inception, the
-                        franchise has consistently delivered high-octane action and engaging gameplay experiences. The
-                        latest installment continues this impressive legacy, incorporating new features and innovations
-                        that aim to set a new standard for the genre. This article details into the key aspects of "Call
-                        of Duty", examining its latest game mechanics, innovations, features, and the feedback from the
-                        gaming community. Whether you're a seasoned veteran or a newcomer, this review will provide an
-                        in-depth look at what the latest "Call of Duty" game has to offer.
-                    </p>
+                    <div id="content-container" class="content-hidden">
+                        <p class="mb-4 text-gray-700">
+                            "Call of Duty" continues to be a dominant force in the gaming industry. Since its inception,
+                            the
+                            franchise has consistently delivered high-octane action and engaging gameplay experiences.
+                            The
+                            latest installment continues this impressive legacy, incorporating new features and
+                            innovations
+                            that aim to set a new standard for the genre. This article details into the key aspects of
+                            "Call
+                            of Duty", examining its latest game mechanics, innovations, features, and the feedback from
+                            the
+                            gaming community. Whether you're a seasoned veteran or a newcomer, this review will provide
+                            an
+                            in-depth look at what the latest "Call of Duty" game has to offer.
+                        </p>
 
-                    <h2 class="text-xl font-bold mb-4">Evolution of Call of Duty: Historical Perspective</h2>
-                    <h3 class="text-lg font-medium mb-3">The Franchise's Journey</h3>
-                    <p class="mb-4 text-gray-700">
-                        The <strong>Call of Duty</strong> franchise has evolved significantly since its debut in 2003.
-                        Initially focusing on World War II settings, the series has expanded to include modern warfare,
-                        futuristic settings, and various other historical periods. <strong>Key Milestones:</strong>
-                    </p>
-                    <p class="mb-4 text-gray-700">
-                        <strong>Early Years: Call of Duty</strong> and its sequels set the foundation for the series
-                        with gritty, realistic World War II combat scenarios.
-                    </p>
-                    <p class="mb-4 text-gray-700">
-                        <strong>Modern Warfare:</strong> The introduction of Call of Duty 4: Modern Warfare brought
-                        contemporary settings and new gameplay mechanics, reshaping the franchise.
-                    </p>
-                    <button class="bg-blue-400 text-white px-6 py-2 rounded-md">Read More</button>
+                        <h2 class="text-xl font-bold mb-4">Evolution of Call of Duty: Historical Perspective</h2>
+                        <h3 class="text-lg font-medium mb-3">The Franchise's Journey</h3>
+                        <p class="mb-4 text-gray-700">
+                            The <strong>Call of Duty</strong> franchise has evolved significantly since its debut in
+                            2003.
+                            Initially focusing on World War II settings, the series has expanded to include modern
+                            warfare,
+                            futuristic settings, and various other historical periods. <strong>Key Milestones:</strong>
+                        </p>
+                        <p class="mb-4 text-gray-700">
+                            <strong>Early Years: Call of Duty</strong> and its sequels set the foundation for the series
+                            with gritty, realistic World War II combat scenarios.
+                        </p>
+                        <p class="mb-4 text-gray-700">
+                            <strong>Modern Warfare:</strong> The introduction of Call of Duty 4: Modern Warfare brought
+                            contemporary settings and new gameplay mechanics, reshaping the franchise.
+                        </p>
+                        <div id="fade-overlay" class="fade-overlay"></div>
+                    </div>
+                    <button id="read-more-btn"
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-400">Read
+                        More</button>
                 </div>
 
                 <!-- Ratings -->
@@ -210,7 +299,7 @@
                             <span class="text-gray-700 font-medium">5</span>
                         </div>
                         <div class="bg-gray-200 rounded-full h-2.5">
-                            <div class="bg-blue-400 h-2.5 rounded-full" style="width: 100%"></div>
+                            <div class="bg-blue-500 h-2.5 rounded-full" style="width: 100%"></div>
                         </div>
                     </div>
 
@@ -220,7 +309,7 @@
                             <span class="text-gray-700 font-medium">5</span>
                         </div>
                         <div class="bg-gray-200 rounded-full h-2.5">
-                            <div class="bg-blue-400 h-2.5 rounded-full" style="width: 100%"></div>
+                            <div class="bg-blue-500 h-2.5 rounded-full" style="width: 100%"></div>
                         </div>
                     </div>
 
@@ -230,7 +319,7 @@
                             <span class="text-gray-700 font-medium">4</span>
                         </div>
                         <div class="bg-gray-200 rounded-full h-2.5">
-                            <div class="bg-blue-400 h-2.5 rounded-full" style="width: 80%"></div>
+                            <div class="bg-blue-500 h-2.5 rounded-full" style="width: 80%"></div>
                         </div>
                     </div>
 
@@ -240,7 +329,7 @@
                             <span class="text-gray-700 font-medium">4</span>
                         </div>
                         <div class="bg-gray-200 rounded-full h-2.5">
-                            <div class="bg-blue-400 h-2.5 rounded-full" style="width: 80%"></div>
+                            <div class="bg-blue-500 h-2.5 rounded-full" style="width: 80%"></div>
                         </div>
                     </div>
                 </div>
@@ -294,7 +383,7 @@
 
                     <div class="bg-white p-4 rounded-md shadow-sm mb-4">
                         <div class="flex">
-                            <img src="https://piccologame.com/wp-content/uploads/2024/08/logo-150x150.png"
+                            <img src="https://piccologame.com/wp-content/uploads/2024/08/fall-guys.jpg"
                                 alt="BeamNG.drive" class="rounded-md mr-4">
                             <div>
                                 <h3 class="font-bold">BeamNG.drive</h3>
@@ -425,7 +514,7 @@
 
                     <div class="bg-white p-4 rounded-md shadow-sm mb-4">
                         <div class="flex">
-                            <img src="https://piccologame.com/wp-content/uploads/2024/12/sword-hunter-game-150x150.png"
+                            <img src="https://piccologame.com/wp-content/uploads/2024/08/fall-guys.jpg"
                                 alt="Moto Road Rash 3D" class="rounded-md mr-4">
                             <div>
                                 <h3 class="font-bold">Moto Road Rash 3D</h3>
@@ -672,5 +761,50 @@
             </div>
         </div>
     </footer>
+    <script>
+        // read more button
+        document.addEventListener('DOMContentLoaded', function () {
+            const readMoreBtn = document.getElementById('read-more-btn');
+            const contentContainer = document.getElementById('content-container');
+            const fadeOverlay = document.getElementById('fade-overlay');
+
+            readMoreBtn.addEventListener('click', function () {
+                if (contentContainer.classList.contains('content-hidden')) {
+                    // Expand content
+                    contentContainer.classList.remove('content-hidden');
+                    fadeOverlay.style.display = 'none';
+                    readMoreBtn.textContent = 'Read Less';
+                } else {
+                    // Collapse content
+                    contentContainer.classList.add('content-hidden');
+                    fadeOverlay.style.display = 'block';
+                    readMoreBtn.textContent = 'Read More';
+
+                    // Scroll back to top of content when collapsing
+                    contentContainer.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+        // Automatically trigger the wave animation every 3 seconds
+        document.addEventListener('DOMContentLoaded', function () {
+            const gameBtn = document.querySelector('.game-btn');
+            const btnWave = document.querySelector('.btn-wave');
+
+            // Initial animation
+            setTimeout(triggerAnimation, 1000);
+
+            // Set interval for repeating animation
+            setInterval(triggerAnimation, 3000);
+
+            function triggerAnimation() {
+                btnWave.classList.remove('hidden');
+
+                setTimeout(() => {
+                    btnWave.classList.add('hidden');
+                }, 1500);
+            }
+        });
+    </script>
 </body>
+
 </html>
