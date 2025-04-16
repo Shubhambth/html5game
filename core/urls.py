@@ -6,6 +6,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
     path('page/', page, name='page'),
-    path('allgames/', allgames, name='allgames')
+    path('allgames/', allgames, name='allgames'),
     path('gamerivew/', gamerivew, name='gamerivew')
 ]
