@@ -11,3 +11,6 @@ def page(request):
 
 def gamerivew(request):
     return render(request, 'gamerivew.html')
+
+def about(request):
+    return render(request, 'about.html')
