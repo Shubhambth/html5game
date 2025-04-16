@@ -8,3 +8,6 @@ def allgames(request):
 
 def page(request):
     return render(request, 'page.html')
+
+def gamerivew(request):
+    return render(request, 'gamerivew.html')

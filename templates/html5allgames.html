@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>piccolo game!</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet"></script>
+    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -58,7 +58,7 @@
             </div>
 
             <nav class="space-x-4 text-xs uppercase font-semibold text-gray-600">
-                <a href="#" class="hover:text-pink-500">Reviews & Games</a>
+                <a href="{% url 'gamerivew' %}" class="hover:text-pink-500">Reviews & Games</a>
                 <a href="{% url 'allgames'%}" class="hover:text-pink-500">HTML5 Games</a>
                 <a href="#" class="hover:text-pink-500">Blog</a>
                 <a href="#" class="hover:text-pink-500">About Us</a>
@@ -111,7 +111,7 @@
         <!-- Mobile Menu (initially hidden) -->
         <div class="mobile-menu md:hidden bg-white border-t border-gray-200">
             <nav class="flex flex-col text-sm uppercase font-semibold text-gray-600">
-                <a href="{% url 'allgames'%}" class="block px-4 py-2 hover:bg-gray-100 hover:text-pink-500">Reviews & Games</a>
+                <a href="{% url 'gamerivew' %}" class="block px-4 py-2 hover:bg-gray-100 hover:text-pink-500">Reviews & Games</a>
                 <a href="{% url 'allgames'%}" class="block px-4 py-2 hover:bg-gray-100 hover:text-pink-500">HTML5 Games</a>
                 <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-pink-500">Blog</a>
                 <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-pink-500">About Us</a>

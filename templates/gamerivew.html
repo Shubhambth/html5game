@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Piccolo Game - Game Reviews</title>
+
+    <style>
+        .rating {
+            color: #FFD700;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-sm py-3 px-4 md:px-8">
+        <div class="container mx-auto flex justify-between items-center">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <a href="#" class="text-2xl font-bold text-red-500">
+              piccolo<span class="text-gray-800">game!</span>
+            </a>
+          </div>
+
+          <!-- Hamburger (Mobile) -->
+          <div class="md:hidden">
+            <button id="menu-toggle" class="text-gray-700 focus:outline-none">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16">
+                </path>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Search Bar (Desktop Only) -->
+          <div class="hidden md:flex items-center flex-grow justify-center mx-8">
+            <div class="relative w-full max-w-md">
+              <input type="text" placeholder="Search games here..."
+                class="w-full px-4 py-1 border border-gray-300 rounded-md focus:outline-none">
+              <button class="absolute right-2 top-1/2 transform -translate-y-1/2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Menu Links -->
+          <div id="menu" class="hidden md:flex items-center space-x-6">
+            <a href="{% url 'gamerivew' %}" class="text-gray-700 hover:text-gray-900 font-medium uppercase text-sm">Reviews Games</a>
+            <a href="{% url 'allgames'%}" class="text-gray-700 hover:text-gray-900 font-medium uppercase text-sm">HTML5 Games</a>
+            <a href="#" class="text-gray-700 hover:text-gray-900 font-medium uppercase text-sm">Blog</a>
+            <a href="#" class="text-gray-700 hover:text-gray-900 font-medium uppercase text-sm">About Us</a>
+          </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden px-4 pt-4 pb-2 space-y-2">
+          <a href="{% url 'gamerivew' %}" class="block text-gray-700 hover:text-gray-900 font-medium uppercase text-sm">Reviews Games</a>
+          <a href="{% url 'allgames'%}" class="block text-gray-700 hover:text-gray-900 font-medium uppercase text-sm">HTML5 Games</a>
+          <a href="#" class="block text-gray-700 hover:text-gray-900 font-medium uppercase text-sm">Blog</a>
+          <a href="#" class="block text-gray-700 hover:text-gray-900 font-medium uppercase text-sm">About Us</a>
+        </div>
+      </nav>
+
+
+
+
+    <!-- Breadcrumb -->
+    <div class="container mx-auto px-4 py-2 text-sm">
+        <div class="flex items-center text-gray-500">
+            <a href="#" class="hover:text-gray-700">Home</a>
+            <span class="mx-2">></span>
+            <span class="text-gray-700">App Reviews</span>
+        </div>
+    </div>
+
+    <!-- Advertisement Banner -->
+    <div class="container mx-auto px-4 mt-4">
+        <div class="bg-blue-50 rounded-md p-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="bg-green-100 rounded-full p-2 mr-3">
+                    <span class="text-green-500 text-xl">€</span>
+                </div>
+                <div>
+                    <p class="font-medium text-gray-800">Monetag Referral Program</p>
+                </div>
+            </div>
+            <button class="bg-blue-900 text-white px-4 py-1 rounded-md text-sm">Open</button>
+        </div>
+    </div>
+
+    <!-- App Review Header -->
+    <div class="container mx-auto px-4 mt-6">
+        <div class="border-b border-blue-400 pb-2 mb-6">
+            <h1 class="text-2xl font-bold text-center">App Review</h1>
+            <div class="w-24 h-1 bg-blue-400 mx-auto mt-2"></div>
+        </div>
+    </div>
+
+    <!-- Game Reviews Grid -->
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+
+
+
+
+
+            <!-- Red Dead Redemption 2 -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="flex p-4">
+                    <img src="https://piccologame.com/wp-content/uploads/2025/01/RDR2_HeroSquare_1080x1080-150x150.jpg"
+                        alt="Red Dead Redemption 2" class="w-20 h-20 object-cover rounded">
+                    <div class="ml-4">
+                        <h3 class="font-bold text-lg">Red Dead Redemption 2</h3>
+                        <p class="text-sm text-gray-600 mt-2">Red Dead Redemption 2 offers a breathtaking journey
+                            through the Wild West with its engaging story and...</p>
+                        <div class="flex mt-2 rating">
+                            <span>★★★★★</span>
+                        </div>
+                        <a href="#" class="text-blue-400 text-sm mt-1 inline-block">Read full review</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Roblox -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="flex p-4">
+                    <img src="https://piccologame.com/wp-content/uploads/2025/01/5_1200x1200-150x150.jpg" alt="Roblox"
+                        class="w-20 h-20 object-cover rounded">
+                    <div class="ml-4">
+                        <h3 class="font-bold text-lg">Roblox</h3>
+                        <p class="text-sm text-gray-600 mt-2">Roblox is an innovative platform where users can create
+                            and socialize in immersive virtual worlds. Explore ende...</p>
+                        <div class="flex mt-2 rating">
+                            <span>★★★★★</span>
+                        </div>
+                        <a href="#" class="text-blue-400 text-sm mt-1 inline-block">Read full review</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Core Keeper -->
+
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="container mx-auto px-4 mt-8 flex justify-center">
+        <div class="flex space-x-2">
+            <a href="#" class="bg-blue-400 text-white px-3 py-1 rounded">1</a>
+            <a href="#" class="bg-gray-200 text-gray-700 px-3 py-1 rounded">2</a>
+            <a href="#" class="bg-gray-200 text-gray-700 px-3 py-1 rounded">></a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white mt-12 pt-8 pb-6 border-t">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap">
+                <div class="w-full lg:w-1/4 mb-8">
+                    <a href="#" class="text-2xl font-bold text-red-500">piccolo<span
+                            class="text-gray-800">game!</span></a>
+                    <p class="text-sm text-gray-600 mt-4">
+                        Welcome to piccologame.com, your compass for comprehensive guides with the latest industry news.
+                        Our mission is to provide you with insightful analysis and valuable insights, enriching your
+                        digital journey.
+                    </p>
+                </div>
+
+                <div class="w-full lg:w-1/4 mb-8 lg:px-4">
+                    <h4 class="text-blue-400 font-medium mb-4">Blog</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">News</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Top Apps</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Top Games</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">How-To</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Tips&Guides</a></li>
+                    </ul>
+                </div>
+
+                <div class="w-full lg:w-1/4 mb-8 lg:px-4">
+                    <h4 class="text-blue-400 font-medium mb-4">Latest Reviews</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Marvel Rivals</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Red Dead Redemption 2</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Roblox</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Core Keeper</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">EA SPORT FC 25</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Brawl Stars</a></li>
+                    </ul>
+                </div>
+
+                <div class="w-full lg:w-1/4 mb-8 lg:px-4">
+                    <h4 class="text-blue-400 font-medium mb-4">Contact us</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">About Us</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Disclaimer</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-200 mt-6 pt-6">
+                <p class="text-sm text-gray-600 text-center">© 2025 piccologame. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Toggle menu for mobile
+        const toggleBtn = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        toggleBtn.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+      </script>
+</body>
+
+</html>
