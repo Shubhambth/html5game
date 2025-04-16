@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>piccolo game!</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .game-item {
+            width: 100%;
+            aspect-ratio: 1/1;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .banner {
+            background-color: #f9f9f9;
+        }
+
+        /* Mobile menu toggle */
+        #mobile-menu-toggle:checked+.mobile-menu {
+            display: block;
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <!-- Header -->
+    <header class="border-b border-gray-200">
+        <!-- Desktop Header -->
+        <div class="hidden md:flex items-center justify-between px-4 py-2">
+            <div class="flex items-center">
+                <a href="#" class="text-pink-500 font-bold text-xl">
+                    piccolo<span class="text-blue-500">game!</span>
+                </a>
+            </div>
+
+            <div class="relative">
+                <input type="text" placeholder="Search games here..."
+                    class="px-4 py-1 bg-gray-100 rounded-full text-sm border border-gray-200 pr-8 w-64">
+                <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </button>
+            </div>
+
+            <nav class="space-x-4 text-xs uppercase font-semibold text-gray-600">
+                <a href="#" class="hover:text-pink-500">Reviews & Games</a>
+                <a href="{% url 'allgames'%}" class="hover:text-pink-500">HTML5 Games</a>
+                <a href="#" class="hover:text-pink-500">Blog</a>
+                <a href="#" class="hover:text-pink-500">About Us</a>
+            </nav>
+        </div>
+
+        <!-- Mobile Header -->
+        <div class="md:hidden flex items-center justify-between px-4 py-2">
+            <div class="flex items-center">
+                <a href="/" class="text-pink-500 font-bold text-xl">
+                    piccolo<span class="text-blue-500">game!</span>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="flex items-center">
+                <button id="search-button" class="p-2 mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </button>
+                <label for="mobile-menu-toggle" class="cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </label>
+                <input type="checkbox" id="mobile-menu-toggle" class="hidden">
+            </div>
+        </div>
+
+        <!-- Mobile Search (initially hidden) -->
+        <div id="mobile-search" class="hidden px-4 py-2 md:hidden">
+            <div class="relative">
+                <input type="text" placeholder="Search games here..."
+                    class="w-full px-4 py-2 bg-gray-100 rounded-full text-sm border border-gray-200 pr-8">
+                <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (initially hidden) -->
+        <div class="mobile-menu md:hidden bg-white border-t border-gray-200">
+            <nav class="flex flex-col text-sm uppercase font-semibold text-gray-600">
+                <a href="{% url 'allgames'%}" class="block px-4 py-2 hover:bg-gray-100 hover:text-pink-500">Reviews & Games</a>
+                <a href="{% url 'allgames'%}" class="block px-4 py-2 hover:bg-gray-100 hover:text-pink-500">HTML5 Games</a>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-pink-500">Blog</a>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-pink-500">About Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Banner Ad - Responsive -->
+    <div class="banner py-3 px-4 md:py-4 md:px-6 flex flex-col md:flex-row items-center justify-between">
+        <div class="flex items-center mb-2 md:mb-0">
+            <div class="text-green-500 text-3xl md:text-4xl mr-2 md:mr-4">€</div>
+            <div class="text-sm md:text-base">
+                <p class="font-semibold">Looking for an Easy Way to Make</p>
+                <p>Extra Money? Let's Dive Right In</p>
+            </div>
+        </div>
+        <button class="bg-indigo-900 text-white px-4 py-1 md:px-6 rounded-full text-sm">OPEN ➔</button>
+    </div>
+
+    <!-- H5 Game Header -->
+    <div class="text-center py-3 md:py-4">
+        <h1 class="text-2xl md:text-3xl font-bold">H5 <span class="text-blue-600">Game</span></h1>
+    </div>
+
+    <!-- Game Grid - Already Responsive -->
+    <div class="px-2 md:px-4 pb-8">
+        <div
+            class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 2xl:grid-cols-12 gap-2 md:gap-3">
+            <div
+                class="game-item bg-blue-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
+                <img src="https://piccologame.com/wp-content/uploads/2024/08/logo-150x150.jpg"
+                    alt="Game" class="w-full h-full object-cover" />
+                <div
+                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
+                    <div
+                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
+                        Game Name
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example of duplicated items -->
+            <div
+                class="game-item bg-red-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
+                <img src="https://piccologame.com/wp-content/uploads/2024/08/logo-gtav-150x150.jpg"
+                    alt="Game" class="w-full h-full object-cover" />
+                <div
+                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
+                    <div
+                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
+                        Racing Game
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
+                <img src="https://piccologame.com/wp-content/uploads/2024/12/tank-sniper-3d-game-150x150.png"
+                    alt="Game" class="w-full h-full object-cover" />
+                <div
+                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
+                    <div
+                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
+                        Puzzle Game
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
+                <img src="
+                https://piccologame.com/wp-content/uploads/2024/12/frozen-sisters-dream-wedding-game-150x150.png"
+                    alt="Game" class="w-full h-full object-cover" />
+                <div
+                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
+                    <div
+                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
+                        Puzzle Game
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
+                <img src="
+                https://piccologame.com/wp-content/uploads/2024/12/brain-master-iq-challenge-2-game-150x150.png"
+                    alt="Game" class="w-full h-full object-cover" />
+                <div
+                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
+                    <div
+                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
+                        Puzzle Game
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
+                <img src="
+                https://piccologame.com/wp-content/uploads/2024/12/cube-arena-2048-merge-numbers-game-150x150.png"
+                    alt="Game" class="w-full h-full object-cover" />
+                <div
+                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
+                    <div
+                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
+                        Puzzle Game
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
+                <img src="https://piccologame.com/wp-content/uploads/2024/12/2048-x2-legends-game-150x150.png"
+                    alt="Game" class="w-full h-full object-cover" />
+                <div
+                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
+                    <div
+                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
+                        Puzzle Game
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
+                <img src="
+                https://piccologame.com/wp-content/uploads/2024/12/mushroomtarzan-game-150x150.png"
+                    alt="Game" class="w-full h-full object-cover" />
+                <div
+                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
+                    <div
+                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
+                        Puzzle Game
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
+                <img src="https://piccologame.com/wp-content/uploads/2024/12/z-stick-duel-fighting-game-150x150.png"
+                    alt="Game" class="w-full h-full object-cover" />
+                <div
+                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
+                    <div
+                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
+                        Puzzle Game
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
+                <img src="
+                https://piccologame.com/wp-content/uploads/2024/12/stickboys-xmas-game-150x150.png"
+                    alt="Game" class="w-full h-full object-cover" />
+                <div
+                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
+                    <div
+                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
+                        Puzzle Game
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
+                <img src="https://piccologame.com/wp-content/uploads/2024/12/z-stick-duel-fighting-game-150x150.png"
+                    alt="Game" class="w-full h-full object-cover" />
+                <div
+                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
+                    <div
+                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
+                        Puzzle Game
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
+                <img src="
+                https://piccologame.com/wp-content/uploads/2024/12/vegas-city-gangster-2024-game-150x150.png"
+                    alt="Game" class="w-full h-full object-cover" />
+                <div
+                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
+                    <div
+                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
+                        Puzzle Game
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
+                <img src="https://piccologame.com/wp-content/uploads/2024/12/sky-stunts-rolling-ball-3d-game-150x150.png"
+                    alt="Game" class="w-full h-full object-cover" />
+                <div
+                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
+                    <div
+                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
+                        Puzzle Game
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
+                <img src="https://piccologame.com/wp-content/uploads/2024/12/city-cash-race-game-150x150.png"
+                    alt="Game" class="w-full h-full object-cover" />
+                <div
+                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
+                    <div
+                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
+                        Puzzle Game
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
+                <img src="https://piccologame.com/wp-content/uploads/2024/12/moto-stuntman-game-150x150.png"
+                    alt="Game" class="w-full h-full object-cover" />
+                <div
+                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
+                    <div
+                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
+                        Puzzle Game
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
+                <img src="
+                https://piccologame.com/wp-content/uploads/2024/12/soccer-championship-2023-html5-game-150x150.png"
+                    alt="Game" class="w-full h-full object-cover" />
+                <div
+                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
+                    <div
+                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
+                        Puzzle Game
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
+                <img src="https://piccologame.com/wp-content/uploads/2024/12/dark-war-game-150x150.png"
+                    alt="Game" class="w-full h-full object-cover" />
+                <div
+                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
+                    <div
+                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
+                        Puzzle Game
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add more game items as needed -->
+        </div>
+    </div>
+
+    <!-- Footer - Made Responsive -->
+    <footer class="border-t border-gray-200 py-4 md:py-6 px-4">
+        <div class="container mx-auto">
+            <div class="flex flex-wrap">
+                <!-- Logo and Description -->
+                <div class="w-full md:w-1/2 lg:w-1/4 mb-6 md:mb-4">
+                    <h3 class="text-pink-500 font-bold mb-2">
+                        piccolo<span class="text-blue-500">game!</span>
+                    </h3>
+                    <p class="text-xs text-gray-600 mb-4 pr-4">
+                        Piccolo is piccoologames.com, your compass for comprehensive guides
+                        with the latest industry news. Our mission is to provide you with
+                        insightful analysis and valuable insights, enriching your digital journey.
+                    </p>
+                </div>
+
+                <!-- Footer Links - Responsive Columns -->
+                <div class="w-1/2 md:w-1/6 mb-6 md:mb-4">
+                    <h4 class="font-semibold text-blue-500 mb-2">Blog</h4>
+                    <ul class="text-xs text-gray-600 space-y-1">
+                        <li><a href="#" class="hover:text-pink-500">News</a></li>
+                        <li><a href="#" class="hover:text-pink-500">Top Apps</a></li>
+                        <li><a href="#" class="hover:text-pink-500">Top Games</a></li>
+                        <li><a href="#" class="hover:text-pink-500">How To</a></li>
+                        <li><a href="#" class="hover:text-pink-500">Tips</a></li>
+                    </ul>
+                </div>
+
+                <div class="w-1/2 md:w-1/6 mb-6 md:mb-4">
+                    <h4 class="font-semibold text-blue-500 mb-2">Latest Reviews</h4>
+                    <ul class="text-xs text-gray-600 space-y-1">
+                        <li><a href="#" class="hover:text-pink-500">Marvel Contest</a></li>
+                        <li><a href="#" class="hover:text-pink-500">Roblox</a></li>
+                        <li><a href="#" class="hover:text-pink-500">Red Dead Redemption</a></li>
+                        <li><a href="#" class="hover:text-pink-500">Bubble</a></li>
+                        <li><a href="#" class="hover:text-pink-500">Cricut</a></li>
+                        <li><a href="#" class="hover:text-pink-500">Perplexed on 20</a></li>
+                        <li><a href="#" class="hover:text-pink-500">Word Snack</a></li>
+                    </ul>
+                </div>
+
+                <div class="w-full md:w-1/6 mb-4">
+                    <h4 class="font-semibold text-blue-500 mb-2">Contact us</h4>
+                    <ul class="text-xs text-gray-600 space-y-1">
+                        <li><a href="#" class="hover:text-pink-500">Email</a></li>
+                        <li><a href="#" class="hover:text-pink-500">Terms of Use</a></li>
+                        <li><a href="#" class="hover:text-pink-500">Privacy policy</a></li>
+                        <li><a href="#" class="hover:text-pink-500">Disclaimer</a></li>
+                        <li><a href="#" class="hover:text-pink-500">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for mobile menu toggle -->
+    <script>
+        document.getElementById('search-button').addEventListener('click', function () {
+            const mobileSearch = document.getElementById('mobile-search');
+            mobileSearch.classList.toggle('hidden');
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            // Fix for mobile menu toggle
+            const menuToggle = document.getElementById('mobile-menu-toggle');
+            const mobileMenu = document.querySelector('.mobile-menu');
+
+            menuToggle.addEventListener('change', function () {
+                if (this.checked) {
+                    mobileMenu.style.display = 'block';
+                } else {
+                    mobileMenu.style.display = 'none';
+                }
+            });
+
+            // Keep the existing search button functionality
+            document.getElementById('search-button').addEventListener('click', function () {
+                const mobileSearch = document.getElementById('mobile-search');
+                mobileSearch.classList.toggle('hidden');
+            });
+        });
+    </script>
+</body>
+
+</html>
