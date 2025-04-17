@@ -1,168 +1,475 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SuperGameH5 UI Clone</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PiccoloGame - Game Reviews & News</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .wave-shape {
+            height: 150px;
+            overflow: hidden;
+        }
+
+        .wave {
+            fill: white;
+        }
+
+        .logo-text {
+            font-weight: bold;
+        }
+
+        .logo-piccolo {
+            color: #ff5c5c;
+        }
+
+        .logo-game {
+            color: #8e44ad;
+        }
+
+        .hero-section {
+            background-color: #0f1b44;
+            background-image: radial-gradient(circle, rgba(25, 40, 100, 0.4) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        .rating {
+            color: #FFD700;
+        }
+
+        /* Mobile menu styles */
+        .mobile-menu {
+            display: none;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+
+            .mobile-menu-button {
+                display: block;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-menu-button {
+                display: none;
+            }
+        }
+    </style>
 </head>
-<body class="bg-gradient-to-b from-pink-100 to-white font-sans">
-  <!-- Header -->
-  <header class="flex items-center justify-between p-4 bg-white shadow">
-    <div class="text-xl font-bold text-pink-600">super<span class="text-purple-900">gameh5!</span></div>
-    <input type="text" placeholder="Search games here..." class="px-4 py-2 border rounded">
-    <nav class="space-x-4">
-      <a href="{% url 'gamerivew' %}" class="text-gray-700">Reviews Games</a>
-      <a href="{% url 'allgames' %}" class="text-gray-700">HTML5 Games</a>
-      <a href="{% url 'blog' %}" class="text-gray-700">Blog</a>
-      <a href="{% url 'about'%}" class="text-gray-700">About us</a>
-    </nav>
-  </header>
 
-  <!-- Hero Section -->
-  <section class="text-center py-16">
-    <h1 class="text-4xl md:text-5xl font-bold text-gray-800 max-w-3xl mx-auto">Enhance your expertise with the latest news and reviews on top games and apps. Join our community!</h1>
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSadfsyIhq8Yxd8Mr07I7GVRJLCnN85zT_EQA&s" alt="Gamer Image" class="mx-auto w-80 mt-8">
-  </section>
+<body class="bg-white">
+    <!-- Header/Navigation -->
+    <header class="bg-gray-900 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+          <div class="flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="text-2xl font-extrabold tracking-tight flex items-center space-x-1">
+              <span class="text-pink-500">piccolo</span><span class="text-blue-400">game!</span>
+            </a>
 
-  <!-- Latest Reviews -->
-  <section class="px-4 md:px-12 py-10">
-    <h2 class="text-2xl font-bold text-center mb-8">Latest Reviews</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- Card -->
-      <div class="flex items-start gap-4 p-4 bg-white rounded shadow transform transition duration-300 hover:scale-105 hover:shadow-lg">
-        <img src="https://picsum.photos/3/38" alt="League of Legends" class="w-16 h-16">
-        <div>
-          <h3 class="font-semibold">League of Legends</h3>
-          <p class="text-sm text-gray-600">League of Legends: Wild Rift game that has quickly become...</p>
-          <div class="text-yellow-500 mt-1">★★★★★</div>
+            <!-- Mobile Menu Button -->
+            <button id="menuButton" class="lg:hidden text-2xl focus:outline-none">
+              <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Desktop Menu -->
+            <div class="hidden lg:flex items-center space-x-8 w-full max-w-3xl ml-10">
+              <!-- Search Bar -->
+
+
+              <!-- Navigation Links -->
+              <nav>
+                <ul class="flex space-x-6 text-sm font-medium">
+                  <li><a href="{% url 'gamerivew' %}" class="hover:text-blue-300">Reviews</a></li>
+                  <li><a href="{% url 'allgames'%}" class="hover:text-blue-300">HTML5 Games</a></li>
+                  <li><a href="{% url 'blog' %}" class="hover:text-blue-300">Blog</a></li>
+                  <li><a href="{% url 'about'%}" class="hover:text-blue-300">About</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          <!-- Mobile Menu (Dropdown) -->
+          <div id="mobileMenu" class="hidden flex flex-col gap-4 mt-4 lg:hidden animate-fadeIn">
+            <!-- Search -->
+
+
+            <!-- Nav Links -->
+            <ul class="flex flex-col space-y-2 text-sm font-medium">
+              <li><a href="{% url 'gamerivew' %}" class="block hover:text-blue-300">Reviews</a></li>
+              <li><a href="{% url 'allgames'%}" class="block hover:text-blue-300">HTML5 Games</a></li>
+              <li><a href="{% url 'blog' %}" class="block hover:text-blue-300">Blog</a></li>
+              <li><a href="{% url 'about'%}" class="block hover:text-blue-300">About</a></li>
+            </ul>
+          </div>
         </div>
-      </div>
+      </header>
 
-      <div class="flex items-start gap-4 p-4 bg-white rounded shadow transform transition duration-300 hover:scale-105 hover:shadow-lg">
-        <img src="https://picsum.photos/3/38" alt="League of Legends" class="w-16 h-16">
-        <div>
-          <h3 class="font-semibold">League of Legends</h3>
-          <p class="text-sm text-gray-600">League of Legends: Wild Rift game that has quickly become...</p>
-          <div class="text-yellow-500 mt-1">★★★★★</div>
+
+
+    <!-- Hero Section -->
+    <section
+        class="hero-section text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 relative overflow-hidden">
+        <div class="container mx-auto px-6 py-16 md:py-28">
+            <div class="text-center max-w-3xl mx-auto">
+                <h1 class="text-3xl md:text-5xl font-bold leading-tight mb-6">
+                    Get fact-checked news and honest reviews about top apps and games
+                </h1>
+                <p class="text-lg md:text-xl text-white/90 mb-8">
+                    Stay informed with real insights and explore the digital world through a trustworthy lens.
+                </p>
+
+            </div>
         </div>
-      </div>
-     
+
+        <!-- Wave Shape -->
+
+    </section>
 
 
-      
-      <!-- Add more cards similarly -->
-    </div>
-  </section>
+    <!-- Reviews Section -->
+    <section class="py-8">
+        <div class="container mx-auto px-4">
+            <div class="border-l-4 border-blue-500 pl-2 mb-6">
+                <h2 class="font-bold text-lg">REVIEWS</h2>
+                <p class="text-gray-500 text-xs">MOST POPULAR</p>
+            </div>
 
-  <!-- Popular Posts on Blog -->
-  <section class="px-4 md:px-12 py-10">
-    <h2 class="text-2xl font-bold text-center mb-8">Popular posts on blog</h2>
-    <div class="grid gap-6">
-      <!-- Blog Card -->
-      <div class="relative h-64 rounded-lg overflow-hidden">
-        <img src="https://picsum.photos/800/300" class="w-full h-full object-cover" alt="Post Image">
-        <div class="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-md text-white p-4">
-          <h3 class="text-xl font-semibold">Top 5 Video Downloader & Player Apps</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Fall Guys -->
+                <div>
+                    <div class="mb-2">
+                        <img src="https://piccologame.com/wp-content/uploads/2024/08/fall-guys.jpg" alt="Fall Guys"
+                            class="w-full h-40 object-cover rounded">
+                    </div>
+                    <h3 class="font-semibold mb-1">Fall Guys</h3>
+                    <div class="rating mb-2">
+                        ★★★★★
+                    </div>
+                    <p class="text-sm text-gray-600">Fall Guys is an online multiplayer game where up to 60 players
+                        compete in battle royale-style rounds. The goal is to be the last one standing after navigating
+                        a series of unique obstacles.</p>
+                </div>
+
+                <!-- Roblox -->
+                <div>
+                    <div class="mb-2">
+                        <img src="
+                        https://piccologame.com/wp-content/uploads/2024/08/roblox.png" alt="Roblox"
+                            class="w-full h-40 object-cover rounded">
+                    </div>
+                    <h3 class="font-semibold mb-1">Roblox</h3>
+                    <div class="rating mb-2">
+                        ★★★★★
+                    </div>
+                    <p class="text-sm text-gray-600">Roblox is an innovative platform where users can create and
+                        socialize in immersive visual worlds. Explore endless possibilities with Roblox.</p>
+                </div>
+
+                <!-- Minecraft -->
+                <div>
+                    <div class="mb-2">
+                        <img src="
+                        https://piccologame.com/wp-content/uploads/2024/08/logo.png" alt="Minecraft"
+                            class="w-full h-40 object-cover rounded">
+                    </div>
+                    <h3 class="font-semibold mb-1">Minecraft</h3>
+                    <div class="rating mb-2">
+                        ★★★★★
+                    </div>
+                    <p class="text-sm text-gray-600">Minecraft is a sandbox game where players can build virtually
+                        anything they can imagine. There are many ways to play Minecraft: players can either explore the
+                        world, build big.</p>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="relative h-64 rounded-lg overflow-hidden">
-        <img src="https://picsum.photos/800/300" class="w-full h-full object-cover" alt="Post Image">
-        <div class="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-md text-white p-4">
-          <h3 class="text-xl font-semibold">Top 5 Video Downloader & Player Apps</h3>
-        </div>
-      </div>
-      <div class="relative h-64 rounded-lg overflow-hidden">
-        <img src="https://picsum.photos/800/300" class="w-full h-full object-cover" alt="Post Image">
-        <div class="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-md text-white p-4">
-          <h3 class="text-xl font-semibold">Top 5 Video Downloader & Player Apps</h3>
-        </div>
-      </div>
-      <div class="relative h-64 rounded-lg overflow-hidden">
-        <img src="https://picsum.photos/800/300" class="w-full h-full object-cover" alt="Post Image">
-        <div class="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-md text-white p-4">
-          <h3 class="text-xl font-semibold">Top 5 Video Downloader & Player Apps</h3>
-        </div>
-      </div>
-      <!-- Repeat for more blog posts -->
-    </div>
-  </section>
+    </section>
 
-  <!-- Trending Games -->
-  <section class="px-4 md:px-12 py-10">
-    <h2 class="text-2xl font-bold text-center mb-8">Trending games</h2>
-    <div class="grid grid-cols-2 md:grid-cols-6 gap-4">
-      <div class="text-center">
-        <img src="https://picsum.photos/80/80" class="mx-auto rounded" alt="Game">
-        <p class="mt-2 text-sm font-medium">Game Title</p>
-        <div class="text-yellow-500">★★★★★</div>
-      </div>
-      <div class="text-center">
-        <img src="https://picsum.photos/80/80" class="mx-auto rounded" alt="Game">
-        <p class="mt-2 text-sm font-medium">Game Title</p>
-        <div class="text-yellow-500">★★★★★</div>
-      </div>
-      <div class="text-center">
-        <img src="https://picsum.photos/80/80" class="mx-auto rounded" alt="Game">
-        <p class="mt-2 text-sm font-medium">Game Title</p>
-        <div class="text-yellow-500">★★★★★</div>
-      </div>
-      <div class="text-center">
-        <img src="https://picsum.photos/80/80" class="mx-auto rounded" alt="Game">
-        <p class="mt-2 text-sm font-medium">Game Title</p>
-        <div class="text-yellow-500">★★★★★</div>
-      </div>
-      <div class="text-center">
-        <img src="https://picsum.photos/80/80" class="mx-auto rounded" alt="Game">
-        <p class="mt-2 text-sm font-medium">Game Title</p>
-        <div class="text-yellow-500">★★★★★</div>
-      </div>
-      <div class="text-center">
-        <img src="https://picsum.photos/80/80" class="mx-auto rounded" alt="Game">
-        <p class="mt-2 text-sm font-medium">Game Title</p>
-        <div class="text-yellow-500">★★★★★</div>
-      </div>
-      
-      <!-- Repeat for other games -->
-    </div>
-  </section>
-  
+    <!-- Hot Apps Section -->
+    <section class="py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-6">
+                <div class="border-l-4 border-blue-500 pl-2">
+                    <h2 class="font-bold text-lg">HOT APPS</h2>
+                    <p class="text-gray-500 text-xs">LATEST</p>
+                </div>
+                <a href="#" class="text-blue-500 border border-blue-500 px-4 py-1 rounded text-sm">SEE ALL</a>
+            </div>
 
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-white py-10 px-4 md:px-12">
-    <div class="flex flex-col md:flex-row justify-between gap-6">
-      <div>
-        <h3 class="text-lg font-bold text-pink-400">super<span class="text-purple-300">gameh5!</span></h3>
-        <p class="text-sm max-w-xs mt-2">Your compass for comprehensive and insightful reviews.</p>
-        <p class="text-xs mt-4">© 2024 supergameh5.com - All Rights Reserved</p>
-      </div>
-      <div>
-        <h4 class="font-semibold mb-2">Blog</h4>
-        <ul class="space-y-1 text-sm">
-          <li>News</li>
-          <li>Top Apps</li>
-          <li>Top Games</li>
-          <li>How-To</li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="font-semibold mb-2">Latest Reviews</h4>
-        <ul class="space-y-1 text-sm">
-          <li>Counter-Strike 2</li>
-          <li>Spider-Man 2</li>
-          <li>Core Keeper</li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="font-semibold mb-2">Contact us</h4>
-        <ul class="space-y-1 text-sm">
-          <li>About Us</li>
-          <li>Privacy Policy</li>
-          <li>Disclaimer</li>
-          <li>Sitemap</li>
-        </ul>
-      </div>
-    </div>
-  </footer>
+            <!-- First Row -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
+                <div>
+                    <div class="mb-2">
+                        <img src="
+                        https://piccologame.com/wp-content/uploads/2024/08/logo-1.png" alt="League of Legends"
+                            class="w-full rounded">
+                    </div>
+                    <h3 class="font-semibold text-sm mb-1">League of Legends</h3>
+                    <div class="rating text-sm">
+                        ★★★★★
+                    </div>
+                </div>
+
+                <div>
+                    <div class="mb-2">
+                        <img src="
+                        https://piccologame.com/wp-content/uploads/2024/11/Brawl-Stars.jpeg" alt="Gacha Club"
+                            class="w-full rounded">
+                    </div>
+                    <h3 class="font-semibold text-sm mb-1">Gacha Club</h3>
+                    <div class="rating text-sm">
+                        ★★★★★
+                    </div>
+                </div>
+
+                <div>
+                    <div class="mb-2">
+                        <img src="https://piccologame.com/wp-content/uploads/2024/08/roblox.png" alt="FIFA 23"
+                            class="w-full rounded">
+                    </div>
+                    <h3 class="font-semibold text-sm mb-1">FIFA 23</h3>
+                    <div class="rating text-sm">
+                        ★★★★★
+                    </div>
+                </div>
+
+                <div>
+                    <div class="mb-2">
+                        <img src="https://piccologame.com/wp-content/uploads/2024/08/roblox.png" alt="Roblox"
+                            class="w-full rounded">
+                    </div>
+                    <h3 class="font-semibold text-sm mb-1">Roblox</h3>
+                    <div class="rating text-sm">
+                        ★★★★★
+                    </div>
+                </div>
+
+                <div>
+                    <div class="mb-2">
+                        <img src="https://piccologame.com/wp-content/uploads/2025/01/RDR2_HeroSquare_1080x1080.jpg"
+                            alt="Red Dead Redemption" class="w-full rounded">
+                    </div>
+                    <h3 class="font-semibold text-sm mb-1">Red Dead Redemption</h3>
+                    <div class="rating text-sm">
+                        ★★★★★
+                    </div>
+                </div>
+
+                <div>
+                    <div class="mb-2">
+                        <img src="
+                        https://piccologame.com/wp-content/uploads/2024/08/logo.jpg" alt="Fall Guys"
+                            class="w-full rounded">
+                    </div>
+                    <h3 class="font-semibold text-sm mb-1">Fall Guys</h3>
+                    <div class="rating text-sm">
+                        ★★★★★
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second Row -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                <div>
+                    <div class="mb-2">
+                        <img src="
+                        https://piccologame.com/wp-content/uploads/2024/08/logo.jpg" alt="Core Keeper"
+                            class="w-full rounded">
+                    </div>
+                    <h3 class="font-semibold text-sm mb-1">Core Keeper</h3>
+                    <div class="rating text-sm">
+                        ★★★★★
+                    </div>
+                </div>
+
+                <div>
+                    <div class="mb-2">
+                        <img src="
+                        https://piccologame.com/wp-content/uploads/2024/08/logo.jpg" alt="God of War Ragnarok"
+                            class="w-full rounded">
+                    </div>
+                    <h3 class="font-semibold text-sm mb-1">God of War Ragnarok</h3>
+                    <div class="rating text-sm">
+                        ★★★★★
+                    </div>
+                </div>
+
+                <div>
+                    <div class="mb-2">
+                        <img src="https://piccologame.com/wp-content/uploads/2024/11/Brawl-Stars.jpeg" alt="Brawl Stars"
+                            class="w-full rounded">
+                    </div>
+                    <h3 class="font-semibold text-sm mb-1">Brawl Stars</h3>
+                    <div class="rating text-sm">
+                        ★★★★★
+                    </div>
+                </div>
+
+                <div>
+                    <div class="mb-2">
+                        <img src="https://piccologame.com/wp-content/uploads/2024/11/Brawl-Stars.jpeg" alt="Minecraft"
+                            class="w-full rounded">
+                    </div>
+                    <h3 class="font-semibold text-sm mb-1">Minecraft</h3>
+                    <div class="rating text-sm">
+                        ★★★★★
+                    </div>
+                </div>
+
+                <div>
+                    <div class="mb-2">
+                        <img src="
+                        https://piccologame.com/wp-content/uploads/2024/08/11.jpg" alt="Marvel Rivals"
+                            class="w-full rounded">
+                    </div>
+                    <h3 class="font-semibold text-sm mb-1">Marvel Rivals</h3>
+                    <div class="rating text-sm">
+                        ★★★★★
+                    </div>
+                </div>
+
+                <div>
+                    <div class="mb-2">
+                        <img src="
+                        https://piccologame.com/wp-content/uploads/2024/08/11.jpg" alt="Call of Duty"
+                            class="w-full rounded">
+                    </div>
+                    <h3 class="font-semibold text-sm mb-1">Call of Duty</h3>
+                    <div class="rating text-sm">
+                        ★★★★★
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-6">
+                <div class="border-l-4 border-blue-500 pl-2">
+                    <h2 class="font-bold text-lg">BLOG</h2>
+                    <p class="text-gray-500 text-xs">MOST POPULAR</p>
+                </div>
+                <a href="#" class="text-blue-500 border border-blue-500 px-4 py-1 rounded text-sm">SEE ALL</a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Blog Post 1 -->
+                <div class="relative">
+                    <img src="https://piccologame.com/wp-content/uploads/2025/03/candy-crush-saga-1.jpg"
+                        alt="Candy Crush" class="w-full h-40 object-cover rounded">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                        <h3 class="text-white font-semibold text-sm md:text-base">Candy Crush Saga: The Ultimate Guide
+                            to the Top Game</h3>
+                        <p class="text-gray-300 text-xs mt-1">January 10, 2024</p>
+                    </div>
+                </div>
+
+                <!-- Blog Post 2 -->
+                <div class="relative">
+                    <img src="https://piccologame.com/wp-content/uploads/2025/03/candy-crush-saga-1.jpg"
+                        alt="Basketball" class="w-full h-40 object-cover rounded">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                        <h3 class="text-white font-semibold text-sm md:text-base">Mastering the Randomness in Basketball
+                            Games: Strategies for Success</h3>
+                        <p class="text-gray-300 text-xs mt-1">January 11, 2024</p>
+                    </div>
+                </div>
+
+                <!-- Blog Post 3 -->
+                <div class="relative">
+                    <img src="https://piccologame.com/wp-content/uploads/2025/03/candy-crush-saga-1.jpg"
+                        alt="Casual Games" class="w-full h-40 object-cover rounded">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                        <h3 class="text-white font-semibold text-sm md:text-base">Top 5 Casual Games: The Best Picks for
+                            Relaxation and Fun</h3>
+                        <p class="text-gray-300 text-xs mt-1">January 12, 2024</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+
+
+    <!-- Footer -->
+    <footer class="bg-white py-12 border-t border-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row justify-between">
+                <div class="mb-8 lg:mb-0 text-center lg:text-left">
+                    <a href="#" class="text-xl font-bold mb-4 block">
+                        <span class="logo-piccolo">piccolo</span><span class="logo-game">game!</span>
+                    </a>
+                    <p class="text-gray-600 text-sm mb-4 max-w-md mx-auto lg:mx-0">Welcome to piccologame.com, your
+                        compass for comprehensively coupled with the latest industry news. Our mission is to provide you
+                        with insightful analysis and valuable insights, enriching your digital journey.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                    <div class="text-center sm:text-left">
+                        <h3 class="font-semibold mb-4">Blog</h3>
+                        <ul class="text-sm space-y-2">
+                            <li><a href="#" class="text-gray-600 hover:text-gray-900">News</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-gray-900">Top Apps</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-gray-900">Top Games</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-gray-900">How-To</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-gray-900">Tips/Guides</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="text-center sm:text-left">
+                        <h3 class="font-semibold mb-4">Latest Reviews</h3>
+                        <ul class="text-sm space-y-2">
+                            <li><a href="#" class="text-gray-600 hover:text-gray-900">Marvel Rivals</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-gray-900">Red Dead Redemption</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-gray-900">Roblox</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-gray-900">Core Keeper</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-gray-900">EA SPORT FC 25</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-gray-900">Brawl Stars</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="text-center sm:text-left">
+                        <h3 class="font-semibold mb-4">Contact us</h3>
+                        <ul class="text-sm space-y-2">
+                            <li><a href="#" class="text-gray-600 hover:text-gray-900">About Us</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-gray-900">Privacy policy</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-gray-900">Disclaimer</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-gray-900">Sitemap</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Mobile Menu Toggle -->
+    <script>
+        const menuButton = document.getElementById('menuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        menuButton.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+
+
 </body>
+
 </html>
