@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>piccologame!</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+        .piccolo-pink {
+            color: #ff6b81;
+        }
+
+        .piccolo-purple {
+            color: #8c52ff;
+        }
+
+        .rating-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #00bcd4;
+        }
+
+        .carousel-button {
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+        }
+
+        .cyan-bg {
+            background-color: #00bcd4;
+        }
+
+        .full-star {
+            color: #ffd700;
+        }
+    </style>
+</head>
+
+<body class="bg-white text-gray-800">
+    <!-- Header -->
+    <header class="border-b border-gray-200 py-3">
+        <div class="container mx-auto px-4 flex items-center justify-between">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold">
+                    <span class="piccolo-pink">piccolo</span><span class="piccolo-purple">game!</span>
+                </h1>
+            </div>
+
+            <div class="flex-1 mx-8">
+                <div class="relative">
+                    <input type="text" placeholder="Search games here..."
+                        class="w-56 border border-gray-300 rounded-md px-3 py-1 text-sm">
+                    <button class="absolute right-2 top-1 text-gray-400">
+                        <i class="fas fa-search text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <nav>
+                <ul class="flex space-x-4 text-sm uppercase">
+                    <li><a href="#" class="text-gray-600 hover:text-gray-900">Reviews Games</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-gray-900">HTML5 Games</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-gray-900">Blog</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-gray-900">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="container mx-auto px-4 pt-4 pb-2">
+        <div class="text-sm text-gray-500">
+            <span>Home</span>
+            <span class="mx-1">›</span>
+            <span>Reviews</span>
+            <span class="mx-1">›</span>
+            <span class="text-gray-700">League of Legends</span>
+            <span class="mx-1">›</span>
+            <span class="text-gray-700">Get App</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 flex flex-wrap">
+
+        <!-- Left Content (Game Review) -->
+        <div class="w-full lg:w-2/3 pr-0 lg:pr-8">
+
+            <!-- Game Header -->
+            <div class="flex items-start mb-6">
+                <div class="flex-shrink-0 mr-6">
+                    <img src="https://piccologame.com/wp-content/uploads/2024/08/logo-1.png" alt="League of Legends Icon" class="w-32 h-32 rounded-md">
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold mb-1">LEAGUE OF LEGENDS</h2>
+                    <div class="flex mb-1">
+                        <i class="fas fa-star full-star"></i>
+                        <i class="fas fa-star full-star"></i>
+                        <i class="fas fa-star full-star"></i>
+                        <i class="fas fa-star full-star"></i>
+                        <i class="fas fa-star full-star"></i>
+                    </div>
+                    <p class="text-sm text-gray-500">All trademarks belong to their respective owners.</p>
+
+                    <button class="mt-4 bg-cyan-500 text-white py-2 px-4 rounded-md flex items-center">
+                        Get access to the premium content
+                        <i class="fas fa-chevron-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Game Options -->
+            <div class="flex justify-between mb-6">
+                <button class="bg-green-400 text-white py-2 px-6 rounded-md flex items-center">
+                    Play
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+
+                <div class="flex space-x-4">
+                    <div class="flex flex-col items-center">
+                        <div class="bg-gray-200 p-3 rounded-md">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <span class="text-xs mt-1">GAME</span>
+                    </div>
+
+                    <div class="flex flex-col items-center">
+                        <div class="bg-gray-200 p-3 rounded-md">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="text-xs mt-1">FREE</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Images -->
+            <div class="relative mb-6 border border-gray-200 rounded-md overflow-hidden">
+                <!-- Image Display -->
+                <div class="flex">
+                    <img id="carousel-image"
+                        src="https://piccologame.com/wp-content/uploads/2024/08/league-of-legends-wild-rift-4.jpg"
+                        alt="League of Legends Gameplay" class="w-full transition-all duration-500 ease-in-out">
+                </div>
+
+                <!-- Carousel Navigation -->
+                <button id="prev-btn"
+                    class="carousel-button absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white bg-opacity-70 hover:bg-opacity-90 rounded-full shadow flex items-center justify-center">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="next-btn"
+                    class="carousel-button absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white bg-opacity-70 hover:bg-opacity-90 rounded-full shadow flex items-center justify-center">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- Ratings -->
+            <div class="mb-8">
+                <h3 class="text-lg font-bold mb-4">Rating</h3>
+
+                <div class="mb-2">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-sm font-medium">Graphics and Sound</span>
+                        <span class="text-sm font-medium">5</span>
+                    </div>
+                    <div class="rating-bar w-full"></div>
+                </div>
+
+                <div class="mb-2">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-sm font-medium">Controls</span>
+                        <span class="text-sm font-medium">5</span>
+                    </div>
+                    <div class="rating-bar w-full"></div>
+                </div>
+
+                <div class="mb-2">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-sm font-medium">Gameplay</span>
+                        <span class="text-sm font-medium">5</span>
+                    </div>
+                    <div class="rating-bar w-full"></div>
+                </div>
+
+                <div class="mb-2">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-sm font-medium">Lasting Appeal</span>
+                        <span class="text-sm font-medium">5</span>
+                    </div>
+                    <div class="rating-bar w-full"></div>
+                </div>
+            </div>
+
+            <!-- Pros & Cons -->
+            <div class="flex mb-8">
+                <div class="w-1/2 pr-4">
+                    <h3 class="text-lg font-bold text-center mb-4">PROS</h3>
+                    <ul class="space-y-2">
+                        <li class="flex">
+                            <i class="fas fa-plus text-green-500 mr-2 mt-1"></i>
+                            <span>Great graphics and animations</span>
+                        </li>
+                        <li class="flex">
+                            <i class="fas fa-plus text-green-500 mr-2 mt-1"></i>
+                            <span>Highly competitive gameplay</span>
+                        </li>
+                        <li class="flex">
+                            <i class="fas fa-plus text-green-500 mr-2 mt-1"></i>
+                            <span>Easily one of the best mobile MOBA games available</span>
+                        </li>
+                        <li class="flex">
+                            <i class="fas fa-plus text-green-500 mr-2 mt-1"></i>
+                            <span>You can play with your friends</span>
+                        </li>
+                        <li class="flex">
+                            <i class="fas fa-plus text-green-500 mr-2 mt-1"></i>
+                            <span>Interesting mechanics</span>
+                        </li>
+                        <li class="flex">
+                            <i class="fas fa-plus text-green-500 mr-2 mt-1"></i>
+                            <span>Can be played for a long time without getting bored</span>
+                        </li>
+                        <li class="flex">
+                            <i class="fas fa-plus text-green-500 mr-2 mt-1"></i>
+                            <span>A lot of people play it so you'll always find someone to play with</span>
+                        </li>
+                        <li class="flex">
+                            <i class="fas fa-plus text-green-500 mr-2 mt-1"></i>
+                            <span>It's free to play</span>
+                        </li>
+                        <li class="flex">
+                            <i class="fas fa-plus text-green-500 mr-2 mt-1"></i>
+                            <span>It's a very fast-paced game, so it's exciting and challenging</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="w-1/2 pl-4">
+                    <h3 class="text-lg font-bold text-center mb-4">CONS</h3>
+                    <ul class="space-y-2">
+                        <li class="flex">
+                            <i class="fas fa-minus text-red-500 mr-2 mt-1"></i>
+                            <span>The game is not new, it has been out for a long time</span>
+                        </li>
+                        <li class="flex">
+                            <i class="fas fa-minus text-red-500 mr-2 mt-1"></i>
+                            <span>It's a very competitive game, so it can be stressful</span>
+                        </li>
+                        <li class="flex">
+                            <i class="fas fa-minus text-red-500 mr-2 mt-1"></i>
+                            <span>It's easy to get addicted and spend too much time playing</span>
+                        </li>
+                        <li class="flex">
+                            <i class="fas fa-minus text-red-500 mr-2 mt-1"></i>
+                            <span>It's not very easy to learn, so it can be frustrating for beginners</span>
+                        </li>
+                        <li class="flex">
+                            <i class="fas fa-minus text-red-500 mr-2 mt-1"></i>
+                            <span>It's hard to find time to play if you have a busy schedule</span>
+                        </li>
+                        <li class="flex">
+                            <i class="fas fa-minus text-red-500 mr-2 mt-1"></i>
+                            <span>It's easy to get tilted (angry/frustrated) if you're losing</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Download Links -->
+            <div class="mb-8">
+                <h3 class="text-lg font-bold mb-4">Get from the official digital markets</h3>
+                <p class="text-sm text-gray-500 mb-4">All trademarks belong to their respective owners.</p>
+
+
+
+                <div class="flex flex-col items-center space-y-2">
+                    <button class="bg-cyan-500 text-white py-2 px-4 rounded-md w-64 flex items-center justify-center">
+                        <i class="fab fa-android mr-2"></i> Get Android Version
+                    </button>
+                    <button class="bg-cyan-500 text-white py-2 px-4 rounded-md w-64 flex items-center justify-center">
+                        <i class="fas fa-globe mr-2"></i> Get from the Official site
+                    </button>
+                    <button class="bg-cyan-500 text-white py-2 px-4 rounded-md w-64 flex items-center justify-center">
+                        <i class="fab fa-apple mr-2"></i> Get iOS Version
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="w-full lg:w-1/3">
+            <div class="mb-8">
+                <h3 class="text-xl font-bold mb-4">Popular</h3>
+
+                <!-- Popular Game Cards -->
+                <div class="space-y-4">
+                    <!-- Among Us -->
+                    <div class="border border-gray-200 rounded-md p-3 flex">
+                        <img src="https://piccologame.com/wp-content/uploads/2024/08/toca-e1723454310706-150x150.jpg" alt="Among Us" class="w-16 h-16 mr-3 rounded-md">
+                        <div>
+                            <h4 class="font-bold">Among Us</h4>
+                            <p class="text-xs text-gray-500">Among Us, developed by Inner...</p>
+                            <div class="flex mt-1">
+                                <i class="fas fa-star full-star text-xs"></i>
+                                <i class="fas fa-star full-star text-xs"></i>
+                                <i class="fas fa-star full-star text-xs"></i>
+                                <i class="fas fa-star full-star text-xs"></i>
+                                <i class="fas fa-star full-star text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Black Myth: Wukong -->
+                    <div class="border border-gray-200 rounded-md p-3 flex">
+                        <img src="https://piccologame.com/wp-content/uploads/2025/04/ss_51dfe5152a8dcaf375a71d0d07433af334bf7a84.600x338-150x150.jpg" alt="Black Myth: Wukong" class="w-16 h-16 mr-3 rounded-md">
+                        <div>
+                            <h4 class="font-bold">Black Myth: Wukong</h4>
+                            <p class="text-xs text-gray-500">Black Myth has explored the m...</p>
+                            <div class="flex mt-1">
+                                <i class="fas fa-star full-star text-xs"></i>
+                                <i class="fas fa-star full-star text-xs"></i>
+                                <i class="fas fa-star full-star text-xs"></i>
+                                <i class="fas fa-star full-star text-xs"></i>
+                                <i class="fas fa-star full-star text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Geometry Dash -->
+                    <div class="border border-gray-200 rounded-md p-3 flex">
+                        <img src="https://piccologame.com/wp-content/uploads/2024/08/gacha-club.png" alt="Geometry Dash" class="w-16 h-16 mr-3 rounded-md">
+                        <div>
+                            <h4 class="font-bold">Geometry Dash</h4>
+                            <p class="text-xs text-gray-500">The in-depth review of Geometr...</p>
+                            <div class="flex mt-1">
+                                <i class="fas fa-star full-star text-xs"></i>
+                                <i class="fas fa-star full-star text-xs"></i>
+                                <i class="fas fa-star full-star text-xs"></i>
+                                <i class="fas fa-star full-star text-xs"></i>
+                                <i class="fas fa-star full-star text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Poppy Playtime -->
+                    <div class="border border-gray-200 rounded-md p-3 flex">
+                        <img src="https://piccologame.com/wp-content/uploads/2024/08/gacha-club.png" alt="Poppy Playtime" class="w-16 h-16 mr-3 rounded-md">
+                        <div>
+                            <h4 class="font-bold">Poppy Playtime</h4>
+                            <p class="text-xs text-gray-500">Poppy Playtime is a must-play...</p>
+                            <div class="flex mt-1">
+                                <i class="fas fa-star full-star text-xs"></i>
+                                <i class="fas fa-star full-star text-xs"></i>
+                                <i class="fas fa-star full-star text-xs"></i>
+                                <i class="fas fa-star full-star text-xs"></i>
+                                <i class="fas fa-star full-star text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- War Machine -->
+                    <div class="border border-gray-200 rounded-md p-3 flex">
+                        <img src="https://piccologame.com/wp-content/uploads/2024/08/merge-fruit-time-1-150x150.jpg" alt="War Machine" class="w-16 h-16 mr-3 rounded-md">
+                        <div>
+                            <h4 class="font-bold">War Machine</h4>
+                            <p class="text-xs text-gray-500">You have to command a destruc...</p>
+                            <div class="flex mt-1">
+                                <i class="fas fa-star full-star text-xs"></i>
+                                <i class="fas fa-star full-star text-xs"></i>
+                                <i class="fas fa-star full-star text-xs"></i>
+                                <i class="fas fa-star full-star text-xs"></i>
+                                <i class="fas fa-star full-star text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Boxing Random -->
+                    <div class="border border-gray-200 rounded-md p-3 flex">
+                        <img src="https://piccologame.com/wp-content/uploads/2024/08/merge-fruit-time-1-150x150.jpg" alt="Boxing Random" class="w-16 h-16 mr-3 rounded-md">
+                        <div>
+                            <h4 class="font-bold">Boxing Random</h4>
+                            <p class="text-xs text-gray-500">The most fun and random chee...</p>
+                            <div class="flex mt-1">
+                                <i class="fas fa-star full-star text-xs"></i>
+                                <i class="fas fa-star full-star text-xs"></i>
+                                <i class="fas fa-star full-star text-xs"></i>
+                                <i class="fas fa-star full-star text-xs"></i>
+                                <i class="fas fa-star full-star text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Latest Posts Section -->
+    <div class="cyan-bg py-8 text-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-6">Latest Posts</h2>
+
+            <div class="relative">
+                <div class="flex space-x-4 overflow-x-auto">
+                    <!-- Post 1 -->
+                    <div class="bg-white text-black rounded-md overflow-hidden flex-shrink-0 w-72">
+                        <div class="relative">
+                            <img src="https://piccologame.com/wp-content/uploads/2025/01/WCCFnba2k242-728x410-1.jpg" alt="NBA 2K24" class="w-full">
+                            <div class="absolute top-2 left-2 bg-purple-700 text-white text-xs px-2 py-1 rounded">HOW-TO
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold mb-2">NBA 2K24 Tips & Guides: Mastering the Game One Play at a Time
+                            </h3>
+                            <p class="text-gray-500 text-xs">January 16, 2022</p>
+                        </div>
+                    </div>
+
+                    <!-- Post 2 -->
+                    <div class="bg-white text-black rounded-md overflow-hidden flex-shrink-0 w-72">
+                        <div class="relative">
+                            <img src="https://piccologame.com/wp-content/uploads/2025/01/capsule_616x353.jpg" alt="Marvel Rivals" class="w-full">
+                            <div class="absolute top-2 left-2 bg-blue-500 text-white text-xs px-2 py-1 rounded">
+                                TIPS&GUIDES</div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold mb-2">Marvel Rivals: The Ultimate Guide to the Top Hero Shooter</h3>
+                            <p class="text-gray-500 text-xs">April 15, 2022</p>
+                        </div>
+                    </div>
+
+                    <!-- Post 3 -->
+                    <div class="bg-white text-black rounded-md overflow-hidden flex-shrink-0 w-72">
+                        <div class="relative">
+                            <img src="https://piccologame.com/wp-content/uploads/2025/04/anh-genshin-impact-4k-klee-17-10-24-48.jpg" alt="Genshin Impact" class="w-full">
+                            <div class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">TOP GAMES
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold mb-2">Genshin Impact: A Complete Guide to Top App Features and How to
+                                Play</h3>
+                            <p class="text-gray-500 text-xs">April 8, 2022</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carousel Navigation -->
+                <button
+                    class="carousel-button absolute left-2 top-1/2 transform -translate-y-1/2 w-8 h-8 flex items-center justify-center">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button
+                    class="carousel-button absolute right-2 top-1/2 transform -translate-y-1/2 w-8 h-8 flex items-center justify-center">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <div class="flex justify-center mt-4">
+                <div class="w-2 h-2 bg-white rounded-full mx-1"></div>
+                <div class="w-2 h-2 bg-gray-400 rounded-full mx-1"></div>
+                <div class="w-2 h-2 bg-gray-400 rounded-full mx-1"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Latest Reviews -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex items-center mb-6">
+            <div class="w-8 h-1 bg-cyan-500 mr-2"></div>
+            <h2 class="text-2xl font-bold">Latest Reviews</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Review 1 -->
+            <div>
+                <div class="flex mb-3">
+                    <img src="
+                    https://piccologame.com/wp-content/uploads/2025/04/ss_51dfe5152a8dcaf375a71d0d07433af334bf7a84.600x338-150x150.jpg" alt="Marvel Rivals" class="w-16 h-16 mr-3 rounded-md">
+                    <h3 class="font-bold">Marvel Rivals</h3>
+                </div>
+                <p class="text-sm text-gray-600 mb-2">Marvel Rivals combines strategic team combat, dynamic
+                    environments, and a rich roster of Marvel characters, offering...</p>
+                <div class="flex mb-1">
+                    <i class="fas fa-star full-star"></i>
+                    <i class="fas fa-star full-star"></i>
+                    <i class="fas fa-star full-star"></i>
+                    <i class="fas fa-star full-star"></i>
+                    <i class="fas fa-star full-star"></i>
+                </div>
+                <a href="#" class="text-cyan-500 text-sm">Read full review</a>
+            </div>
+
+            <!-- Review 2 -->
+            <div>
+                <div class="flex mb-3">
+                    <img src="https://piccologame.com/wp-content/uploads/2025/01/RDR2_HeroSquare_1080x1080-150x150.jpg" alt="Red Dead Redemption 2" class="w-16 h-16 mr-3 rounded-md">
+                    <h3 class="font-bold">Red Dead Redemption 2</h3>
+                </div>
+                <p class="text-sm text-gray-600 mb-2">Red Dead Redemption 2 offers a breathtaking journey through the
+                    Wild West with its engaging story an...</p>
+                <div class="flex mb-1">
+                    <i class="fas fa-star full-star"></i>
+                    <i class="fas fa-star full-star"></i>
+                    <i class="fas fa-star full-star"></i>
+                    <i class="fas fa-star full-star"></i>
+                    <i class="fas fa-star full-star"></i>
+                </div>
+                <a href="#" class="text-cyan-500 text-sm">Read full review</a>
+            </div>
+
+            <!-- Review 3 -->
+            <div>
+                <div class="flex mb-3">
+                    <img src="https://piccologame.com/wp-content/uploads/2024/11/Brawl-Stars-150x150.jpeg" alt="Roblox" class="w-16 h-16 mr-3 rounded-md">
+                    <h3 class="font-bold">Roblox</h3>
+                </div>
+                <p class="text-sm text-gray-600 mb-2">Roblox is an innovative platform where users can create and
+                    socialize in immersive virtual worlds. Explore endle...</p>
+                <div class="flex mb-1">
+                    <i class="fas fa-star full-star"></i>
+                    <i class="fas fa-star full-star"></i>
+                    <i class="fas fa-star full-star"></i>
+                    <i class="fas fa-star full-star"></i>
+                    <i class="fas fa-star full-star"></i>
+                </div>
+                <a href="#" class="text-cyan-500 text-sm">Read full review</a>
+            </div>
+
+            <!-- Review 4 -->
+            <div>
+                <div class="flex mb-3">
+                    <img src="https://piccologame.com/wp-content/uploads/2024/11/logo_coor.jpg-150x150.webp" alt="Core Keeper" class="w-16 h-16 mr-3 rounded-md">
+                    <h3 class="font-bold">Core Keeper</h3>
+                </div>
+                <p class="text-sm text-gray-600 mb-2">Explore Core Keeper's gameplay, combat, biomes, and tips in this
+                    in-depth review. Discover strategies and features. I...</p>
+                <div class="flex mb-1">
+                    <i class="fas fa-star full-star"></i>
+                    <i class="fas fa-star full-star"></i>
+                    <i class="fas fa-star full-star"></i>
+                    <i class="fas fa-star full-star"></i>
+                    <i class="fas fa-star full-star"></i>
+                </div>
+                <a href="#" class="text-cyan-500 text-sm">Read full review</a>
+            </div>
+
+            <!-- Review 5 -->
+            <div>
+                <div class="flex mb-3">
+                    <img src="
+                    https://piccologame.com/wp-content/uploads/2024/11/yikie8k8y2dd1-e1730728629502-150x150.jpeg" alt="EA SPORT FC 25" class="w-16 h-16 mr-3 rounded-md">
+                    <h3 class="font-bold">EA SPORT FC 25</h3>
+                </div>
+                <p class="text-sm text-gray-600 mb-2">EA SPORTS FC 25 marks the beginning of a new chapter for EA's
+                    football franchise, and fans will notice game-alteri...</p>
+                <div class="flex mb-1">
+                    <i class="fas fa-star full-star"></i>
+                    <i class="fas fa-star full-star"></i>
+                    <i class="fas fa-star full-star"></i>
+                    <i class="fas fa-star full-star"></i>
+                    <i class="fas fa-star full-star"></i>
+                </div>
+                <a href="#" class="text-cyan-500 text-sm">Read full review</a>
+            </div>
+
+            <!-- Review 6 -->
+            <div>
+                <div class="flex mb-3">
+                    <img src="
+                    https://piccologame.com/wp-content/uploads/2024/11/Brawl-Stars-150x150.jpeg" alt="Brawl Stars" class="w-16 h-16 mr-3 rounded-md">
+                    <h3 class="font-bold">Brawl Stars</h3>
+                </div>
+                <p class="text-sm text-gray-600 mb-2">Brawl Stars review: Explore fast-paced mobile, unique characters,
+                    and dynamic gameplay as Supercell's hit mobile...</p>
+                <div class="flex mb-1">
+                    <i class="fas fa-star full-star"></i>
+                    <i class="fas fa-star full-star"></i>
+                    <i class="fas fa-star full-star"></i>
+                    <i class="fas fa-star full-star"></i>
+                    <i class="fas fa-star full-star"></i>
+                </div>
+                <a href="#" class="text-cyan-500 text-sm">Read full review</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <!-- Logo and Text -->
+                <div class="md:w-1/3 mb-6 md:mb-0">
+                    <h2 class="text-2xl font-bold mb-4">
+                        <span class="piccolo-pink">piccolo</span><span class="piccolo-purple">game!</span>
+                    </h2>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Welcome to piccologame.com, your compass for comprehensive guidance with the latest industry
+                        news. Our mission is to provide you with insightful analysis and valuable insights, enriching
+                        your digital journey.
+                    </p>
+                </div>
+
+                <!-- Site Links -->
+                <div class="md:w-1/5 mb-6 md:mb-0">
+                    <h3 class="text-lg font-bold text-cyan-500 mb-4">Blog</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Marvel Rivals</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Top Apps</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Top Games</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">How-To</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Tips&Guides</a></li>
+                    </ul>
+                </div>
+
+                <!-- Latest Reviews -->
+                <div class="md:w-1/5 mb-6 md:mb-0">
+                    <h3 class="text-lg font-bold text-cyan-500 mb-4">Latest Reviews</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Marvel Rivals</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Red Dead Redemption 2</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Roblox</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Core Keeper</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">EA SPORT FC 25</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Brawl Stars</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Us -->
+                <div class="md:w-1/5">
+                    <h3 class="text-lg font-bold text-cyan-500 mb-4">Contact us</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">About Us</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Privacy policy</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Disclaimer</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        const images = [
+            "https://piccologame.com/wp-content/uploads/2024/08/league-of-legends-wild-rift-4.jpg",
+            "https://piccologame.com/wp-content/uploads/2024/08/league-of-legends-wild-rift-2.jpg",
+            "https://piccologame.com/wp-content/uploads/2024/08/league-of-legends-wild-rift-3.jpg",
+            "https://piccologame.com/wp-content/uploads/2024/08/league-of-legends-wild-rift-1.jpg"
+        ];
+
+        let currentIndex = 0;
+
+        const carouselImage = document.getElementById('carousel-image');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            carouselImage.src = images[currentIndex];
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % images.length;
+            carouselImage.src = images[currentIndex];
+        });
+    </script>
+</body>
+
+</html>

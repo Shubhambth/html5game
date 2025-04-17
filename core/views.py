@@ -17,3 +17,6 @@ def about(request):
 
 def blog(request):
     return render(request, 'blog.html')
+
+def final(request):
+    return render(request, 'final.html')

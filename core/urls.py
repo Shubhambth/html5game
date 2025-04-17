@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from .views import home , page , allgames , gamerivew, about , blog
+from .views import home , page , allgames , gamerivew, about , blog , final
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -9,5 +9,6 @@ urlpatterns = [
     path('allgames/', allgames, name='allgames'),
     path('gamerivew/', gamerivew, name='gamerivew'),
     path('about/', about, name='about'),
-    path('blog/', blog, name='blog')
+    path('blog/', blog, name='blog'),
+    path('final/', final, name='final')
 ]
