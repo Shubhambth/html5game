@@ -45,30 +45,38 @@
     <!-- Header -->
     <header class="border-b border-gray-200 py-3">
         <div class="container mx-auto px-4 flex items-center justify-between">
+            <!-- Logo -->
             <div class="flex items-center">
                 <h1 class="text-2xl font-bold">
                     <span class="piccolo-pink">piccolo</span><span class="piccolo-purple">game!</span>
                 </h1>
             </div>
 
-            <div class="flex-1 mx-8">
-                <div class="relative">
-                    <input type="text" placeholder="Search games here..."
-                        class="w-56 border border-gray-300 rounded-md px-3 py-1 text-sm">
-                    <button class="absolute right-2 top-1 text-gray-400">
-                        <i class="fas fa-search text-xs"></i>
-                    </button>
-                </div>
-            </div>
+            <!-- Hamburger Button -->
+            <button id="menu-toggle" class="md:hidden text-gray-600 hover:text-gray-900 focus:outline-none text-2xl">
+                ☰
+            </button>
+            
 
-            <nav>
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:block">
                 <ul class="flex space-x-4 text-sm uppercase">
-                    <li><a href="#" class="text-gray-600 hover:text-gray-900">Reviews Games</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-gray-900">HTML5 Games</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-gray-900">Blog</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-gray-900">About Us</a></li>
+                    <li><a href="{% url 'gamerivew' %}" class="text-gray-600 hover:text-gray-900">Reviews Games</a></li>
+                    <li><a href="{% url 'allgames'%}" class="text-gray-600 hover:text-gray-900">HTML5 Games</a></li>
+                    <li><a href="{% url 'blog' %}" class="text-gray-600 hover:text-gray-900">Blog</a></li>
+                    <li><a href="{% url 'about' %}" class="text-gray-600 hover:text-gray-900">About Us</a></li>
                 </ul>
             </nav>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden px-4 mt-2">
+            <ul class="flex flex-col gap-2 text-sm uppercase">
+                <li><a href="{% url 'gamerivew' %}" class="block text-gray-600 hover:text-gray-900">Reviews Games</a></li>
+                <li><a href="{% url 'allgames'%}" class="block text-gray-600 hover:text-gray-900">HTML5 Games</a></li>
+                <li><a href="{% url 'blog' %}" class="block text-gray-600 hover:text-gray-900">Blog</a></li>
+                <li><a href="{% url 'about' %}" class="block text-gray-600 hover:text-gray-900">About Us</a></li>
+            </ul>
         </div>
     </header>
 
@@ -86,7 +94,8 @@
             </a>
             <span class="mx-1">›</span>
 
-            <span class="text-gray-700">Get App</span>
+            <a href="{% url 'allgames'%}" class="text-gray-700 hover:text-gray-900">Get App</a>
+
         </div>
     </div>
 
@@ -308,14 +317,7 @@
                 </div>
 
                 <!-- Navigation Buttons -->
-                <button id="prevBtn"
-                    class="carousel-button absolute left-0 top-1/2 transform -translate-y-1/2 w-9 h-9 bg-white text-black rounded-full shadow-md hover:bg-gray-200 transition duration-200 z-10">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button id="nextBtn"
-                    class="carousel-button absolute right-0 top-1/2 transform -translate-y-1/2 w-9 h-9 bg-white text-black rounded-full shadow-md hover:bg-gray-200 transition duration-200 z-10">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
+                
             </div>
         </div>
     </div>
@@ -436,9 +438,17 @@
                 currentIndex = (currentIndex + 1) % images.length;
                 carouselImage.src = images[currentIndex];
             });
+
+            const toggleBtn = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            toggleBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
        
 
     </script>
+    
 </body>
 
 </html>

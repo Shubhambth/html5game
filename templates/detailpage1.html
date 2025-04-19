@@ -126,18 +126,19 @@
     <!-- Header & Navigation -->
     <header class="bg-white shadow-sm">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <!-- Logo -->
             <div class="flex items-center">
                 <a href="/" class="text-2xl font-bold">
                     <span class="text-gray-700">super</span><span class="text-pink-500">gameh5!</span>
                 </a>
             </div>
-            <div class="relative w-64">
-                <input type="text" placeholder="Search games here..."
-                    class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm">
-                <button class="absolute right-2 top-2 text-gray-400">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
+
+            <!-- Hamburger Button (Mobile) -->
+            <button id="menu-toggle" class="md:hidden text-gray-600 hover:text-pink-500 text-2xl">
+                ☰
+            </button>
+
+            <!-- Desktop Navigation -->
             <nav class="hidden md:flex">
                 <ul class="flex space-x-6">
                     <li><a href="{% url 'gamerivew' %}" class="text-gray-600 hover:text-pink-500">Reviews/Games</a></li>
@@ -146,6 +147,16 @@
                     <li><a href="{% url 'about'%}" class="text-gray-600 hover:text-pink-500">About us</a></li>
                 </ul>
             </nav>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden px-4 mt-2">
+            <ul class="flex flex-col gap-2 text-sm uppercase">
+                <li><a href="{% url 'gamerivew' %}" class="block text-gray-600 hover:text-pink-500">Reviews/Games</a></li>
+                <li><a href="{% url 'allgames'%}" class="block text-gray-600 hover:text-pink-500">HTML5 Games</a></li>
+                <li><a href="{% url 'blog' %}" class="block text-gray-600 hover:text-pink-500">Blog</a></li>
+                <li><a href="{% url 'about'%}" class="block text-gray-600 hover:text-pink-500">About us</a></li>
+            </ul>
         </div>
     </header>
 
@@ -161,14 +172,18 @@
         </div>
 
         <!-- Game Thumbnails -->
-        <div class="grid grid-cols-5 gap-2 mb-8">
-            {% for game in allgames %}
-            <a href="{% url 'game_detail' game.id %}" class="block">
-                <img src="{{ game.icon.url }}" alt="{{ game.name }}"
-                    class="w-32 h-32 object-cover rounded-md" />
-            </a>
-            {% endfor %}
+        <div class="overflow-x-auto mb-8">
+            <div class="flex gap-4">
+                {% for game in allgames %}
+                <a href="{% url 'game_detail' game.id %}" class="flex-shrink-0">
+                    <img src="{{ game.icon.url }}" alt="{{ game.name }}"
+                        class="w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-md" />
+                </a>
+                {% endfor %}
+            </div>
         </div>
+
+
 
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8421665977210633"
              crossorigin="anonymous"></script>
@@ -247,14 +262,20 @@
 
                 <!-- Action Buttons -->
                 <div class="flex flex-wrap gap-2 mb-8">
-                    <button
-                        class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-300 text-sm md:text-base">Read
-                        Review</button>
-                    <button
-                        class="bg-white hover:bg-gray-100 border border-gray-300 text-gray-700 px-4 py-2 rounded-md transition duration-300 text-sm md:text-base">Download</button>
-                    <button
-                        class="bg-white hover:bg-gray-100 border border-gray-300 text-gray-700 px-4 py-2 rounded-md transition duration-300 text-sm md:text-base">Screenshot</button>
+                    <a href="/review"
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-300 text-sm md:text-base inline-block">
+                        Read Review
+                    </a>
+                    <a href="{% url 'detailpage2' game.id %}"
+                        class="bg-white hover:bg-gray-100 border border-gray-300 text-gray-700 px-4 py-2 rounded-md transition duration-300 text-sm md:text-base inline-block">
+                        Download
+                    </a>
+                    <a href="{% url 'detailpage2' game.id %}"
+                        class="bg-white hover:bg-gray-100 border border-gray-300 text-gray-700 px-4 py-2 rounded-md transition duration-300 text-sm md:text-base inline-block">
+                        Screenshot
+                    </a>
                 </div>
+
 
                 <!-- Review Content -->
                 <div class="prose max-w-none mb-8">
@@ -602,6 +623,15 @@
                 }
             }, 100);
         });
+
+        
+            const toggleBtn = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            toggleBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        
     </script>
 </body>
 
