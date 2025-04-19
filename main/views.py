@@ -31,21 +31,25 @@ def blog(request):
     popularpost = Post.objects.order_by('-views')[:1]
     topapp = Post.objects.filter(categories__name='Top App').order_by('-views')[:1]
     topgame = Post.objects.filter(categories__name='Top Games').order_by('-views')[:2]
-    return render(request, 'blog.html',{'blogs': posts,'popularpost': popularpost,'topapp':topapp,'topgame':topgame})
+    popular_games = Game.objects.order_by('-views_count')[:4]
+    return render(request, 'blog.html',{'blogs': posts,'popularpost': popularpost,'topapp':topapp,'topgame':topgame,'popular_games': popular_games})
 
 
 def allgames(request):
     game = Game.objects.all()
-    return render(request, "html5allgames.html",{'game':game})
+    popular_games = Game.objects.order_by('-views_count')[:4]
+    return render(request, "html5allgames.html",{'game':game,'popular_games': popular_games})
 
 
 
 def gamerivew(request):
     game = Game.objects.all()
-    return render(request, 'gamerivew.html',{'game':game})
+    popular_games = Game.objects.order_by('-views_count')[:4]
+    return render(request, 'gamerivew.html',{'game':game,'popular_games': popular_games})
 
 def about(request):
-    return render(request, 'about.html')
+    popular_games = Game.objects.order_by('-views_count')[:4]
+    return render(request, 'about.html',{'popular_games': popular_games})
 
 def blogdetail(request, slug):
     post = Post.objects.get(slug=slug)

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title>Piccolo Game - Game Reviews</title>
+    <title>Nox Games - Game Reviews</title>
 
     <style>
         .rating {
@@ -65,7 +65,7 @@
     <div id="loading-screen">
         <div class="text-center">
             <a href="/" class="text-2xl font-bold">
-              <span class="text-pink-500">piccolo</span><span class="text-blue-500">game!</span>
+              <span class="text-pink-500">Nox</span><span class="text-blue-500"> Games</span>
             </a>
 
           <p class="text-gray-600 text-sm mt-2">Loading awesome games for you...</p>
@@ -81,7 +81,7 @@
             <!-- Logo -->
             <div class="flex items-center">
                 <a href="/" class="text-2xl font-bold text-red-500">
-                    piccolo<span class="text-gray-800">game!</span>
+                    Nox<span class="text-gray-800"> Games</span>
                 </a>
             </div>
 
@@ -145,15 +145,18 @@
     <!-- Advertisement Banner -->
     <div class="container mx-auto px-4 mt-4">
         <div class="bg-blue-50 rounded-md p-3 flex justify-between items-center">
-            <div class="flex items-center">
-                <div class="bg-green-100 rounded-full p-2 mr-3">
-                    <span class="text-green-500 text-xl">€</span>
-                </div>
-                <div>
-                    <p class="font-medium text-gray-800">Monetag Referral Program</p>
-                </div>
-            </div>
-            <button class="bg-blue-900 text-white px-4 py-1 rounded-md text-sm">Open</button>
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8421665977210633"
+                 crossorigin="anonymous"></script>
+            <!-- rectangle ads -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-8421665977210633"
+                 data-ad-slot="9922948821"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
     </div>
 
@@ -218,12 +221,11 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-wrap">
                 <div class="w-full lg:w-1/4 mb-8">
-                    <a href="#" class="text-2xl font-bold text-red-500">piccolo<span
-                            class="text-gray-800">game!</span></a>
+                    <a href="#" class="text-2xl font-bold text-red-500">Nox<span
+                            class="text-gray-800"> Games</span></a>
                     <p class="text-sm text-gray-600 mt-4">
-                        Welcome to piccologame.com, your compass for comprehensive guides with the latest industry news.
-                        Our mission is to provide you with insightful analysis and valuable insights, enriching your
-                        digital journey.
+                        Welcome to Nox Games — your ultimate destination for the latest in the gaming industry.
+                        Our mission is to deliver insightful analysis, up-to-date news, and valuable perspectives to empower your digital gaming journey.
                     </p>
                 </div>
 
@@ -241,7 +243,8 @@
                 <div class="w-full lg:w-1/4 mb-8 lg:px-4">
                     <h4 class="text-blue-400 font-medium mb-4">Latest Reviews</h4>
                     <ul class="space-y-2">
-                        {% for game in game %}
+                       
+                        {% for game in popular_games%}
                         <li><a href="{% url 'game_detail' game.id %}" class="text-gray-600 hover:text-gray-900 text-sm">{{game.name}}</a></li>
                         {% endfor %}
                         
@@ -253,8 +256,7 @@
                     <ul class="space-y-2">
                         <li><a href="{% url 'about'%}" class="text-gray-600 hover:text-gray-900 text-sm">About Us</a></li>
                         <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Privacy Policy</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Disclaimer</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Sitemap</a></li>
+                        
                     </ul>
                 </div>
             </div>

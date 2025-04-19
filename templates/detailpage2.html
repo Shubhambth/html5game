@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>piccologame!</title>
+    <title>Nox Game - {{game.name}}</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -42,14 +42,18 @@
 </head>
 
 <body class="bg-white text-gray-800">
+    
     <!-- Header -->
     <header class="border-b border-gray-200 py-3">
         <div class="container mx-auto px-4 flex items-center justify-between">
             <!-- Logo -->
             <div class="flex items-center">
-                <h1 class="text-2xl font-bold">
-                    <span class="piccolo-pink">piccolo</span><span class="piccolo-purple">game!</span>
-                </h1>
+                <a href="/">
+                    <h1 class="text-2xl font-bold">
+                        <span class="piccolo-pink">Nox</span><span class="piccolo-purple"> Games</span>
+                    </h1>
+                </a>
+
             </div>
 
             <!-- Hamburger Button -->
@@ -122,9 +126,36 @@
                     </div>
                     <p class="text-sm text-gray-500">All trademarks belong to their respective owners.</p>
 
-                    <button class="mt-4 bg-cyan-500 text-white py-2 px-4 rounded-md flex items-center">
+                    <button onclick="showPopup()" class="mt-4 bg-cyan-500 text-white py-2 px-4 rounded-md flex items-center">
                         Get access to the premium content
                         <i class="fas fa-chevron-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="popupModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+                <div class="bg-white p-6 rounded-md w-96 relative">
+                    <h2 class="text-lg font-semibold mb-2">Please wait <span id="countdown">5</span> seconds...</h2>
+
+                    <!-- Ad Area -->
+                    <div class="bg-gray-100 p-4 rounded mb-3">
+                        <p class="text-sm text-gray-600"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8421665977210633"
+                             crossorigin="anonymous"></script>
+                        <!-- lastad -->
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-8421665977210633"
+                             data-ad-slot="9012439832"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                        <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script></p>
+                    </div>
+
+                    <!-- Close Button (hidden initially) -->
+                    <button id="closePopup" onclick="closeAndRedirect()" class="absolute top-2 right-2 text-gray-500 hover:text-red-500 hidden text-lg">
+                        &times;
                     </button>
                 </div>
             </div>
@@ -308,7 +339,7 @@
                         </div>
                         <div class="p-4">
                             <h3 class="font-semibold text-base md:text-lg mb-2 hover:text-blue-600 transition-colors duration-200">
-                                <a href="/">{{ post.title }}</a>
+                                <a href="{% url 'blog_detail' post.slug %}">{{ post.title }}</a>
                             </h3>
                             <p class="text-gray-500 text-xs">{{ post.created_at }}</p>
                         </div>
@@ -372,12 +403,11 @@
                 <!-- Logo and Text -->
                 <div class="md:w-1/3 mb-6 md:mb-0">
                     <h2 class="text-2xl font-bold mb-4">
-                        <span class="piccolo-pink">piccolo</span><span class="piccolo-purple">game!</span>
+                        <span class="piccolo-pink">Nox</span><span class="piccolo-purple"> Games</span>
                     </h2>
                     <p class="text-sm text-gray-600 mb-4">
-                        Welcome to piccologame.com, your compass for comprehensive guidance with the latest industry
-                        news. Our mission is to provide you with insightful analysis and valuable insights, enriching
-                        your digital journey.
+                        Welcome to Nox Games — your ultimate destination for the latest in the gaming industry.
+                        Our mission is to deliver insightful analysis, up-to-date news, and valuable perspectives to empower your digital gaming journey.
                     </p>
                 </div>
 
@@ -385,11 +415,11 @@
                 <div class="md:w-1/5 mb-6 md:mb-0">
                     <h3 class="text-lg font-bold text-cyan-500 mb-4">Blog</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Marvel Rivals</a></li>
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Top Apps</a></li>
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Top Games</a></li>
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">How-To</a></li>
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Tips&Guides</a></li>
+                        <li><a href="{% url 'blog' %}" class="text-sm text-gray-600 hover:text-cyan-500">Top News</a></li>
+                        <li><a href="{% url 'blog' %}" class="text-sm text-gray-600 hover:text-cyan-500">Top Apps</a></li>
+                        <li><a href="{% url 'blog' %}" class="text-sm text-gray-600 hover:text-cyan-500">Top Games</a></li>
+                        <li><a href="{% url 'blog' %}" class="text-sm text-gray-600 hover:text-cyan-500">How-To</a></li>
+                        <li><a href="{% url 'blog' %}" class="text-sm text-gray-600 hover:text-cyan-500">Tips&Guides</a></li>
                     </ul>
                 </div>
 
@@ -397,12 +427,9 @@
                 <div class="md:w-1/5 mb-6 md:mb-0">
                     <h3 class="text-lg font-bold text-cyan-500 mb-4">Latest Reviews</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Marvel Rivals</a></li>
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Red Dead Redemption 2</a></li>
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Roblox</a></li>
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Core Keeper</a></li>
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">EA SPORT FC 25</a></li>
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Brawl Stars</a></li>
+                        {% for game in allgames %}
+                        <li><a href="{% url 'game_detail' game.id %}" class="text-sm text-gray-600 hover:text-cyan-500">{{game.name}}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
 
@@ -410,10 +437,9 @@
                 <div class="md:w-1/5">
                     <h3 class="text-lg font-bold text-cyan-500 mb-4">Contact us</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">About Us</a></li>
+                        <li><a href="{% url 'blog' %}" class="text-sm text-gray-600 hover:text-cyan-500">About Us</a></li>
                         <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Privacy policy</a></li>
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Disclaimer</a></li>
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Sitemap</a></li>
+                        
                     </ul>
                 </div>
             </div>
@@ -445,8 +471,35 @@
             toggleBtn.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
             });
-       
 
+                function showPopup() {
+                    const modal = document.getElementById('popupModal');
+                    const countdown = document.getElementById('countdown');
+                    const closeBtn = document.getElementById('closePopup');
+
+                    modal.classList.remove('hidden');
+
+                    let timeLeft = 5;
+                    countdown.textContent = timeLeft;
+
+                    const timer = setInterval(() => {
+                        timeLeft--;
+                        countdown.textContent = timeLeft;
+
+                        if (timeLeft <= 0) {
+                            clearInterval(timer);
+                            closeBtn.classList.remove('hidden');
+                        }
+                    }, 1000);
+                }
+
+                function closeAndRedirect() {
+                    document.getElementById('popupModal').classList.add('hidden');
+                    // Redirect to new page
+                    window.location.href = "{% url 'allgames'%}";  // Replace with your URL
+                }
+             
+            
     </script>
     
 </body>

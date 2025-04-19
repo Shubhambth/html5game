@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>piccolo game!</title>
+    <title>Nox Games</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     </script>
     <style>
@@ -83,7 +83,7 @@
     <div id="loading-screen">
         <div class="text-center">
             <a href="/" class="text-2xl font-bold">
-              <span class="text-pink-500">piccolo</span><span class="text-blue-500">game!</span>
+              <span class="text-pink-500">Nox</span><span class="text-blue-500"> Games</span>
             </a>
 
           <p class="text-gray-600 text-sm mt-2">Loading awesome games for you...</p>
@@ -99,7 +99,7 @@
         <div class="hidden md:flex items-center justify-between px-4 py-2">
             <div class="flex items-center">
                 <a href="/" class="text-pink-500 font-bold text-xl">
-                    piccolo<span class="text-blue-500">game!</span>
+                    Nox<span class="text-blue-500"> Games</span>
                 </a>
             </div>
 
@@ -127,7 +127,7 @@
         <div class="md:hidden flex items-center justify-between px-4 py-2">
             <div class="flex items-center">
                 <a href="/" class="text-pink-500 font-bold text-xl">
-                    piccolo<span class="text-blue-500">game!</span>
+                    Nox<span class="text-blue-500"> Games</span>
                 </a>
             </div>
 
@@ -233,12 +233,11 @@
                 <!-- Logo and Description -->
                 <div class="w-full md:w-1/2 lg:w-1/4 mb-6 md:mb-4">
                     <h3 class="text-pink-500 font-bold mb-2">
-                        piccolo<span class="text-blue-500">game!</span>
+                        Nox<span class="text-blue-500"> Games</span>
                     </h3>
                     <p class="text-xs text-gray-600 mb-4 pr-4">
-                        Piccolo is piccoologames.com, your compass for comprehensive guides
-                        with the latest industry news. Our mission is to provide you with
-                        insightful analysis and valuable insights, enriching your digital journey.
+                        Welcome to Nox Games — your ultimate destination for the latest in the gaming industry.
+                        Our mission is to deliver insightful analysis, up-to-date news, and valuable perspectives to empower your digital gaming journey.
                     </p>
                 </div>
 
@@ -257,24 +256,20 @@
                 <div class="w-1/2 md:w-1/6 mb-6 md:mb-4">
                     <h4 class="font-semibold text-blue-500 mb-2">Latest Reviews</h4>
                     <ul class="text-xs text-gray-600 space-y-1">
-                        <li><a href="#" class="hover:text-pink-500">Marvel Contest</a></li>
-                        <li><a href="#" class="hover:text-pink-500">Roblox</a></li>
-                        <li><a href="#" class="hover:text-pink-500">Red Dead Redemption</a></li>
-                        <li><a href="#" class="hover:text-pink-500">Bubble</a></li>
-                        <li><a href="#" class="hover:text-pink-500">Cricut</a></li>
-                        <li><a href="#" class="hover:text-pink-500">Perplexed on 20</a></li>
-                        <li><a href="#" class="hover:text-pink-500">Word Snack</a></li>
+                        {% for game in popular_games%}
+                        <li><a href="{% url 'game_detail' game.id%}" class="hover:text-pink-500">{{game.name}}</a></li>
+                       {% endfor %}
                     </ul>
                 </div>
 
                 <div class="w-full md:w-1/6 mb-4">
                     <h4 class="font-semibold text-blue-500 mb-2">Contact us</h4>
                     <ul class="text-xs text-gray-600 space-y-1">
-                        <li><a href="#" class="hover:text-pink-500">Email</a></li>
-                        <li><a href="#" class="hover:text-pink-500">Terms of Use</a></li>
+                        
+                        
+                        <li><a href="{% url 'about' %}" class="hover:text-pink-500">About Us</a></li>
                         <li><a href="#" class="hover:text-pink-500">Privacy policy</a></li>
-                        <li><a href="#" class="hover:text-pink-500">Disclaimer</a></li>
-                        <li><a href="#" class="hover:text-pink-500">Sitemap</a></li>
+                        
                     </ul>
                 </div>
             </div>

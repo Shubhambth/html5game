@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SuperGameh5 - Gaming Reviews & Insights</title>
+    <title>Nox Games - Gaming Reviews & Insights</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
@@ -114,7 +114,7 @@
     <div id="loading-screen">
         <div class="text-center">
           <h1 class="text-2xl font-bold">
-            <span class="text-pink-500">piccolo</span><span class="text-blue-500">game!</span>
+            <span class="text-pink-500">Nox</span><span class="text-blue-500"> Game</span>
           </h1>
           <p class="text-gray-600 text-sm mt-2">Loading awesome games for you...</p>
         </div>
@@ -122,14 +122,14 @@
           <div id="loading-bar"></div>
         </div>
         <div id="loading-percentage">0%</div>
-      </div>
+    </div>
     <!-- Header & Navigation -->
     <header class="bg-white shadow-sm">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <!-- Logo -->
             <div class="flex items-center">
                 <a href="/" class="text-2xl font-bold">
-                    <span class="text-gray-700">super</span><span class="text-pink-500">gameh5!</span>
+                    <span class="text-gray-700">Nox</span><span class="text-pink-500"> Games</span>
                 </a>
             </div>
 
@@ -182,21 +182,6 @@
                 {% endfor %}
             </div>
         </div>
-
-
-
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8421665977210633"
-             crossorigin="anonymous"></script>
-        <!-- kk -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-8421665977210633"
-             data-ad-slot="9246028143"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
         <div class="flex flex-wrap -mx-4">
             <!-- Main Column -->
             <div class="w-full lg:w-2/3 px-4">
@@ -221,20 +206,32 @@
                                 <span>★</span>
                             </div>
                             <p class="text-gray-600 mb-4 text-sm">All trademarks belong to their respective owners.</p>
-                            <div class="relative inline-block game-btn">
+                            <div class="relative w-full game-btn">
                                 <a href="{% url 'detailpage2' game.id %}"
-                                   class="inline-block bg-blue-400 hover:bg-blue-500 text-white px-8 py-3 rounded-md uppercase font-bold tracking-wide animate-pulse relative z-10">
+                                   class="block w-full bg-blue-400 hover:bg-blue-500 text-white px-8 py-3 rounded-md uppercase font-bold tracking-wide animate-pulse relative z-10 text-center">
                                    GET GAME
                                 </a>
 
-                                <div
-                                    class="btn-wave absolute inset-0 rounded-md border-2 border-blue-400 animate-ping opacity-75 z-0">
-                                </div>
+
+                                <div class="btn-wave absolute inset-0 rounded-md border-2 border-blue-400 animate-ping opacity-75 z-0"></div>
                             </div>
+
 
                         </div>
                     </div>
                 </div>
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8421665977210633"
+                     crossorigin="anonymous"></script>
+                <!-- kk -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-8421665977210633"
+                     data-ad-slot="9246028143"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
 
                 <!-- Popular Now -->
 
@@ -499,51 +496,47 @@
             <div class="flex flex-wrap -mx-4 mb-8">
                 <div class="w-full md:w-1/4 px-4 mb-8 md:mb-0">
                     <a href="#" class="text-2xl font-bold mb-4 block">
-                        <span class="text-gray-300">super</span><span class="text-pink-500">gameh5!</span>
+                        <span class="text-gray-300">Nox</span><span class="text-pink-500"> Games</span>
                     </a>
                     <p class="text-gray-400 text-sm mb-4">
-                        Welcome to supergameh5.com, your complete comprehensive destination with the latest industry
-                        news. Our mission is to provide you with insightful analysis and needed insights, enabling your
-                        digital journey.
+                        Welcome to Nox Games — your ultimate destination for the latest in the gaming industry.
+                        Our mission is to deliver insightful analysis, up-to-date news, and valuable perspectives to empower your digital gaming journey.
                     </p>
                 </div>
 
                 <div class="w-full md:w-1/4 px-4 mb-8 md:mb-0">
                     <h3 class="text-lg font-bold mb-4">Blog</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">News</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">Top Apps</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">Top Games</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">How-To</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">Tips&Guides</a></li>
+                        <li><a href="{% url 'blog' %}" class="text-gray-400 hover:text-white text-sm">News</a></li>
+                        <li><a href="{% url 'blog' %}" class="text-gray-400 hover:text-white text-sm">Top Apps</a></li>
+                        <li><a href="{% url 'blog' %}" class="text-gray-400 hover:text-white text-sm">Top Games</a></li>
+                        <li><a href="{% url 'blog' %}" class="text-gray-400 hover:text-white text-sm">How-To</a></li>
+                        <li><a href="{% url 'blog' %}" class="text-gray-400 hover:text-white text-sm">Tips&Guides</a></li>
                     </ul>
                 </div>
 
                 <div class="w-full md:w-1/4 px-4 mb-8 md:mb-0">
                     <h3 class="text-lg font-bold mb-4">Latest Reviews</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">Counter-Strike 2</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">CarX Drift Racing 3</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">Free Fire Max</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">Spider-Man 2</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">Core Keeper</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">EA SPORT FC 25</a></li>
+                        {% for allgame in allgames %}
+                        <li><a href="{% url 'game_detail' allgame.id %}" class="text-gray-400 hover:text-white text-sm">{{allgame.name}}</a></li>
+                        {% endfor %}
+                        
                     </ul>
                 </div>
 
                 <div class="w-full md:w-1/4 px-4">
                     <h3 class="text-lg font-bold mb-4">Contact us</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">About Us</a></li>
+                        <li><a href="{%url 'about'%}" class="text-gray-400 hover:text-white text-sm">About Us</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white text-sm">Privacy policy</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">Disclaimer</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">Sitemap</a></li>
+                       
                     </ul>
                 </div>
             </div>
 
             <div class="border-t border-gray-800 pt-8">
-                <p class="text-center text-gray-500 text-sm">© 2024 supergameh5.com - All rights reserved</p>
+                <p class="text-center text-gray-500 text-sm">© 2025 Nox Game - All rights reserved</p>
             </div>
         </div>
     </footer>

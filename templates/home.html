@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PiccoloGame - Game Reviews & News</title>
+    <title>Nox Games - Game Reviews & News</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -78,7 +78,7 @@
           <div class="flex justify-between items-center">
             <!-- Logo -->
             <a href="/" class="text-2xl font-extrabold tracking-tight flex items-center space-x-1">
-              <span class="text-pink-500">piccolo</span><span class="text-blue-400">game!</span>
+              <span class="text-pink-500">Nox</span><span class="text-blue-400"> Games</span>
             </a>
 
             <!-- Mobile Menu Button -->
@@ -152,28 +152,26 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Fall Guys -->
                 {% for game in popular_games %}
-                <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 p-4 group">
-                    <div class="mb-3 overflow-hidden rounded-xl">
-                        <img src="{{game.icon.url}}"
-                             alt="Fall Guys"
-                             class="w-full h-40 object-cover transition-transform duration-300 group-hover:scale-105">
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-1 group-hover:text-blue-600 transition-colors duration-200">
-                        {{ game.name }}
-                    </h3>
-                    <div class="rating text-yellow-500 text-sm mb-2">
-                        ★★★★★
-                    </div>
-                    <p class="text-sm text-gray-600 mb-3">
-                        {{ game.review|truncatewords:20|safe }}
-                    </p>
-                    <a href="{% url 'game_detail' game.id %}"
-                       class="text-sm font-medium text-blue-500 hover:text-blue-700 transition-colors duration-200">
-                        Read More →
+                    <a href="{% url 'game_detail' game.id %}" class="block w-full h-full">
+                        <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 p-4 group">
+                            <div class="mb-3 overflow-hidden rounded-xl">
+                                <img src="{{game.icon.url}}"
+                                     alt="{{ game.name }}"
+                                     class="w-full h-40 object-cover transition-transform duration-300 group-hover:scale-105">
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-1 group-hover:text-blue-600 transition-colors duration-200">
+                                {{ game.name }}
+                            </h3>
+                            <div class="rating text-yellow-500 text-sm mb-2">
+                                ★★★★★
+                            </div>
+                            <p class="text-sm text-gray-600">
+                                {{ game.review|truncatewords:20|safe }}
+                            </p>
+                        </div>
                     </a>
-                </div>
-
                 {% endfor %}
+
 
                 <!-- Roblox -->
                
@@ -259,11 +257,10 @@
             <div class="flex flex-col lg:flex-row justify-between">
                 <div class="mb-8 lg:mb-0 text-center lg:text-left">
                     <a href="#" class="text-xl font-bold mb-4 block">
-                        <span class="logo-piccolo">piccolo</span><span class="logo-game">game!</span>
+                        <span class="logo-piccolo">Nox</span><span class="logo-game"> Games</span>
                     </a>
-                    <p class="text-gray-600 text-sm mb-4 max-w-md mx-auto lg:mx-0">Welcome to piccologame.com, your
-                        compass for comprehensively coupled with the latest industry news. Our mission is to provide you
-                        with insightful analysis and valuable insights, enriching your digital journey.</p>
+                    <p class="text-gray-600 text-sm mb-4 max-w-md mx-auto lg:mx-0">Welcome to Nox Games — your ultimate destination for the latest in the gaming industry.
+                    Our mission is to deliver insightful analysis, up-to-date news, and valuable perspectives to empower your digital gaming journey.</p>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
@@ -290,10 +287,9 @@
                     <div class="text-center sm:text-left">
                         <h3 class="font-semibold mb-4">Contact us</h3>
                         <ul class="text-sm space-y-2">
-                            <li><a href="#" class="text-gray-600 hover:text-gray-900">About Us</a></li>
+                            <li><a href="{% url 'about' %}" class="text-gray-600 hover:text-gray-900">About Us</a></li>
                             <li><a href="#" class="text-gray-600 hover:text-gray-900">Privacy policy</a></li>
-                            <li><a href="#" class="text-gray-600 hover:text-gray-900">Disclaimer</a></li>
-                            <li><a href="#" class="text-gray-600 hover:text-gray-900">Sitemap</a></li>
+                            
                         </ul>
                     </div>
                 </div>

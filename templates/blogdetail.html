@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-  <title>Game Blog UI</title>
+  <title>Nox Games - {{post.title}}</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-white text-gray-800">
@@ -20,7 +20,7 @@
       <div class="py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         <!-- Logo -->
         <a href="/" class="text-2xl font-bold text-purple-700">
-          <span class="text-red-500">piccolo</span>game!
+          <span class="text-red-500">Nox</span> Game
         </a>
 
 
@@ -98,8 +98,18 @@
     <!-- Advertisement Block -->
     <div class="my-8">
       <div class="bg-gray-100 p-6 rounded-md text-center border border-gray-300">
-        <p class="text-sm text-gray-600 mb-2">Advertisement</p>
-        <div class="bg-purple-900 text-white py-3 px-6 rounded-md inline-block">Monetag Referral Program - OPEN</div>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8421665977210633"
+           crossorigin="anonymous"></script>
+        <!-- rectangle ads -->
+        <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-8421665977210633"
+           data-ad-slot="9922948821"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+        <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
       </div>
     </div>
 
@@ -163,23 +173,25 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
           {% for game in popular_games %}
-            <div class="bg-white p-4 rounded-md shadow-sm">
-                <div class="flex items-center mb-4">
-                    <img src="{{game.icon.url}}"
-                        alt="Counter-Strike 2" class="rounded-md mr-4">
-                    <h3 class="font-bold">{{game.name}}</h3>
-                </div>
-                <p class="text-sm text-gray-700 mb-4">{{game.review|truncatechars:100|safe}}</p>
-                <div class="flex star-rating text-xs mb-2">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <a href="{% url 'game_detail' game.id %}" class="text-blue-500 hover:underline text-sm">Read full review</a>
-            </div>
+              <div class="bg-white p-4 rounded-md shadow-sm">
+                  <div class="flex items-center mb-4">
+                      <img src="{{ game.icon.url }}"
+                           alt="{{ game.name }}"
+                           class="w-16 h-16 object-cover rounded-md mr-4">
+                      <h3 class="font-bold">{{ game.name }}</h3>
+                  </div>
+                  <p class="text-sm text-gray-700 mb-4">{{ game.review|truncatechars:100|safe }}</p>
+                  <div class="flex star-rating text-xs mb-2 text-yellow-500">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                  </div>
+                  <a href="{% url 'game_detail' game.id %}" class="text-blue-500 hover:underline text-sm">Read full review</a>
+              </div>
           {% endfor %}
+
 
             
         </div>
@@ -191,19 +203,20 @@
     <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
       <!-- Brand Info -->
       <div>
-        <h2 class="text-2xl font-bold text-[#cc1d2c]">piccolo<span class="text-purple-700">game!</span></h2>
-        <p class="mt-4">Welcome to piccologame.com, your compass for comprehensively coupled with the latest industry news. Our mission is to provide you with insightful analysis and valuable insights, enriching your digital journey.</p>
+        <h2 class="text-2xl font-bold text-[#cc1d2c]">Nox<span class="text-purple-700"> Games</span></h2>
+        <p class="mt-4">Welcome to Nox Games — your ultimate destination for the latest in the gaming industry.
+        Our mission is to deliver insightful analysis, up-to-date news, and valuable perspectives to empower your digital gaming journey.</p>
       </div>
 
       <!-- Blog Links -->
       <div>
         <h3 class="font-bold text-cyan-600 mb-3">Blog</h3>
         <ul class="space-y-2">
-          <li><a href="#">News</a></li>
-          <li><a href="#">Top Apps</a></li>
-          <li><a href="#">Top Games</a></li>
-          <li><a href="#">How-To</a></li>
-          <li><a href="#">Tips&Guides</a></li>
+          <li><a href="{% url 'blog' %}">News</a></li>
+          <li><a href="{% url 'blog' %}">Top Apps</a></li>
+          <li><a href="{% url 'blog' %}">Top Games</a></li>
+          <li><a href="{% url 'blog' %}">How-To</a></li>
+          <li><a href="{% url 'blog' %}">Tips&Guides</a></li>
         </ul>
       </div>
 
@@ -211,12 +224,10 @@
       <div>
         <h3 class="font-bold text-cyan-600 mb-3">Latest Reviews</h3>
         <ul class="space-y-2">
-          <li><a href="#">Marvel Rivals</a></li>
-          <li><a href="#">Red Dead Redemption 2</a></li>
-          <li><a href="#">Roblox</a></li>
-          <li><a href="#">Core Keeper</a></li>
-          <li><a href="#">EA SPORT FC 25</a></li>
-          <li><a href="#">Brawl Stars</a></li>
+          {% for game in popular_games%}
+            <li><a href="{% url 'game_detail' game.id%}" class="hover:text-pink-500">{{game.name}}</a></li>
+          {% endfor %}
+          
         </ul>
       </div>
 
@@ -224,10 +235,9 @@
       <div>
         <h3 class="font-bold text-cyan-600 mb-3">Contact us</h3>
         <ul class="space-y-2">
-          <li><a href="#">About Us</a></li>
+          <li><a href="{% url 'about' %}">About Us</a></li>
           <li><a href="#">Privacy policy</a></li>
-          <li><a href="#">Disclaimer</a></li>
-          <li><a href="#">Sitemap</a></li>
+          
         </ul>
       </div>
     </div>
