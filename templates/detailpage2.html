@@ -175,23 +175,25 @@
             </script>
 
             <!-- Game Images -->
-            <div class="relative mb-6  rounded-md overflow-hidden">
-                <!-- Image Display -->
-                <div class="flex items-center justify-center">
-                    <button id="prev-btn" class="px-3 py-2 text-white bg-gray-600 rounded-l">‹</button>
+            <div class="relative mb-6 rounded-md overflow-hidden">
+              <!-- Image Display -->
+              <div class="flex items-center justify-center">
+                <button id="prev-btn" class="px-3 py-2 text-white bg-gray-600 rounded-l">‹</button>
 
-                    <img id="carousel-image"
-                         src="{{ game.screenshots.0 }}"
-                         alt="{{ game.name }} Screenshot"
-                         class="w-full transition-all duration-500 ease-in-out max-w-xl rounded-md">
+                <img id="carousel-image"
+                     src="{{ game.screenshots.0 }}"
+                     alt="{{ game.name }} Screenshot"
+                     class="w-full transition-all duration-500 ease-in-out max-w-xl rounded-md">
 
-                    <button id="next-btn" class="px-3 py-2 text-white bg-gray-600 rounded-r">›</button>
-                </div>
+                <button id="next-btn" class="px-3 py-2 text-white bg-gray-600 rounded-r">›</button>
+              </div>
 
-
-                <!-- Carousel Navigation -->
-
+              <!-- Disclaimer Text -->
+              <p class="text-xs text-gray-500 text-center mt-2">
+                * Images shown above are sourced from the Google Play Store.
+              </p>
             </div>
+
 
             <!-- Ratings -->
             <div class="mb-8">

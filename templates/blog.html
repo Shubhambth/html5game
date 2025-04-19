@@ -76,41 +76,54 @@
   <main class="px-4 md:px-10 py-6 grid grid-cols-1 md:grid-cols-3 gap-6">
     <!-- Featured Blog -->
     {% for post in popularpost %}
-    <div class="md:col-span-2">
-      <div class="relative">
-        <img src="{{post.image.url}}" class="rounded-lg w-full h-[200px] md:h-[320px] object-cover" />
-        <span class="absolute top-2 left-2 bg-blue-600 text-white text-xs font-semibold px-2 py-1 rounded">{% for category in post.categories.all %}
-          {{ category.name }}{% if not forloop.last %}, {% endif %}
-        {% endfor %}</span>
+      <div class="md:col-span-2">
+        <div class="relative">
+          <img src="{{ post.image.url }}" class="rounded-lg w-full h-[200px] md:h-[320px] object-cover" />
+          <span class="absolute top-2 left-2 bg-blue-600 text-white text-xs font-semibold px-2 py-1 rounded">
+            {% for category in post.categories.all %}
+              {{ category.name }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+          </span>
+        </div>
+        <h2 class="text-lg font-bold mt-3">
+          <a href="{% url 'blog_detail' slug=post.slug %}" class="hover:text-blue-600 transition duration-300">
+            {{ post.title }}
+          </a>
+        </h2>
+        <p class="text-sm text-gray-600 mt-1">{{ post.content|truncatechars:60|safe }}</p>
+        <p class="text-xs text-gray-400 mt-1">{{ post.created_at|date:"F j, Y" }}</p>
       </div>
-      <h2 class="text-lg font-bold mt-3">{{post.title}}</h2>
-      <p class="text-sm text-gray-600 mt-1">{{post.content|truncatechars:60|safe}}</p>
-      <p class="text-xs text-gray-400 mt-1">{{ blog.created_at|date:"F j, Y" }}</p>
-    </div>
     {% endfor %}
+
 
     <!-- Side Cards -->
     <div class="space-y-6">
       {% for post in topapp %}
-      <div class="flex space-x-4">
-        <img src="{{post.image.url}}" class="w-24 h-20 object-cover rounded" />
-        <div>
-          <span class="text-xs text-white bg-purple-600 px-2 py-1 rounded font-semibold">TOP APPS</span>
-          <h3 class="text-sm font-semibold">{{post.title}}</h3>
-          <p class="text-xs text-gray-400">{{post.created_at|date:"F j, Y"}}</p>
-        </div>
-      </div>
+        <a href="{% url 'blog_detail' slug=post.slug %}" class="block hover:bg-gray-100 hover:shadow-md rounded transition duration-300 p-2">
+          <div class="flex space-x-4">
+            <img src="{{ post.image.url }}" class="w-24 h-20 object-cover rounded" />
+            <div>
+              <span class="text-xs text-white bg-purple-600 px-2 py-1 rounded font-semibold">TOP APPS</span>
+              <h3 class="text-sm font-semibold">{{ post.title }}</h3>
+              <p class="text-xs text-gray-400">{{ post.created_at|date:"F j, Y" }}</p>
+            </div>
+          </div>
+        </a>
       {% endfor %}
+
       {% for post in topgame %}
-      <div class="flex space-x-4">
-        <img src="{{post.image.url}}" class="w-24 h-20 object-cover rounded" />
-        <div>
-          <span class="text-xs text-white bg-blue-600 px-2 py-1 rounded font-semibold">TOP GAMES</span>
-          <h3 class="text-sm font-semibold">{{post.title}}</h3>
-          <p class="text-xs text-gray-400">{{post.created_at|date:"F j, Y"}}</p>
-        </div>
-      </div>
+        <a href="{% url 'blog_detail' slug=post.slug %}" class="block hover:bg-gray-100 hover:shadow-md rounded transition duration-300 p-2">
+          <div class="flex space-x-4">
+            <img src="{{ post.image.url }}" class="w-24 h-20 object-cover rounded" />
+            <div>
+              <span class="text-xs text-white bg-blue-600 px-2 py-1 rounded font-semibold">TOP GAMES</span>
+              <h3 class="text-sm font-semibold">{{ post.title }}</h3>
+              <p class="text-xs text-gray-400">{{ post.created_at|date:"F j, Y" }}</p>
+            </div>
+          </div>
+        </a>
       {% endfor %}
+
     </div>
   </main>
 
