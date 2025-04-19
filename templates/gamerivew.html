@@ -136,7 +136,7 @@
     <!-- Breadcrumb -->
     <div class="container mx-auto px-4 py-2 text-sm">
         <div class="flex items-center text-gray-500">
-            <a href="#" class="hover:text-gray-700">Home</a>
+            <a href="/" class="hover:text-gray-700">Home</a>
             <span class="mx-2">></span>
             <span class="text-gray-700">App Reviews</span>
         </div>
@@ -230,23 +230,21 @@
                 <div class="w-full lg:w-1/4 mb-8 lg:px-4">
                     <h4 class="text-blue-400 font-medium mb-4">Blog</h4>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">News</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Top Apps</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Top Games</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">How-To</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Tips&Guides</a></li>
+                        <li><a href="{% url 'blog' %}" class="text-gray-600 hover:text-gray-900 text-sm">News</a></li>
+                        <li><a href="{% url 'blog' %}" class="text-gray-600 hover:text-gray-900 text-sm">Top Apps</a></li>
+                        <li><a href="{% url 'blog' %}" class="text-gray-600 hover:text-gray-900 text-sm">Top Games</a></li>
+                        <li><a href="{% url 'blog' %}" class="text-gray-600 hover:text-gray-900 text-sm">How-To</a></li>
+                        <li><a href="{% url 'blog' %}" class="text-gray-600 hover:text-gray-900 text-sm">Tips&Guides</a></li>
                     </ul>
                 </div>
 
                 <div class="w-full lg:w-1/4 mb-8 lg:px-4">
                     <h4 class="text-blue-400 font-medium mb-4">Latest Reviews</h4>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Marvel Rivals</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Red Dead Redemption 2</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Roblox</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Core Keeper</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">EA SPORT FC 25</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Brawl Stars</a></li>
+                        {% for game in game %}
+                        <li><a href="{% url 'game_detail' game.id %}" class="text-gray-600 hover:text-gray-900 text-sm">{{game.name}}</a></li>
+                        {% endfor %}
+                        
                     </ul>
                 </div>
 

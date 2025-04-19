@@ -98,7 +98,7 @@
         <!-- Desktop Header -->
         <div class="hidden md:flex items-center justify-between px-4 py-2">
             <div class="flex items-center">
-                <a href="#" class="text-pink-500 font-bold text-xl">
+                <a href="/" class="text-pink-500 font-bold text-xl">
                     piccolo<span class="text-blue-500">game!</span>
                 </a>
             </div>
@@ -196,22 +196,26 @@
 
     <!-- Game Grid - Already Responsive -->
     <div class="px-2 md:px-4 pb-8">
-        {% for game in game%}
+        
         <div
             class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 2xl:grid-cols-12 gap-2 md:gap-3">
-            <div
-                class="game-item bg-blue-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
-                <img src="{{game.icon.url}}"
-                    alt="Game" class="w-full h-full object-cover" />
+            {% for game in game %}
+            <a href="{% url 'game_detail' game.id %}">
                 <div
-                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
+                    class="game-item bg-blue-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
+                    <img src="{{ game.icon.url }}"
+                        alt="{{ game.name }}" class="w-full h-full object-cover" />
                     <div
-                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
-                        {{game.name}}
+                        class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
+                        <div
+                            class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
+                            {{ game.name }}
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
             {% endfor %}
+
 
             <!-- Example of duplicated items -->
             
@@ -240,11 +244,11 @@
                 <div class="w-1/2 md:w-1/6 mb-6 md:mb-4">
                     <h4 class="font-semibold text-blue-500 mb-2">Blog</h4>
                     <ul class="text-xs text-gray-600 space-y-1">
-                        <li><a href="#" class="hover:text-pink-500">News</a></li>
-                        <li><a href="#" class="hover:text-pink-500">Top Apps</a></li>
-                        <li><a href="#" class="hover:text-pink-500">Top Games</a></li>
-                        <li><a href="#" class="hover:text-pink-500">How To</a></li>
-                        <li><a href="#" class="hover:text-pink-500">Tips</a></li>
+                        <li><a href="{% url 'blog' %}" class="hover:text-pink-500">News</a></li>
+                        <li><a href="{% url 'blog' %}" class="hover:text-pink-500">Top Apps</a></li>
+                        <li><a href="{% url 'blog' %}" class="hover:text-pink-500">Top Games</a></li>
+                        <li><a href="{% url 'blog' %}" class="hover:text-pink-500">How To</a></li>
+                        <li><a href="{% url 'blog' %}" class="hover:text-pink-500">Tips</a></li>
                     </ul>
                 </div>
 

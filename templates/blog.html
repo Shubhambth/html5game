@@ -43,7 +43,7 @@
 
   <!-- Breadcrumbs -->
   <nav class="text-sm text-gray-500 px-4 md:px-6 py-2">
-    <a href="#" class="hover:text-purple-600">Home</a> → <span>Blogs</span>
+    <a href="/" class="hover:text-purple-600">Home</a> → <span>Blogs</span>
   </nav>
 
   <!-- Blog Title -->
@@ -53,45 +53,53 @@
   </section>
 
   <!-- Category Menu -->
-  <div class="flex flex-wrap justify-center gap-4 text-sm font-semibold text-gray-700 border-b px-4 pb-2">
+  <!-- <div class="flex flex-wrap justify-center gap-4 text-sm font-semibold text-gray-700 border-b px-4 pb-2">
     <a href="#" class="hover:text-purple-600">NEWS</a>
     <a href="#" class="hover:text-purple-600">TOP APPS</a>
     <a href="#" class="hover:text-purple-600">TOP GAMES</a>
     <a href="#" class="hover:text-purple-600">HOW-TO</a>
     <a href="#" class="hover:text-purple-600">TIPS&GUIDES</a>
-  </div>
+  </div> -->
 
   <!-- Blog Grid -->
   <main class="px-4 md:px-10 py-6 grid grid-cols-1 md:grid-cols-3 gap-6">
     <!-- Featured Blog -->
+    {% for post in popularpost %}
     <div class="md:col-span-2">
       <div class="relative">
-        <img src="https://piccologame.com/wp-content/uploads/2025/04/7877482-18-09-16-44.jpg" class="rounded-lg w-full h-[200px] md:h-[320px] object-cover" />
-        <span class="absolute top-2 left-2 bg-blue-600 text-white text-xs font-semibold px-2 py-1 rounded">TOP GAMES</span>
+        <img src="{{post.image.url}}" class="rounded-lg w-full h-[200px] md:h-[320px] object-cover" />
+        <span class="absolute top-2 left-2 bg-blue-600 text-white text-xs font-semibold px-2 py-1 rounded">{% for category in post.categories.all %}
+          {{ category.name }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}</span>
       </div>
-      <h2 class="text-lg font-bold mt-3">Marvel Rivals: The Ultimate Guide to the Top Hero Shooter</h2>
-      <p class="text-sm text-gray-600 mt-1">Since its release on December 6, 2024, Marvel Rivals has quickly become a standout title in the hero shooter genre...</p>
-      <p class="text-xs text-gray-400 mt-1">April 14, 2025</p>
+      <h2 class="text-lg font-bold mt-3">{{post.title}}</h2>
+      <p class="text-sm text-gray-600 mt-1">{{post.content|truncatechars:60|safe}}</p>
+      <p class="text-xs text-gray-400 mt-1">{{ blog.created_at|date:"F j, Y" }}</p>
     </div>
+    {% endfor %}
 
     <!-- Side Cards -->
     <div class="space-y-6">
+      {% for post in topapp %}
       <div class="flex space-x-4">
-        <img src="https://piccologame.com/wp-content/uploads/2024/08/Block-Blast-tips-and-guide-02-1.jpg" class="w-24 h-20 object-cover rounded" />
+        <img src="{{post.image.url}}" class="w-24 h-20 object-cover rounded" />
         <div>
           <span class="text-xs text-white bg-purple-600 px-2 py-1 rounded font-semibold">TOP APPS</span>
-          <h3 class="text-sm font-semibold">Genshin Impact: Guide to Top App Features and How to Play</h3>
-          <p class="text-xs text-gray-400">April 9, 2025</p>
+          <h3 class="text-sm font-semibold">{{post.title}}</h3>
+          <p class="text-xs text-gray-400">{{post.created_at|date:"F j, Y"}}</p>
         </div>
       </div>
+      {% endfor %}
+      {% for post in topgame %}
       <div class="flex space-x-4">
-        <img src="https://piccologame.com/wp-content/uploads/2025/03/candy-crush-saga-1.jpg" class="w-24 h-20 object-cover rounded" />
+        <img src="{{post.image.url}}" class="w-24 h-20 object-cover rounded" />
         <div>
           <span class="text-xs text-white bg-blue-600 px-2 py-1 rounded font-semibold">TOP GAMES</span>
-          <h3 class="text-sm font-semibold">Geometry Dash: Complete Guide</h3>
-          <p class="text-xs text-gray-400">April 7, 2025</p>
+          <h3 class="text-sm font-semibold">{{post.title}}</h3>
+          <p class="text-xs text-gray-400">{{post.created_at|date:"F j, Y"}}</p>
         </div>
       </div>
+      {% endfor %}
     </div>
   </main>
 
@@ -126,16 +134,7 @@
         <h2 class="text-xl font-bold text-purple-700">piccologame!</h2>
         <p class="mt-2">Welcome to piccologame.com, your compass for comprehensive gaming insights...</p>
       </div>
-      <div>
-        <h3 class="font-semibold text-gray-800 mb-2">Blog</h3>
-        <ul class="space-y-1">
-          <li><a href="#" class="hover:text-purple-600">News</a></li>
-          <li><a href="#" class="hover:text-purple-600">Top Apps</a></li>
-          <li><a href="#" class="hover:text-purple-600">Top Games</a></li>
-          <li><a href="#" class="hover:text-purple-600">How-To</a></li>
-          <li><a href="#" class="hover:text-purple-600">Tips & Guides</a></li>
-        </ul>
-      </div>
+      
       <div>
         <h3 class="font-semibold text-gray-800 mb-2">Latest Reviews</h3>
         <ul class="space-y-1">
