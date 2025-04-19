@@ -64,9 +64,10 @@
 
     <div id="loading-screen">
         <div class="text-center">
-          <h1 class="text-2xl font-bold">
-            <span class="text-pink-500">piccolo</span><span class="text-blue-500">game!</span>
-          </h1>
+            <a href="/" class="text-2xl font-bold">
+              <span class="text-pink-500">piccolo</span><span class="text-blue-500">game!</span>
+            </a>
+
           <p class="text-gray-600 text-sm mt-2">Loading awesome games for you...</p>
         </div>
         <div id="loading-bar-container">
@@ -79,7 +80,7 @@
         <div class="container mx-auto flex justify-between items-center">
             <!-- Logo -->
             <div class="flex items-center">
-                <a href="#" class="text-2xl font-bold text-red-500">
+                <a href="/" class="text-2xl font-bold text-red-500">
                     piccolo<span class="text-gray-800">game!</span>
                 </a>
             </div>
@@ -172,54 +173,32 @@
 
 
 
-
+            {% for game in game%}
             <!-- Red Dead Redemption 2 -->
             <div
                 class="bg-white rounded-xl shadow-md overflow-hidden transform transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer">
                 <div class="flex p-4">
-                    <img src="https://piccologame.com/wp-content/uploads/2025/01/RDR2_HeroSquare_1080x1080-150x150.jpg"
+                    <img src="{{game.icon.url}}"
                         alt="Red Dead Redemption 2" class="w-20 h-20 object-cover rounded-lg">
                     <div class="ml-4">
                         <h3 class="font-bold text-lg text-gray-800 transition duration-200 hover:underline">
-                            Red Dead Redemption 2
+                            {{game.name}}
                         </h3>
                         <p class="text-sm text-gray-600 mt-2">
-                            Red Dead Redemption 2 offers a breathtaking journey through the Wild West with its engaging
-                            story and...
+                            {{game.review|truncatechars:100|safe}}
                         </p>
                         <div class="flex mt-2 rating text-yellow-400 text-sm">
                             <span>★★★★★</span>
                         </div>
-                        <a href="#" class="text-blue-500 text-sm mt-1 inline-block hover:underline transition">
+                        <a href="{% url 'game_detail' game.id%}" class="text-blue-500 text-sm mt-1 inline-block hover:underline transition">
                             Read full review
                         </a>
                     </div>
                 </div>
             </div>
+            {% endfor %}
 
-            <div
-                class="bg-white rounded-xl shadow-md overflow-hidden transform transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer">
-                <div class="flex p-4">
-                    <img src="https://piccologame.com/wp-content/uploads/2025/01/5_1200x1200-150x150.jpg"
-                        alt="Red Dead Redemption 2" class="w-20 h-20 object-cover rounded-lg">
-                    <div class="ml-4">
-                        <h3 class="font-bold text-lg text-gray-800 transition duration-200 hover:underline">
-                            Roblox
-                        </h3>
-                        <p class="text-sm text-gray-600 mt-2">
-                            Roblox is an innovative platform where users can create
-                            and socialize in immersive virtual worlds. Explore ende...
-                        </p>
-                        <div class="flex mt-2 rating text-yellow-400 text-sm">
-                            <span>★★★★★</span>
-                        </div>
-                        <a href="#" class="text-blue-500 text-sm mt-1 inline-block hover:underline transition">
-                            Read full review
-                        </a>
-                    </div>
-                </div>
-            </div>
-
+            
 
 
             <!-- Roblox -->
@@ -231,27 +210,7 @@
     </div>
 
     <!-- Pagination -->
-    <div class="container mx-auto px-4 mt-10 flex justify-center">
-        <div class="flex space-x-2">
-            <!-- Active Page -->
-            <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition">
-                1
-            </a>
-            <!-- Inactive Pages -->
-            <a href="#"
-                class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg shadow-sm hover:bg-gray-100 transition">
-                2
-            </a>
-            <!-- Next Page -->
-            <a href="#"
-                class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg shadow-sm hover:bg-gray-100 transition">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-            </a>
-        </div>
-    </div>
+    
 
 
     <!-- Footer -->
@@ -325,7 +284,7 @@
             let progress = 0;
             const interval = setInterval(function() {
                 // Increment progress
-                progress += Math.random() * 3;
+                progress += Math.random() * 10;
                 if (progress > 100) progress = 100;
 
                 // Update loading bar and text

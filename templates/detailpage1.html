@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuperGameh5 - Gaming Reviews & Insights</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        .content-hidden {
+            max-height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .fade-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+        }
+
+        .star-rating {
+            color: #FFD700;
+        }
+
+        .animate-ping {
+            animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes ping {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            75%,
+            100% {
+                transform: scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        .animate-pulse {
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+        }
+
+        .game-btn:hover .btn-wave {
+            display: block;
+        }
+
+        #loading-screen {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: white;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          z-index: 9999;
+          transition: opacity 0.5s ease-out;
+        }
+
+        #loading-bar-container {
+          width: 80%;
+          max-width: 300px;
+          height: 20px;
+          background-color: #f0f0f0;
+          border-radius: 10px;
+          overflow: hidden;
+          margin-top: 20px;
+        }
+
+        #loading-bar {
+          height: 100%;
+          width: 0%;
+          background: linear-gradient(to right, #ec4899, #3b82f6);
+          border-radius: 10px;
+          transition: width 0.3s ease;
+        }
+
+        #loading-percentage {
+          margin-top: 10px;
+          font-size: 14px;
+          color: #333;
+        }
+
+        #main-content {
+          display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <div id="loading-screen">
+        <div class="text-center">
+          <h1 class="text-2xl font-bold">
+            <span class="text-pink-500">piccolo</span><span class="text-blue-500">game!</span>
+          </h1>
+          <p class="text-gray-600 text-sm mt-2">Loading awesome games for you...</p>
+        </div>
+        <div id="loading-bar-container">
+          <div id="loading-bar"></div>
+        </div>
+        <div id="loading-percentage">0%</div>
+      </div>
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="#" class="text-2xl font-bold">
+                    <span class="text-gray-700">super</span><span class="text-pink-500">gameh5!</span>
+                </a>
+            </div>
+            <div class="relative w-64">
+                <input type="text" placeholder="Search games here..."
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm">
+                <button class="absolute right-2 top-2 text-gray-400">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <nav class="hidden md:flex">
+                <ul class="flex space-x-6">
+                    <li><a href="{% url 'gamerivew' %}" class="text-gray-600 hover:text-pink-500">Reviews/Games</a></li>
+                    <li><a href="{% url 'allgames'%}" class="text-gray-600 hover:text-pink-500">HTML5 Games</a></li>
+                    <li><a href="{% url 'blog' %}" class="text-gray-600 hover:text-pink-500">Blog</a></li>
+                    <li><a href="{% url 'about'%}" class="text-gray-600 hover:text-pink-500">About us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6">
+        <!-- Breadcrumb -->
+        <div class="flex text-sm mb-6">
+            <a href="/" class="text-gray-600 hover:text-pink-500">Home</a>
+            <span class="mx-2 text-gray-400">→</span>
+            <a href="{% url 'gamerivew' %}" class="text-gray-600 hover:text-pink-500">Reviews</a>
+            <span class="mx-2 text-gray-400">→</span>
+            <span class="text-gray-400">{{game.name}}</span>
+        </div>
+
+        <!-- Game Thumbnails -->
+        <div class="grid grid-cols-5 gap-2 mb-8">
+            {% for game in allgames %}
+            <a href="{% url 'game_detail' game.id%}" class="block">
+                <img src="{{game.icon.url}}" alt="Game 1"
+                    class="rounded-md">
+            </a>
+            {% endfor %}
+            
+        </div>
+
+        <div class="flex flex-wrap -mx-4">
+            <!-- Main Column -->
+            <div class="w-full lg:w-2/3 px-4">
+                <!-- Game Header -->
+
+
+
+
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md max-w-2xl w-full">
+                    <div class="flex flex-col sm:flex-row items-center sm:items-start">
+                        <div class="mr-0 sm:mr-6 mb-4 sm:mb-0">
+                            <img src="{{game.icon.url}}"
+                                alt="GTA V Cover" class="rounded-md w-24 h-24 md:w-32 md:h-32">
+                        </div>
+                        <div class="flex-1 text-center sm:text-left">
+                            <h1 class="text-2xl font-bold mb-1">{{game.name}}</h1>
+                            <div class="flex justify-center sm:justify-start text-yellow-400 mb-2">
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                            </div>
+                            <p class="text-gray-600 mb-4 text-sm">All trademarks belong to their respective owners.</p>
+                            <div class="relative inline-block game-btn">
+                                <a href="{% url 'detailpage2' game.id %}"
+                                   class="inline-block bg-blue-400 hover:bg-blue-500 text-white px-8 py-3 rounded-md uppercase font-bold tracking-wide animate-pulse relative z-10">
+                                   GET GAME
+                                </a>
+
+                                <div
+                                    class="btn-wave absolute inset-0 rounded-md border-2 border-blue-400 animate-ping opacity-75 z-0">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Popular Now -->
+
+
+
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold mb-6 text-blue-900">Popular Now</h2>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <!-- Row 1 -->
+                        {% for game in allgames %}
+                        <a href="{% url 'game_detail' game.id %}"
+                            class="flex items-center bg-white rounded-lg shadow-sm p-3 hover:shadow-md transition">
+                            <div class="w-12 h-12 bg-gray-100 rounded-md flex-shrink-0 overflow-hidden">
+                                <img src="{{game.icon.url}}" alt="FIFA 23"
+                                    class="w-full h-full object-cover">
+                            </div>
+                            <span class="ml-4 text-gray-700">{{game.name}}</span>
+                        </a>
+                        {% endfor %}
+
+                        
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap gap-2 mb-8">
+                    <button
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-300 text-sm md:text-base">Read
+                        Review</button>
+                    <button
+                        class="bg-white hover:bg-gray-100 border border-gray-300 text-gray-700 px-4 py-2 rounded-md transition duration-300 text-sm md:text-base">Download</button>
+                    <button
+                        class="bg-white hover:bg-gray-100 border border-gray-300 text-gray-700 px-4 py-2 rounded-md transition duration-300 text-sm md:text-base">Screenshot</button>
+                </div>
+
+                <!-- Review Content -->
+                <div class="prose max-w-none mb-8">
+                    <div id="content-container" class="content-hidden">
+                        
+
+                        
+                        {{game.review|safe}}
+                        <div id="fade-overlay" class="fade-overlay"></div>
+                    </div>
+                    <button id="read-more-btn"
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-400">Read
+                        More</button>
+                </div>
+
+                <!-- Ratings -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold mb-4">Rating</h2>
+
+                    <div class="mb-4">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-gray-700">Graphics and Sound</span>
+                            <span class="text-gray-700 font-medium">5</span>
+                        </div>
+                        <div class="bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-blue-500 h-2.5 rounded-full" style="width: 100%"></div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-gray-700">Controls</span>
+                            <span class="text-gray-700 font-medium">5</span>
+                        </div>
+                        <div class="bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-blue-500 h-2.5 rounded-full" style="width: 100%"></div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-gray-700">Gameplay</span>
+                            <span class="text-gray-700 font-medium">4</span>
+                        </div>
+                        <div class="bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-blue-500 h-2.5 rounded-full" style="width: 80%"></div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-gray-700">Lasting Appeal</span>
+                            <span class="text-gray-700 font-medium">4</span>
+                        </div>
+                        <div class="bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-blue-500 h-2.5 rounded-full" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pros & Cons -->
+                <div class="flex flex-wrap -mx-2 mb-8">
+                    <div class="w-1/2 px-2">
+                        <h3 class="text-lg font-bold mb-4">PROS</h3>
+                        <ul class="space-y-2">
+                            
+                            {% for pro in game.pros %}
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2">•</span>
+                                <span class="text-gray-700">{{ pro }}</span>
+                            </li>
+                            {% endfor %}
+                           
+                        </ul>
+                    </div>
+                    <div class="w-1/2 px-2">
+                        <h3 class="text-lg font-bold mb-4">CONS</h3>
+                        <ul class="space-y-2">
+                            
+                               
+                            {% for con in game.cons %}
+                            <li class="flex items-start">
+                                <span class="text-red-500 mr-2">•</span>
+                                <span class="text-gray-700">{{ con }}</span>
+                            </li>
+                            {% endfor %}
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="w-full lg:w-1/3 px-4">
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold mb-4">Popular</h2>
+                    {% for game in popular_games %}
+                    <a href="{% url 'game_detail' game.id%}" class="block bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 mb-4 hover:bg-gray-50">
+                        <div class="flex items-start gap-4">
+                            <img src="{{ game.icon.url }}"
+                                 alt="{{ game.name }}"
+                                 class="w-16 h-16 object-cover rounded-md flex-shrink-0">
+                            <div>
+                                <h3 class="text-base md:text-lg font-semibold text-gray-800 hover:text-blue-600 transition-colors duration-200">
+                                    {{ game.name }}
+                                </h3>
+                                <p class="text-sm text-gray-600 mt-1">{{ game.review|truncatechars:50|safe }}</p>
+                                <div class="flex items-center text-yellow-400 text-xs mt-2">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    {% endfor %}
+
+                    
+                </div>
+
+                <!-- <div class="mb-8">
+
+                    <h2 class="text-xl font-bold mb-4">H5 Game</h2>
+
+                    <div class="bg-white p-4 rounded-md shadow-sm mb-4">
+                        <div class="flex">
+                            <img src="https://piccologame.com/wp-content/uploads/2024/08/the-legend-of-zelda-tears-of-the-kingdom-logo.jpg"
+                                alt="Block Craft 3D School" class="rounded-md mr-4">
+                            <div>
+                                <h3 class="font-bold">Block Craft 3D School</h3>
+                                <p class="text-sm text-gray-600">Welcome to Block Craft 3D School...</p>
+                                <div class="flex star-rating text-xs mt-1">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div> -->
+            </div>
+        </div>
+
+        <!-- Latest Posts Section -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-6">Latest Posts</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                {% for post in posts %}
+                <div class="bg-white rounded-md shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300">
+                    <div class="relative">
+                        <img src="{{ post.image.url }}"
+                             alt="{{ post.title }}"
+                             class="w-full h-48 object-cover">
+                        <span class="absolute top-4 left-4 bg-blue-500 text-white text-xs px-3 py-1 rounded-md font-medium">
+                            HOW-TO GUIDES
+                        </span>
+                    </div>
+                    <div class="p-4">
+                        <a href="/">
+                            <h3 class="font-bold text-lg mb-2 text-gray-800 hover:text-blue-600 transition-colors duration-200">
+                                {{ post.title }}
+                            </h3>
+                        </a>
+                        <p class="text-gray-500 text-sm">{{ post.created_at }}</p>
+                    </div>
+                </div>
+
+                {% endfor %}
+
+                
+            </div>
+        </div>
+
+        <!-- Latest Reviews Section -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-6">Latest Reviews</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                {% for allgame in allgames%}
+                <div class="bg-white p-4 rounded-md shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <img src="{{allgame.icon.url}}" alt="Counter-Strike 2" class="rounded-md mr-4">
+                        <h3 class="font-bold">{{allgame.name}}</h3>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-4">{{allgame.review|truncatechars:100|safe}}</p>
+                    <div class="flex star-rating text-xs mb-2">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <a href="{% url 'game_detail' allgame.id %}" class="text-blue-500 hover:underline text-sm">Read full review</a>
+                </div>
+                {% endfor %}
+
+                
+            </div>
+
+            
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap -mx-4 mb-8">
+                <div class="w-full md:w-1/4 px-4 mb-8 md:mb-0">
+                    <a href="#" class="text-2xl font-bold mb-4 block">
+                        <span class="text-gray-300">super</span><span class="text-pink-500">gameh5!</span>
+                    </a>
+                    <p class="text-gray-400 text-sm mb-4">
+                        Welcome to supergameh5.com, your complete comprehensive destination with the latest industry
+                        news. Our mission is to provide you with insightful analysis and needed insights, enabling your
+                        digital journey.
+                    </p>
+                </div>
+
+                <div class="w-full md:w-1/4 px-4 mb-8 md:mb-0">
+                    <h3 class="text-lg font-bold mb-4">Blog</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">News</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">Top Apps</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">Top Games</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">How-To</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">Tips&Guides</a></li>
+                    </ul>
+                </div>
+
+                <div class="w-full md:w-1/4 px-4 mb-8 md:mb-0">
+                    <h3 class="text-lg font-bold mb-4">Latest Reviews</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">Counter-Strike 2</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">CarX Drift Racing 3</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">Free Fire Max</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">Spider-Man 2</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">Core Keeper</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">EA SPORT FC 25</a></li>
+                    </ul>
+                </div>
+
+                <div class="w-full md:w-1/4 px-4">
+                    <h3 class="text-lg font-bold mb-4">Contact us</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">Privacy policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">Disclaimer</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8">
+                <p class="text-center text-gray-500 text-sm">© 2024 supergameh5.com - All rights reserved</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // read more button
+        document.addEventListener('DOMContentLoaded', function () {
+            const readMoreBtn = document.getElementById('read-more-btn');
+            const contentContainer = document.getElementById('content-container');
+            const fadeOverlay = document.getElementById('fade-overlay');
+
+            readMoreBtn.addEventListener('click', function () {
+                if (contentContainer.classList.contains('content-hidden')) {
+                    // Expand content
+                    contentContainer.classList.remove('content-hidden');
+                    fadeOverlay.style.display = 'none';
+                    readMoreBtn.textContent = 'Read Less';
+                } else {
+                    // Collapse content
+                    contentContainer.classList.add('content-hidden');
+                    fadeOverlay.style.display = 'block';
+                    readMoreBtn.textContent = 'Read More';
+
+                    // Scroll back to top of content when collapsing
+                    contentContainer.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+        // Automatically trigger the wave animation every 3 seconds
+        document.addEventListener('DOMContentLoaded', function () {
+            const gameBtn = document.querySelector('.game-btn');
+            const btnWave = document.querySelector('.btn-wave');
+
+            // Initial animation
+            setTimeout(triggerAnimation, 1000);
+
+            // Set interval for repeating animation
+            setInterval(triggerAnimation, 3000);
+
+            function triggerAnimation() {
+                btnWave.classList.remove('hidden');
+
+                setTimeout(() => {
+                    btnWave.classList.add('hidden');
+                }, 1500);
+            }
+
+            const loadingScreen = document.getElementById('loading-screen');
+            const loadingBar = document.getElementById('loading-bar');
+            const loadingPercentage = document.getElementById('loading-percentage');
+            const mainContent = document.getElementById('main-content');
+
+            let progress = 0;
+            const interval = setInterval(function() {
+                // Increment progress
+                progress += Math.random() * 10;
+                if (progress > 100) progress = 100;
+
+                // Update loading bar and text
+                loadingBar.style.width = progress + '%';
+                loadingPercentage.textContent = Math.round(progress) + '%';
+
+                // When loading is complete
+                if (progress >= 100) {
+                    clearInterval(interval);
+
+                    // Wait a moment at 100% before fading out
+                    setTimeout(function() {
+                        // Fade out loading screen
+                        loadingScreen.style.opacity = '0';
+
+                        // After fade animation completes
+                        setTimeout(function() {
+                            loadingScreen.style.display = 'none';
+                            mainContent.style.display = 'block';
+                        }, 500);
+                    }, 500);
+                }
+            }, 100);
+        });
+    </script>
+</body>
+
+</html>

@@ -77,7 +77,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <div class="flex justify-between items-center">
             <!-- Logo -->
-            <a href="#" class="text-2xl font-extrabold tracking-tight flex items-center space-x-1">
+            <a href="/" class="text-2xl font-extrabold tracking-tight flex items-center space-x-1">
               <span class="text-pink-500">piccolo</span><span class="text-blue-400">game!</span>
             </a>
 
@@ -151,50 +151,32 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Fall Guys -->
-                <div>
-                    <div class="mb-2">
-                        <img src="https://piccologame.com/wp-content/uploads/2024/08/fall-guys.jpg" alt="Fall Guys"
-                            class="w-full h-40 object-cover rounded">
+                {% for game in popular_games %}
+                <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 p-4 group">
+                    <div class="mb-3 overflow-hidden rounded-xl">
+                        <img src="{{game.icon.url}}"
+                             alt="Fall Guys"
+                             class="w-full h-40 object-cover transition-transform duration-300 group-hover:scale-105">
                     </div>
-                    <h3 class="font-semibold mb-1">Fall Guys</h3>
-                    <div class="rating mb-2">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-1 group-hover:text-blue-600 transition-colors duration-200">
+                        {{ game.name }}
+                    </h3>
+                    <div class="rating text-yellow-500 text-sm mb-2">
                         ★★★★★
                     </div>
-                    <p class="text-sm text-gray-600">Fall Guys is an online multiplayer game where up to 60 players
-                        compete in battle royale-style rounds. The goal is to be the last one standing after navigating
-                        a series of unique obstacles.</p>
+                    <p class="text-sm text-gray-600 mb-3">
+                        {{ game.review|truncatewords:20|safe }}
+                    </p>
+                    <a href="{% url 'game_detail' game.id %}"
+                       class="text-sm font-medium text-blue-500 hover:text-blue-700 transition-colors duration-200">
+                        Read More →
+                    </a>
                 </div>
+
+                {% endfor %}
 
                 <!-- Roblox -->
-                <div>
-                    <div class="mb-2">
-                        <img src="
-                        https://piccologame.com/wp-content/uploads/2024/08/roblox.png" alt="Roblox"
-                            class="w-full h-40 object-cover rounded">
-                    </div>
-                    <h3 class="font-semibold mb-1">Roblox</h3>
-                    <div class="rating mb-2">
-                        ★★★★★
-                    </div>
-                    <p class="text-sm text-gray-600">Roblox is an innovative platform where users can create and
-                        socialize in immersive visual worlds. Explore endless possibilities with Roblox.</p>
-                </div>
-
-                <!-- Minecraft -->
-                <div>
-                    <div class="mb-2">
-                        <img src="
-                        https://piccologame.com/wp-content/uploads/2024/08/logo.png" alt="Minecraft"
-                            class="w-full h-40 object-cover rounded">
-                    </div>
-                    <h3 class="font-semibold mb-1">Minecraft</h3>
-                    <div class="rating mb-2">
-                        ★★★★★
-                    </div>
-                    <p class="text-sm text-gray-600">Minecraft is a sandbox game where players can build virtually
-                        anything they can imagine. There are many ways to play Minecraft: players can either explore the
-                        world, build big.</p>
-                </div>
+               
             </div>
         </div>
     </section>
@@ -207,152 +189,28 @@
                     <h2 class="font-bold text-lg">HOT APPS</h2>
                     <p class="text-gray-500 text-xs">LATEST</p>
                 </div>
-                <a href="#" class="text-blue-500 border border-blue-500 px-4 py-1 rounded text-sm">SEE ALL</a>
+                <a href="{% url 'allgames'%}" class="text-blue-500 border border-blue-500 px-4 py-1 rounded text-sm">SEE ALL</a>
             </div>
 
             <!-- First Row -->
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
-                <div>
-                    <div class="mb-2">
-                        <img src="
-                        https://piccologame.com/wp-content/uploads/2024/08/logo-1.png" alt="League of Legends"
-                            class="w-full rounded">
-                    </div>
-                    <h3 class="font-semibold text-sm mb-1">League of Legends</h3>
-                    <div class="rating text-sm">
-                        ★★★★★
-                    </div>
-                </div>
+                {% for game in games %}
+                    <a href="{% url 'game_detail' game.id %}" class="block hover:bg-gray-100 hover:shadow-lg transition-all duration-300 ease-in-out">
+                        <div>
+                            <div class="mb-2">
+                                <img src="{{ game.icon.url }}" alt="{{ game.name }}"
+                                     class="w-full rounded">
+                            </div>
+                            <h3 class="font-semibold text-sm mb-1">{{ game.name }}</h3>
+                            <div class="rating text-sm">
+                                ★★★★★
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
 
-                <div>
-                    <div class="mb-2">
-                        <img src="
-                        https://piccologame.com/wp-content/uploads/2024/11/Brawl-Stars.jpeg" alt="Gacha Club"
-                            class="w-full rounded">
-                    </div>
-                    <h3 class="font-semibold text-sm mb-1">Gacha Club</h3>
-                    <div class="rating text-sm">
-                        ★★★★★
-                    </div>
-                </div>
 
-                <div>
-                    <div class="mb-2">
-                        <img src="https://piccologame.com/wp-content/uploads/2024/08/roblox.png" alt="FIFA 23"
-                            class="w-full rounded">
-                    </div>
-                    <h3 class="font-semibold text-sm mb-1">FIFA 23</h3>
-                    <div class="rating text-sm">
-                        ★★★★★
-                    </div>
-                </div>
-
-                <div>
-                    <div class="mb-2">
-                        <img src="https://piccologame.com/wp-content/uploads/2024/08/roblox.png" alt="Roblox"
-                            class="w-full rounded">
-                    </div>
-                    <h3 class="font-semibold text-sm mb-1">Roblox</h3>
-                    <div class="rating text-sm">
-                        ★★★★★
-                    </div>
-                </div>
-
-                <div>
-                    <div class="mb-2">
-                        <img src="https://piccologame.com/wp-content/uploads/2025/01/RDR2_HeroSquare_1080x1080.jpg"
-                            alt="Red Dead Redemption" class="w-full rounded">
-                    </div>
-                    <h3 class="font-semibold text-sm mb-1">Red Dead Redemption</h3>
-                    <div class="rating text-sm">
-                        ★★★★★
-                    </div>
-                </div>
-
-                <div>
-                    <div class="mb-2">
-                        <img src="
-                        https://piccologame.com/wp-content/uploads/2024/08/logo.jpg" alt="Fall Guys"
-                            class="w-full rounded">
-                    </div>
-                    <h3 class="font-semibold text-sm mb-1">Fall Guys</h3>
-                    <div class="rating text-sm">
-                        ★★★★★
-                    </div>
-                </div>
-            </div>
-
-            <!-- Second Row -->
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-                <div>
-                    <div class="mb-2">
-                        <img src="
-                        https://piccologame.com/wp-content/uploads/2024/08/logo.jpg" alt="Core Keeper"
-                            class="w-full rounded">
-                    </div>
-                    <h3 class="font-semibold text-sm mb-1">Core Keeper</h3>
-                    <div class="rating text-sm">
-                        ★★★★★
-                    </div>
-                </div>
-
-                <div>
-                    <div class="mb-2">
-                        <img src="
-                        https://piccologame.com/wp-content/uploads/2024/08/logo.jpg" alt="God of War Ragnarok"
-                            class="w-full rounded">
-                    </div>
-                    <h3 class="font-semibold text-sm mb-1">God of War Ragnarok</h3>
-                    <div class="rating text-sm">
-                        ★★★★★
-                    </div>
-                </div>
-
-                <div>
-                    <div class="mb-2">
-                        <img src="https://piccologame.com/wp-content/uploads/2024/11/Brawl-Stars.jpeg" alt="Brawl Stars"
-                            class="w-full rounded">
-                    </div>
-                    <h3 class="font-semibold text-sm mb-1">Brawl Stars</h3>
-                    <div class="rating text-sm">
-                        ★★★★★
-                    </div>
-                </div>
-
-                <div>
-                    <div class="mb-2">
-                        <img src="https://piccologame.com/wp-content/uploads/2024/11/Brawl-Stars.jpeg" alt="Minecraft"
-                            class="w-full rounded">
-                    </div>
-                    <h3 class="font-semibold text-sm mb-1">Minecraft</h3>
-                    <div class="rating text-sm">
-                        ★★★★★
-                    </div>
-                </div>
-
-                <div>
-                    <div class="mb-2">
-                        <img src="
-                        https://piccologame.com/wp-content/uploads/2024/08/11.jpg" alt="Marvel Rivals"
-                            class="w-full rounded">
-                    </div>
-                    <h3 class="font-semibold text-sm mb-1">Marvel Rivals</h3>
-                    <div class="rating text-sm">
-                        ★★★★★
-                    </div>
-                </div>
-
-                <div>
-                    <div class="mb-2">
-                        <img src="
-                        https://piccologame.com/wp-content/uploads/2024/08/11.jpg" alt="Call of Duty"
-                            class="w-full rounded">
-                    </div>
-                    <h3 class="font-semibold text-sm mb-1">Call of Duty</h3>
-                    <div class="rating text-sm">
-                        ★★★★★
-                    </div>
-                </div>
+                
             </div>
         </div>
     </section>
@@ -365,42 +223,29 @@
                     <h2 class="font-bold text-lg">BLOG</h2>
                     <p class="text-gray-500 text-xs">MOST POPULAR</p>
                 </div>
-                <a href="#" class="text-blue-500 border border-blue-500 px-4 py-1 rounded text-sm">SEE ALL</a>
+                <a href="{% url 'blog' %}" class="text-blue-500 border border-blue-500 px-4 py-1 rounded text-sm">SEE ALL</a>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Blog Post 1 -->
-                <div class="relative">
-                    <img src="https://piccologame.com/wp-content/uploads/2025/03/candy-crush-saga-1.jpg"
-                        alt="Candy Crush" class="w-full h-40 object-cover rounded">
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
-                        <h3 class="text-white font-semibold text-sm md:text-base">Candy Crush Saga: The Ultimate Guide
-                            to the Top Game</h3>
-                        <p class="text-gray-300 text-xs mt-1">January 10, 2024</p>
+                {% for post in posts%}
+                <div class="relative group overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <img src="{{ post.image.url }}"
+                         alt="{{ post.title }}"
+                         class="w-full h-40 object-cover transform transition-transform duration-300 group-hover:scale-105">
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 flex flex-col justify-end transition-all duration-300">
+                        <a href="/" class="text-white font-semibold text-sm md:text-base group-hover:text-blue-400 transition-colors duration-200">
+                            {{ post.title }}
+                        </a>
+                        <p class="text-gray-300 text-xs mt-1">{{ post.created_at }}</p>
                     </div>
                 </div>
+
+                {% endfor %}
 
                 <!-- Blog Post 2 -->
-                <div class="relative">
-                    <img src="https://piccologame.com/wp-content/uploads/2025/03/candy-crush-saga-1.jpg"
-                        alt="Basketball" class="w-full h-40 object-cover rounded">
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
-                        <h3 class="text-white font-semibold text-sm md:text-base">Mastering the Randomness in Basketball
-                            Games: Strategies for Success</h3>
-                        <p class="text-gray-300 text-xs mt-1">January 11, 2024</p>
-                    </div>
-                </div>
-
-                <!-- Blog Post 3 -->
-                <div class="relative">
-                    <img src="https://piccologame.com/wp-content/uploads/2025/03/candy-crush-saga-1.jpg"
-                        alt="Casual Games" class="w-full h-40 object-cover rounded">
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
-                        <h3 class="text-white font-semibold text-sm md:text-base">Top 5 Casual Games: The Best Picks for
-                            Relaxation and Fun</h3>
-                        <p class="text-gray-300 text-xs mt-1">January 12, 2024</p>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </section>

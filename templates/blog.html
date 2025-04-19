@@ -14,9 +14,10 @@
 
   <!-- Header -->
   <header class="flex justify-between items-center px-6 py-4 border-b shadow-sm relative z-20 bg-white">
-    <div class="text-2xl font-bold text-purple-700">
+    <a href="/" class="text-2xl font-bold text-purple-700">
       piccolo<span class="text-gray-900">game!</span>
-    </div>
+    </a>
+
 
     <!-- Mobile Menu Button -->
     <div class="md:hidden">
@@ -96,38 +97,26 @@
 
   <!-- More Blog Rows -->
   <section class="px-4 md:px-10 grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-    <div class="bg-white rounded-lg shadow-md overflow-hidden">
-      <img src="https://piccologame.com/wp-content/uploads/2024/08/the-legend-of-zelda-2.jpg" alt="NBA 2K24" class="w-full h-48 object-cover">
-      <div class="p-4">
-        <span class="text-white bg-blue-600 text-xs px-2 py-1 rounded-full">TIPS&GUIDES</span>
-        <h2 class="text-lg font-semibold mt-2">NBA 2K24 Tips & Guides: Mastering the Game One Play at a Time</h2>
-        <p class="text-gray-500 text-sm mt-1">January 16, 2025</p>
-      </div>
-    </div>
-    <div class="bg-white rounded-lg shadow-md overflow-hidden">
-        <img src="https://piccologame.com/wp-content/uploads/2024/08/remove-virus-app.jpg" alt="NBA 2K24" class="w-full h-48 object-cover">
-        <div class="p-4">
-          <span class="text-white bg-blue-600 text-xs px-2 py-1 rounded-full">TIPS&GUIDES</span>
-          <h2 class="text-lg font-semibold mt-2">NBA 2K24 Tips & Guides: Mastering the Game One Play at a Time</h2>
-          <p class="text-gray-500 text-sm mt-1">January 16, 2025</p>
+
+    {% for blog in blogs %}
+      <a href="{% url 'blog_detail' slug=blog.slug %}" class="block hover:shadow-lg transition-shadow duration-200">
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="{{ blog.image.url }}" alt="{{ blog.title }}" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <span class="text-white bg-blue-600 text-xs px-2 py-1 rounded-full">
+              {% for category in blog.categories.all %}
+                {{ category.name }}{% if not forloop.last %}, {% endif %}
+              {% endfor %}
+            </span>
+            <h2 class="text-lg font-semibold mt-2">{{ blog.title }}</h2>
+            <p class="text-gray-500 text-sm mt-1">{{ blog.created_at|date:"F j, Y" }}</p>
+          </div>
         </div>
-      </div>
-      <div class="bg-white rounded-lg shadow-md overflow-hidden">
-        <img src="https://piccologame.com/wp-content/uploads/2025/04/kalahari-free-fire-770x433-1.jpg" alt="NBA 2K24" class="w-full h-48 object-cover">
-        <div class="p-4">
-          <span class="text-white bg-blue-600 text-xs px-2 py-1 rounded-full">TIPS&GUIDES</span>
-          <h2 class="text-lg font-semibold mt-2">NBA 2K24 Tips & Guides: Mastering the Game One Play at a Time</h2>
-          <p class="text-gray-500 text-sm mt-1">January 16, 2025</p>
-        </div>
-      </div>
-      <div class="bg-white rounded-lg shadow-md overflow-hidden">
-        <img src="https://piccologame.com/wp-content/uploads/2025/03/candy-crush-saga-1.jpg" alt="NBA 2K24" class="w-full h-48 object-cover">
-        <div class="p-4">
-          <span class="text-white bg-blue-600 text-xs px-2 py-1 rounded-full">TIPS&GUIDES</span>
-          <h2 class="text-lg font-semibold mt-2">NBA 2K24 Tips & Guides: Mastering the Game One Play at a Time</h2>
-          <p class="text-gray-500 text-sm mt-1">January 16, 2025</p>
-        </div>
-      </div>
+      </a>
+    {% endfor %}
+
+    
+      
   </section>
 
   <!-- Footer -->

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <title>Game Blog UI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-800">
+
+  <!-- Wrapper for entire page content -->
+  <div class="max-w-7xl mx-auto px-4">
+
+    <!-- Header -->
+    <!-- Add Alpine.js for toggle functionality (optional, CDN link) -->
+    
+
+    <header class="bg-white shadow-sm" x-data="{ open: false }">
+      <div class="py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+        <!-- Logo -->
+        <a href="/" class="text-2xl font-bold text-purple-700">
+          <span class="text-red-500">piccolo</span>game!
+        </a>
+
+
+        <!-- Desktop Search -->
+       
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex space-x-6 font-semibold">
+          <a href="{% url 'gamerivew' %}" class="hover:text-purple-700">REVIEWS GAMES</a>
+          <a href="{% url 'allgames' %}" class="hover:text-purple-700">HTML5 GAMES</a>
+          <a href="{% url 'blog' %}" class="hover:text-purple-700">BLOG</a>
+          <a href="{% url 'about' %}" class="hover:text-purple-700">ABOUT US</a>
+        </nav>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="md:hidden focus:outline-none" @click="open = !open">
+          <svg class="w-6 h-6 text-purple-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div class="md:hidden px-4 pb-4 space-y-3" x-show="open" x-transition>
+        <input type="text" placeholder="Search games here..." class="w-full border px-3 py-1 rounded" />
+
+        <a href="{% url 'gamerivew' %}" class="block font-semibold text-gray-700 hover:text-purple-700">REVIEWS GAMES</a>
+        <a href="{% url 'allgames' %}" class="block font-semibold text-gray-700 hover:text-purple-700">HTML5 GAMES</a>
+        <a href="{% url 'blog' %}" class="block font-semibold text-gray-700 hover:text-purple-700">BLOG</a>
+        <a href="{% url 'about' %}" class="block font-semibold text-gray-700 hover:text-purple-700">ABOUT US</a>
+      </div>
+    </header>
+
+
+    <nav class="text-sm text-gray-600 my-4">
+      <ol class="list-reset flex items-center space-x-1">
+        <li>
+          <a href="{% url 'home' %}" class="text-blue-600 hover:underline">Home</a>
+          <span>→</span>
+        </li>
+        <li>
+          <a href="{% url 'blog' %}" class="text-blue-600 hover:underline">Blog</a>
+          
+        </li>
+        
+        
+      </ol>
+    </nav>
+
+
+    <!-- Title -->
+    <div class="text-center mt-4">
+      <h1 class="text-3xl md:text-4xl font-bold">{{post.title}}</h1>
+      <div class="w-16 h-1 bg-cyan-500 mx-auto mt-2"></div>
+    </div>
+
+    <!-- Date and Game Thumbnails -->
+    <div class="mt-8">
+      <p class="text-sm text-gray-600 mb-4">{{post.created_at}}</p>
+      <div class="flex overflow-x-auto space-x-4">
+        {% for game in popular_games %}
+          <a href="{% url 'game_detail' game.id %}" class="inline-block">
+            <img 
+              src="{{ game.icon.url }}" 
+              alt="{{ game.name }}" 
+              class="w-32 h-32 object-cover rounded-md flex-shrink-0 transform hover:scale-105 hover:shadow-lg transition duration-300 cursor-pointer"
+            />
+          </a>
+        {% endfor %}
+
+      </div>
+    </div>
+
+    <!-- Advertisement Block -->
+    <div class="my-8">
+      <div class="bg-gray-100 p-6 rounded-md text-center border border-gray-300">
+        <p class="text-sm text-gray-600 mb-2">Advertisement</p>
+        <div class="bg-purple-900 text-white py-3 px-6 rounded-md inline-block">Monetag Referral Program - OPEN</div>
+      </div>
+    </div>
+
+    <!-- Popular Now -->
+    <div class="mb-12">
+      <h2 class="text-xl font-bold mb-4">Popular Now</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        {% for game in popular_games %}
+          <a href="{% url 'game_detail' game.id %}" class="block">
+            <div class="flex items-center gap-3 bg-gray-100 rounded-lg p-2 hover:bg-gray-200 hover:shadow-md transition-all duration-200 cursor-pointer w-fit">
+              <img src="{{ game.icon.url }}" alt="{{ game.name }}" class="w-12 h-12 object-cover rounded-md">
+              <span class="text-sm font-medium">{{ game.name }}</span>
+            </div>
+          </a>
+        {% endfor %}
+
+
+
+        
+      </div>
+    </div>
+
+    <!-- Introduction Section -->
+    <div class="mt-12 bg-white p-6 rounded-xl shadow-md prose prose-sm sm:prose lg:prose-lg max-w-none">
+      {{ post.content|safe }}
+    </div>
+
+
+  
+    
+
+    <!-- Latest Articles -->
+    <section class="py-12">
+      <div class="border-l-8 border-cyan-500 pl-4 mb-6">
+        <h2 class="text-2xl font-bold">Latest Game</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Core Keeper -->
+        {% for games in allgames %}
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <div class="flex items-center mb-4">
+            <img src="{{games.icon.url}}" alt="Core Keeper" class="w-16 h-16 rounded mr-4">
+            <h3 class="font-bold text-xl">{{games.name}}</h3>
+          </div>
+          <p class="text-gray-600 text-sm mb-4">{{games.review|truncatechars:100|safe}}</p>
+          <div class="flex justify-between items-center">
+            <div class="text-yellow-500">★★★★★</div>
+            <a href="{% url 'game_detail' games.id %}" class="text-cyan-500 text-sm font-semibold">Read full review</a>
+          </div>
+        </div>
+        {% endfor %}
+
+        <!-- EA SPORT FC 25 -->
+        
+      </div>
+    </section>
+
+    <!-- Latest Reviews Section -->
+    <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6">Popular</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          {% for game in popular_games %}
+            <div class="bg-white p-4 rounded-md shadow-sm">
+                <div class="flex items-center mb-4">
+                    <img src="{{game.icon.url}}"
+                        alt="Counter-Strike 2" class="rounded-md mr-4">
+                    <h3 class="font-bold">{{game.name}}</h3>
+                </div>
+                <p class="text-sm text-gray-700 mb-4">{{game.review|truncatechars:100|safe}}</p>
+                <div class="flex star-rating text-xs mb-2">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <a href="{% url 'game_detail' game.id %}" class="text-blue-500 hover:underline text-sm">Read full review</a>
+            </div>
+          {% endfor %}
+
+            
+        </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-[#f4faff] py-10 text-sm text-gray-600">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <!-- Brand Info -->
+      <div>
+        <h2 class="text-2xl font-bold text-[#cc1d2c]">piccolo<span class="text-purple-700">game!</span></h2>
+        <p class="mt-4">Welcome to piccologame.com, your compass for comprehensively coupled with the latest industry news. Our mission is to provide you with insightful analysis and valuable insights, enriching your digital journey.</p>
+      </div>
+
+      <!-- Blog Links -->
+      <div>
+        <h3 class="font-bold text-cyan-600 mb-3">Blog</h3>
+        <ul class="space-y-2">
+          <li><a href="#">News</a></li>
+          <li><a href="#">Top Apps</a></li>
+          <li><a href="#">Top Games</a></li>
+          <li><a href="#">How-To</a></li>
+          <li><a href="#">Tips&Guides</a></li>
+        </ul>
+      </div>
+
+      <!-- Latest Reviews -->
+      <div>
+        <h3 class="font-bold text-cyan-600 mb-3">Latest Reviews</h3>
+        <ul class="space-y-2">
+          <li><a href="#">Marvel Rivals</a></li>
+          <li><a href="#">Red Dead Redemption 2</a></li>
+          <li><a href="#">Roblox</a></li>
+          <li><a href="#">Core Keeper</a></li>
+          <li><a href="#">EA SPORT FC 25</a></li>
+          <li><a href="#">Brawl Stars</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Us -->
+      <div>
+        <h3 class="font-bold text-cyan-600 mb-3">Contact us</h3>
+        <ul class="space-y-2">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Privacy policy</a></li>
+          <li><a href="#">Disclaimer</a></li>
+          <li><a href="#">Sitemap</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="text-center text-gray-400 text-xs mt-10">
+      © 2024 piccologame.com — All Rights Reserved
+    </div>
+  </footer>
+
+</body>
+</html>

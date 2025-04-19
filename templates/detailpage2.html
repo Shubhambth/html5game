@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>piccologame!</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+        .piccolo-pink {
+            color: #ff6b81;
+        }
+
+        .piccolo-purple {
+            color: #8c52ff;
+        }
+
+        .rating-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #00bcd4;
+        }
+
+        .carousel-button {
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+        }
+
+        .cyan-bg {
+            background-color: #00bcd4;
+        }
+
+        .full-star {
+            color: #ffd700;
+        }
+    </style>
+</head>
+
+<body class="bg-white text-gray-800">
+    <!-- Header -->
+    <header class="border-b border-gray-200 py-3">
+        <div class="container mx-auto px-4 flex items-center justify-between">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold">
+                    <span class="piccolo-pink">piccolo</span><span class="piccolo-purple">game!</span>
+                </h1>
+            </div>
+
+            <div class="flex-1 mx-8">
+                <div class="relative">
+                    <input type="text" placeholder="Search games here..."
+                        class="w-56 border border-gray-300 rounded-md px-3 py-1 text-sm">
+                    <button class="absolute right-2 top-1 text-gray-400">
+                        <i class="fas fa-search text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <nav>
+                <ul class="flex space-x-4 text-sm uppercase">
+                    <li><a href="#" class="text-gray-600 hover:text-gray-900">Reviews Games</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-gray-900">HTML5 Games</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-gray-900">Blog</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-gray-900">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="container mx-auto px-4 pt-4 pb-2">
+        <div class="text-sm text-gray-500">
+            <a href="{% url 'home' %}" class="hover:text-gray-800 transition">Home</a>
+            <span class="mx-1">›</span>
+
+            <a href="{% url 'gamerivew' %}" class="hover:text-gray-800 transition">Reviews</a>
+            <span class="mx-1">›</span>
+
+            <a href="{% url 'game_detail' game.id %}" class="text-gray-700 hover:text-gray-900 transition">
+                {{ game.name }}
+            </a>
+            <span class="mx-1">›</span>
+
+            <span class="text-gray-700">Get App</span>
+        </div>
+    </div>
+
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 flex flex-wrap">
+
+        <!-- Left Content (Game Review) -->
+        <div class="w-full lg:w-2/3 pr-0 lg:pr-8">
+
+            <!-- Game Header -->
+            <div class="flex items-start mb-6">
+                <div class="flex-shrink-0 mr-6">
+                    <img src="{{game.icon.url}}" alt="League of Legends Icon" class="w-32 h-32 rounded-md">
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold mb-1">{{game.name}}</h2>
+                    <div class="flex mb-1">
+                        <i class="fas fa-star full-star"></i>
+                        <i class="fas fa-star full-star"></i>
+                        <i class="fas fa-star full-star"></i>
+                        <i class="fas fa-star full-star"></i>
+                        <i class="fas fa-star full-star"></i>
+                    </div>
+                    <p class="text-sm text-gray-500">All trademarks belong to their respective owners.</p>
+
+                    <button class="mt-4 bg-cyan-500 text-white py-2 px-4 rounded-md flex items-center">
+                        Get access to the premium content
+                        <i class="fas fa-chevron-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Game Options -->
+            <div class="flex justify-between mb-6">
+                <button class="bg-green-400 text-white py-2 px-6 rounded-md flex items-center">
+                    Play
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+
+                <div class="flex space-x-4">
+                    <div class="flex flex-col items-center">
+                        <div class="bg-gray-200 p-3 rounded-md">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <span class="text-xs mt-1">GAME</span>
+                    </div>
+
+                    <div class="flex flex-col items-center">
+                        <div class="bg-gray-200 p-3 rounded-md">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="text-xs mt-1">FREE</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Images -->
+            <div class="relative mb-6  rounded-md overflow-hidden">
+                <!-- Image Display -->
+                <div class="flex items-center justify-center">
+                    <button id="prev-btn" class="px-3 py-2 text-white bg-gray-600 rounded-l">‹</button>
+
+                    <img id="carousel-image"
+                         src="{{ game.screenshots.0 }}"
+                         alt="{{ game.name }} Screenshot"
+                         class="w-full transition-all duration-500 ease-in-out max-w-xl rounded-md">
+
+                    <button id="next-btn" class="px-3 py-2 text-white bg-gray-600 rounded-r">›</button>
+                </div>
+
+
+                <!-- Carousel Navigation -->
+
+            </div>
+
+            <!-- Ratings -->
+            <div class="mb-8">
+                <h3 class="text-lg font-bold mb-4">Rating</h3>
+
+                <div class="mb-2">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-sm font-medium">Graphics and Sound</span>
+                        <span class="text-sm font-medium">5</span>
+                    </div>
+                    <div class="rating-bar w-full"></div>
+                </div>
+
+                <div class="mb-2">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-sm font-medium">Controls</span>
+                        <span class="text-sm font-medium">5</span>
+                    </div>
+                    <div class="rating-bar w-full"></div>
+                </div>
+
+                <div class="mb-2">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-sm font-medium">Gameplay</span>
+                        <span class="text-sm font-medium">5</span>
+                    </div>
+                    <div class="rating-bar w-full"></div>
+                </div>
+
+                <div class="mb-2">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-sm font-medium">Lasting Appeal</span>
+                        <span class="text-sm font-medium">5</span>
+                    </div>
+                    <div class="rating-bar w-full"></div>
+                </div>
+            </div>
+
+            <!-- Pros & Cons -->
+            <div class="flex mb-8">
+                <div class="w-1/2 pr-4">
+                    <h3 class="text-lg font-bold text-center mb-4">PROS</h3>
+                    <ul class="space-y-2">
+                        {% for pro in game.pros %}
+                        <li class="flex">
+                            <i class="fas fa-plus text-green-500 mr-2 mt-1"></i>
+                            <span>{{pro}}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="w-1/2 pl-4">
+                    <h3 class="text-lg font-bold text-center mb-4">CONS</h3>
+                    <ul class="space-y-2">
+                        {% for con in game.cons %}
+                       
+                        <li class="flex">
+                            <i class="fas fa-minus text-red-500 mr-2 mt-1"></i>
+                            <span>{{con}}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Download Links -->
+            <div class="mb-8">
+                <h3 class="text-lg font-bold mb-4">Get from the official digital markets</h3>
+                <p class="text-sm text-gray-500 mb-4">All trademarks belong to their respective owners.</p>
+
+
+
+                <div class="flex flex-col items-center space-y-2">
+                    <button class="bg-cyan-500 text-white py-2 px-4 rounded-md w-64 flex items-center justify-center">
+                        <i class="fab fa-android mr-2"></i> Get Android Version
+                    </button>
+                    <button class="bg-cyan-500 text-white py-2 px-4 rounded-md w-64 flex items-center justify-center">
+                        <i class="fas fa-globe mr-2"></i> Get from the Official site
+                    </button>
+                    <button class="bg-cyan-500 text-white py-2 px-4 rounded-md w-64 flex items-center justify-center">
+                        <i class="fab fa-apple mr-2"></i> Get iOS Version
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="w-full lg:w-1/3">
+            <div class="mb-8">
+                <h3 class="text-xl font-bold mb-4">Popular</h3>
+
+                <!-- Popular Game Cards -->
+                <div class="space-y-4">
+                    <!-- Among Us -->
+                    {% for game in popular_games %}
+                    <a href="{% url 'game_detail' game.id %}" 
+                       class="block bg-white p-4 rounded-2xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 mb-4 hover:bg-gray-50 group">
+
+                        <div class="flex items-start gap-4">
+                            <img src="{{ game.icon.url }}"
+                                 alt="{{ game.name }}"
+                                 class="w-16 h-16 object-cover rounded-lg flex-shrink-0 group-hover:scale-105 transition-transform duration-300">
+
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors duration-200">
+                                    {{ game.name }}
+                                </h3>
+
+                                <p class="text-sm text-gray-600 mt-1">{{ game.review|truncatechars:50|safe }}</p>
+
+                                <div class="flex items-center text-yellow-400 text-xs mt-2">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+
+
+                    <!-- Black Myth: Wukong -->
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Latest Posts Section -->
+    <div class="bg-cyan-700 py-10 text-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6">Latest Posts</h2>
+
+            <div class="relative">
+                <!-- Carousel Wrapper -->
+                <div id="carousel" class="flex space-x-4 overflow-x-auto scroll-smooth no-scrollbar">
+                    {% for post in posts %}
+                    <div class="bg-white text-black rounded-xl overflow-hidden flex-shrink-0 w-72 shadow-md hover:shadow-lg transition-shadow duration-300">
+                        <div class="relative">
+                            <img src="{{ post.image.url }}" alt="{{ post.title }}" class="w-full h-40 object-cover">
+                            <div class="absolute top-2 left-2 bg-purple-600 text-white text-xs px-3 py-1 rounded-md font-semibold">HOW-TO</div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-base md:text-lg mb-2 hover:text-blue-600 transition-colors duration-200">
+                                <a href="/">{{ post.title }}</a>
+                            </h3>
+                            <p class="text-gray-500 text-xs">{{ post.created_at }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Navigation Buttons -->
+                <button id="prevBtn"
+                    class="carousel-button absolute left-0 top-1/2 transform -translate-y-1/2 w-9 h-9 bg-white text-black rounded-full shadow-md hover:bg-gray-200 transition duration-200 z-10">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="nextBtn"
+                    class="carousel-button absolute right-0 top-1/2 transform -translate-y-1/2 w-9 h-9 bg-white text-black rounded-full shadow-md hover:bg-gray-200 transition duration-200 z-10">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Latest Reviews -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex items-center mb-6">
+            <div class="w-8 h-1 bg-cyan-500 mr-2"></div>
+            <h2 class="text-2xl font-bold">Latest Reviews</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Review 1 -->
+            {% for game in allgames %}
+            <div class="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 mb-5 hover:bg-gray-50 group">
+                <div class="flex items-start gap-4 mb-3">
+                    <img src="{{ game.icon.url }}" alt="{{ game.name }}"
+                         class="w-16 h-16 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors duration-200">
+                        {{ game.name }}
+                    </h3>
+                </div>
+
+                <p class="text-sm text-gray-600 mb-3">{{ game.review|truncatechars:100|safe }}</p>
+
+                <div class="flex items-center text-yellow-400 text-xs mb-3">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+
+                <a href="{% url 'game_detail' game.id %}"
+                   class="text-cyan-600 text-sm font-medium hover:underline transition-colors duration-200">
+                    Read full review →
+                </a>
+            </div>
+            {% endfor %}
+
+
+            <!-- Review 2 -->
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <!-- Logo and Text -->
+                <div class="md:w-1/3 mb-6 md:mb-0">
+                    <h2 class="text-2xl font-bold mb-4">
+                        <span class="piccolo-pink">piccolo</span><span class="piccolo-purple">game!</span>
+                    </h2>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Welcome to piccologame.com, your compass for comprehensive guidance with the latest industry
+                        news. Our mission is to provide you with insightful analysis and valuable insights, enriching
+                        your digital journey.
+                    </p>
+                </div>
+
+                <!-- Site Links -->
+                <div class="md:w-1/5 mb-6 md:mb-0">
+                    <h3 class="text-lg font-bold text-cyan-500 mb-4">Blog</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Marvel Rivals</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Top Apps</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Top Games</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">How-To</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Tips&Guides</a></li>
+                    </ul>
+                </div>
+
+                <!-- Latest Reviews -->
+                <div class="md:w-1/5 mb-6 md:mb-0">
+                    <h3 class="text-lg font-bold text-cyan-500 mb-4">Latest Reviews</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Marvel Rivals</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Red Dead Redemption 2</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Roblox</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Core Keeper</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">EA SPORT FC 25</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Brawl Stars</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Us -->
+                <div class="md:w-1/5">
+                    <h3 class="text-lg font-bold text-cyan-500 mb-4">Contact us</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">About Us</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Privacy policy</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Disclaimer</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        
+            const images = {{ game.screenshots|safe }};
+
+            let currentIndex = 0;
+
+            const carouselImage = document.getElementById('carousel-image');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                carouselImage.src = images[currentIndex];
+            });
+
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % images.length;
+                carouselImage.src = images[currentIndex];
+            });
+       
+
+    </script>
+</body>
+
+</html>

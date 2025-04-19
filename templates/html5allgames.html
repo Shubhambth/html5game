@@ -82,9 +82,10 @@
 <body class="bg-white">
     <div id="loading-screen">
         <div class="text-center">
-          <h1 class="text-2xl font-bold">
-            <span class="text-pink-500">piccolo</span><span class="text-blue-500">game!</span>
-          </h1>
+            <a href="/" class="text-2xl font-bold">
+              <span class="text-pink-500">piccolo</span><span class="text-blue-500">game!</span>
+            </a>
+
           <p class="text-gray-600 text-sm mt-2">Loading awesome games for you...</p>
         </div>
         <div id="loading-bar-container">
@@ -195,236 +196,25 @@
 
     <!-- Game Grid - Already Responsive -->
     <div class="px-2 md:px-4 pb-8">
+        {% for game in game%}
         <div
             class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 2xl:grid-cols-12 gap-2 md:gap-3">
             <div
                 class="game-item bg-blue-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
-                <img src="https://piccologame.com/wp-content/uploads/2024/08/logo-150x150.jpg"
+                <img src="{{game.icon.url}}"
                     alt="Game" class="w-full h-full object-cover" />
                 <div
                     class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
                     <div
                         class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
-                        Game Name
+                        {{game.name}}
                     </div>
                 </div>
             </div>
+            {% endfor %}
 
             <!-- Example of duplicated items -->
-            <div
-                class="game-item bg-red-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
-                <img src="https://piccologame.com/wp-content/uploads/2024/08/logo-gtav-150x150.jpg"
-                    alt="Game" class="w-full h-full object-cover" />
-                <div
-                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
-                    <div
-                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
-                        Racing Game
-                    </div>
-                </div>
-            </div>
-
-            <div
-                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
-                <img src="https://piccologame.com/wp-content/uploads/2024/12/tank-sniper-3d-game-150x150.png"
-                    alt="Game" class="w-full h-full object-cover" />
-                <div
-                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
-                    <div
-                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
-                        Puzzle Game
-                    </div>
-                </div>
-            </div>
-
-            <div
-                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
-                <img src="
-                https://piccologame.com/wp-content/uploads/2024/12/frozen-sisters-dream-wedding-game-150x150.png"
-                    alt="Game" class="w-full h-full object-cover" />
-                <div
-                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
-                    <div
-                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
-                        Puzzle Game
-                    </div>
-                </div>
-            </div>
-
-            <div
-                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
-                <img src="
-                https://piccologame.com/wp-content/uploads/2024/12/brain-master-iq-challenge-2-game-150x150.png"
-                    alt="Game" class="w-full h-full object-cover" />
-                <div
-                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
-                    <div
-                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
-                        Puzzle Game
-                    </div>
-                </div>
-            </div>
-
-            <div
-                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
-                <img src="
-                https://piccologame.com/wp-content/uploads/2024/12/cube-arena-2048-merge-numbers-game-150x150.png"
-                    alt="Game" class="w-full h-full object-cover" />
-                <div
-                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
-                    <div
-                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
-                        Puzzle Game
-                    </div>
-                </div>
-            </div>
-
-            <div
-                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
-                <img src="https://piccologame.com/wp-content/uploads/2024/12/2048-x2-legends-game-150x150.png"
-                    alt="Game" class="w-full h-full object-cover" />
-                <div
-                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
-                    <div
-                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
-                        Puzzle Game
-                    </div>
-                </div>
-            </div>
-
-            <div
-                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
-                <img src="
-                https://piccologame.com/wp-content/uploads/2024/12/mushroomtarzan-game-150x150.png"
-                    alt="Game" class="w-full h-full object-cover" />
-                <div
-                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
-                    <div
-                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
-                        Puzzle Game
-                    </div>
-                </div>
-            </div>
-
-            <div
-                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
-                <img src="https://piccologame.com/wp-content/uploads/2024/12/z-stick-duel-fighting-game-150x150.png"
-                    alt="Game" class="w-full h-full object-cover" />
-                <div
-                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
-                    <div
-                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
-                        Puzzle Game
-                    </div>
-                </div>
-            </div>
-
-            <div
-                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
-                <img src="
-                https://piccologame.com/wp-content/uploads/2024/12/stickboys-xmas-game-150x150.png"
-                    alt="Game" class="w-full h-full object-cover" />
-                <div
-                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
-                    <div
-                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
-                        Puzzle Game
-                    </div>
-                </div>
-            </div>
-
-            <div
-                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
-                <img src="https://piccologame.com/wp-content/uploads/2024/12/z-stick-duel-fighting-game-150x150.png"
-                    alt="Game" class="w-full h-full object-cover" />
-                <div
-                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
-                    <div
-                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
-                        Puzzle Game
-                    </div>
-                </div>
-            </div>
-
-            <div
-                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
-                <img src="
-                https://piccologame.com/wp-content/uploads/2024/12/vegas-city-gangster-2024-game-150x150.png"
-                    alt="Game" class="w-full h-full object-cover" />
-                <div
-                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
-                    <div
-                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
-                        Puzzle Game
-                    </div>
-                </div>
-            </div>
-
-            <div
-                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
-                <img src="https://piccologame.com/wp-content/uploads/2024/12/sky-stunts-rolling-ball-3d-game-150x150.png"
-                    alt="Game" class="w-full h-full object-cover" />
-                <div
-                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
-                    <div
-                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
-                        Puzzle Game
-                    </div>
-                </div>
-            </div>
-
-            <div
-                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
-                <img src="https://piccologame.com/wp-content/uploads/2024/12/city-cash-race-game-150x150.png"
-                    alt="Game" class="w-full h-full object-cover" />
-                <div
-                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
-                    <div
-                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
-                        Puzzle Game
-                    </div>
-                </div>
-            </div>
-
-            <div
-                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
-                <img src="https://piccologame.com/wp-content/uploads/2024/12/moto-stuntman-game-150x150.png"
-                    alt="Game" class="w-full h-full object-cover" />
-                <div
-                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
-                    <div
-                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
-                        Puzzle Game
-                    </div>
-                </div>
-            </div>
-
-            <div
-                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
-                <img src="
-                https://piccologame.com/wp-content/uploads/2024/12/soccer-championship-2023-html5-game-150x150.png"
-                    alt="Game" class="w-full h-full object-cover" />
-                <div
-                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
-                    <div
-                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
-                        Puzzle Game
-                    </div>
-                </div>
-            </div>
-
-            <div
-                class="game-item bg-yellow-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
-                <img src="https://piccologame.com/wp-content/uploads/2024/12/dark-war-game-150x150.png"
-                    alt="Game" class="w-full h-full object-cover" />
-                <div
-                    class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
-                    <div
-                        class="bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm p-1 text-white text-xs text-center">
-                        Puzzle Game
-                    </div>
-                </div>
-            </div>
+            
 
             <!-- Add more game items as needed -->
         </div>
@@ -518,7 +308,7 @@
             let progress = 0;
             const interval = setInterval(function() {
                 // Increment progress
-                progress += Math.random() * 3;
+                progress += Math.random() * 10;
                 if (progress > 100) progress = 100;
 
                 // Update loading bar and text
