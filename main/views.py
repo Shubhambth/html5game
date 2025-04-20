@@ -62,4 +62,8 @@ def privacy(request):
     return render(request, 'privacy.html')
 
 
+def disclamer(request):
+    return render(request, 'disclamer.html')
+
+
 
