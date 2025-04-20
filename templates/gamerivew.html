@@ -181,8 +181,13 @@
             <div
                 class="bg-white rounded-xl shadow-md overflow-hidden transform transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer">
                 <div class="flex p-4">
+                    {% if game.icon %}
                     <img src="{{game.icon.url}}"
                         alt="Red Dead Redemption 2" class="w-20 h-20 object-cover rounded-lg">
+                    {% elif game.image_url %}
+                    <img src="{{game.image_url}}"
+                        alt="Red Dead Redemption 2" class="w-20 h-20 object-cover rounded-lg">
+                    {% endif %}
                     <div class="ml-4">
                         <h3 class="font-bold text-lg text-gray-800 transition duration-200 hover:underline">
                             {{game.name}}

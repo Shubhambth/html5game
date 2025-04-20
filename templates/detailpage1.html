@@ -176,8 +176,13 @@
             <div class="flex gap-4">
                 {% for game in allgames %}
                 <a href="{% url 'game_detail' game.id %}" class="flex-shrink-0">
+                    {% if game.icon %}
                     <img src="{{ game.icon.url }}" alt="{{ game.name }}"
                         class="w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-md" />
+                    {% elif game.image_url %}
+                    <img src="{{ game.image_url }}" alt="{{ game.name }}"
+                        class="w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-md" />
+                    {% endif %}
                 </a>
                 {% endfor %}
             </div>
@@ -193,8 +198,13 @@
                 <div class="bg-gray-100 p-6 rounded-lg shadow-md max-w-2xl w-full">
                     <div class="flex flex-col sm:flex-row items-center sm:items-start">
                         <div class="mr-0 sm:mr-6 mb-4 sm:mb-0">
+                            {% if game.icon %}
                             <img src="{{game.icon.url}}"
                                 alt="GTA V Cover" class="rounded-md w-24 h-24 md:w-32 md:h-32">
+                            {% elif game.image_url %}
+                            <img src="{{game.image_url}}"
+                                alt="GTA V Cover" class="rounded-md w-24 h-24 md:w-32 md:h-32">
+                            {% endif %}
                         </div>
                         <div class="flex-1 text-center sm:text-left">
                             <h1 class="text-2xl font-bold mb-1">{{game.name}}</h1>
@@ -246,8 +256,13 @@
                         <a href="{% url 'game_detail' game.id %}"
                             class="flex items-center bg-white rounded-lg shadow-sm p-3 hover:shadow-md transition">
                             <div class="w-12 h-12 bg-gray-100 rounded-md flex-shrink-0 overflow-hidden">
-                                <img src="{{game.icon.url}}" alt="FIFA 23"
+                                {% if game.icon %}
+                                <img src="{{game.icon.url}}" alt="{{game.name}}"
                                     class="w-full h-full object-cover">
+                                {% elif game.image_url %}
+                                <img src="{{game.image_url}}" alt="{{game.name}}"
+                                    class="w-full h-full object-cover">
+                                {% endif %}
                             </div>
                             <span class="ml-4 text-gray-700">{{game.name}}</span>
                         </a>
@@ -372,9 +387,15 @@
                     {% for game in popular_games %}
                     <a href="{% url 'game_detail' game.id%}" class="block bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 mb-4 hover:bg-gray-50">
                         <div class="flex items-start gap-4">
+                            {% if game.icon %}
                             <img src="{{ game.icon.url }}"
                                  alt="{{ game.name }}"
                                  class="w-16 h-16 object-cover rounded-md flex-shrink-0">
+                            {% elif game.image_url %}
+                            <img src="{{ game.image_url }}"
+                                 alt="{{ game.name }}"
+                                 class="w-16 h-16 object-cover rounded-md flex-shrink-0">
+                            {% endif %}
                             <div>
                                 <h3 class="text-base md:text-lg font-semibold text-gray-800 hover:text-blue-600 transition-colors duration-200">
                                     {{ game.name }}
@@ -431,9 +452,15 @@
                 {% for post in posts %}
                 <div class="bg-white rounded-md shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300">
                     <div class="relative">
+                        {% if post.image %}
                         <img src="{{ post.image.url }}"
                              alt="{{ post.title }}"
                              class="w-full h-48 object-cover">
+                        {% elif post.image_url %}
+                        <img src="{{ post.image_url }}"
+                             alt="{{ post.title }}"
+                             class="w-full h-48 object-cover">
+                        {% endif %}
                         <span class="absolute top-4 left-4 bg-blue-500 text-white text-xs px-3 py-1 rounded-md font-medium">
                             HOW-TO GUIDES
                         </span>
@@ -462,8 +489,13 @@
                 {% for allgame in allgames %}
                 <div class="bg-white p-4 rounded-md shadow-sm">
                     <div class="flex items-center mb-4">
+                        {% if allgame.icon %}
                         <img src="{{ allgame.icon.url }}" alt="{{ allgame.name }}"
                              class="w-20 h-20 object-cover rounded-md mr-4" />
+                        {% elif allgame.image_url %}
+                        <img src="{{ allgame.image_url }}" alt="{{ allgame.name }}"
+                             class="w-20 h-20 object-cover rounded-md mr-4" />
+                        {% endif %}
                         <h3 class="font-bold text-lg">{{ allgame.name }}</h3>
                     </div>
                     <p class="text-sm text-gray-700 mb-4">

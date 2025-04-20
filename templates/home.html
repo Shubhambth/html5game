@@ -155,9 +155,15 @@
                     <a href="{% url 'game_detail' game.id %}" class="block w-full h-full">
                         <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 p-4 group">
                             <div class="mb-3 overflow-hidden rounded-xl">
+                                {% if game.icon %}
                                 <img src="{{game.icon.url}}"
                                      alt="{{ game.name }}"
                                      class="w-full h-40 object-cover transition-transform duration-300 group-hover:scale-105">
+                                {% elif game.image_url %}
+                                <img src="{{game.image_url}}"
+                                     alt="{{ game.name }}"
+                                     class="w-full h-40 object-cover transition-transform duration-300 group-hover:scale-105">
+                                {% endif %}
                             </div>
                             <h3 class="text-lg font-semibold text-gray-800 mb-1 group-hover:text-blue-600 transition-colors duration-200">
                                 {{ game.name }}
@@ -196,8 +202,13 @@
                     <a href="{% url 'game_detail' game.id %}" class="block hover:bg-gray-100 hover:shadow-lg transition-all duration-300 ease-in-out">
                         <div>
                             <div class="mb-2">
+                                {% if game.icon %}
                                 <img src="{{ game.icon.url }}" alt="{{ game.name }}"
                                      class="w-full rounded">
+                                {% elif game.image_url %}
+                                <img src="{{ game.image_url }}" alt="{{ game.name }}"
+                                     class="w-full rounded">
+                                {% endif %}
                             </div>
                             <h3 class="font-semibold text-sm mb-1">{{ game.name }}</h3>
                             <div class="rating text-sm">
@@ -228,9 +239,15 @@
                 <!-- Blog Post 1 -->
                 {% for post in posts%}
                 <div class="relative group overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
+                    {% if post.image %}
                     <img src="{{ post.image.url }}"
                          alt="{{ post.title }}"
                          class="w-full h-40 object-cover transform transition-transform duration-300 group-hover:scale-105">
+                    {% elif post.image_url %}
+                    <img src="{{ post.image_url }}"
+                         alt="{{ post.title }}"
+                         class="w-full h-40 object-cover transform transition-transform duration-300 group-hover:scale-105">
+                    {% endif %}
 
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 flex flex-col justify-end transition-all duration-300">
                         <a href="/" class="text-white font-semibold text-sm md:text-base group-hover:text-blue-400 transition-colors duration-200">

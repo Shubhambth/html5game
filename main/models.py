@@ -4,7 +4,8 @@ from django_ckeditor_5.fields import CKEditor5Field
 
 class Game(models.Model):
     name = models.CharField(max_length=255)
-    icon = models.ImageField(upload_to='icons/')
+    icon = models.ImageField(upload_to='icons/',blank=True, null=True)
+    image_url = models.URLField(blank=True, null=True, default=None)
     review = CKEditor5Field('Text', config_name='extends')
 
     screenshots = models.JSONField(default=list, blank=True)  # or use separate model if you want uploads
@@ -41,7 +42,8 @@ class Category(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(unique=True, blank=True)
-    image = models.ImageField(upload_to='post_images/')
+    image = models.ImageField(upload_to='post_images/',blank=True, null=True)
+    image_url = models.URLField(blank=True, null=True, default=None)  # ✅ Added field
     content = CKEditor5Field('Text', config_name='extends')
     views = models.PositiveIntegerField(default=0)
     categories = models.ManyToManyField(Category, blank=True, related_name='posts')
@@ -58,3 +60,4 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+

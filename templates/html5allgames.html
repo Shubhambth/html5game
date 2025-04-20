@@ -205,8 +205,13 @@
             <a href="{% url 'game_detail' game.id %}">
                 <div
                     class="game-item bg-blue-200 relative shadow-md transform transition-transform duration-200 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
+                    {% if game.icon %}
                     <img src="{{ game.icon.url }}"
                         alt="{{ game.name }}" class="w-full h-full object-cover" />
+                    {% elif game.image_url %}
+                    <img src="{{ game.image_url }}"
+                        alt="{{ game.name }}" class="w-full h-full object-cover" />
+                    {% endif %}
                     <div
                         class="absolute bottom-0 left-0 w-full opacity-0 transition-opacity duration-200 hover:opacity-100">
                         <div
