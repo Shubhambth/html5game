@@ -216,15 +216,17 @@
                                 <span>★</span>
                             </div>
                             <p class="text-gray-600 mb-4 text-sm">All trademarks belong to their respective owners.</p>
-                            <div class="relative w-full game-btn">
+                            <div class="relative w-full max-w-sm mx-auto overflow-hidden">
                                 <a href="{% url 'detailpage2' game.id %}"
-                                   class="block w-full bg-blue-400 hover:bg-blue-500 text-white px-8 py-3 rounded-md uppercase font-bold tracking-wide animate-pulse relative z-10 text-center">
+                                   class="relative z-10 block w-full bg-blue-400 hover:bg-blue-500 text-white px-4 py-3 rounded-md uppercase font-bold tracking-wide animate-pulse text-center">
                                    GET GAME
                                 </a>
 
-
-                                <div class="btn-wave absolute inset-0 rounded-md border-2 border-blue-400 animate-ping opacity-75 z-0"></div>
+                                <!-- Button wave effect (ping animation) -->
+                                
                             </div>
+
+
 
 
                         </div>
@@ -561,7 +563,7 @@
                     <h3 class="text-lg font-bold mb-4">Contact us</h3>
                     <ul class="space-y-2">
                         <li><a href="{%url 'about'%}" class="text-gray-400 hover:text-white text-sm">About Us</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white text-sm">Privacy policy</a></li>
+                        <li><a href="{% url 'privacy' %}" class="text-gray-400 hover:text-white text-sm">Privacy policy</a></li>
                        
                     </ul>
                 </div>

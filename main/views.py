@@ -58,5 +58,8 @@ def blogdetail(request, slug):
     post.increase_views()
     return render(request, 'blogdetail.html', {'post': post,'allgames':allgames,'popular_games': popular_games})
 
+def privacy(request):
+    return render(request, 'privacy.html')
+
 
 

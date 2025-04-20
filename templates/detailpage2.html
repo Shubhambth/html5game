@@ -137,26 +137,29 @@
                 </div>
             </div>
 
-            <div id="popupModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-                <div class="bg-white p-6 rounded-md w-96 relative">
+           
+            <div id="popupModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden px-4">
+                <div class="bg-white p-6 rounded-md w-full max-w-md relative">
                     <h2 class="text-lg font-semibold mb-2">Please wait <span id="countdown">5</span> seconds...</h2>
 
                     <!-- Ad Area -->
-                    <div class="bg-gray-100 p-4 rounded mb-3">
-                        <p class="text-sm text-gray-600">
+                    <div class="bg-gray-100 p-4 rounded mb-3 w-full h-full">
+                        <div class="w-full h-full">
                             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8421665977210633"
-                             crossorigin="anonymous"></script>
-                        <!-- lastad -->
-                        <ins class="adsbygoogle"
-                             style="display:block"
-                             data-ad-client="ca-pub-8421665977210633"
-                             data-ad-slot="9012439832"
-                             data-ad-format="auto"
-                             data-full-width-responsive="true"></ins>
-                        <script>
-                             (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script></p>
+                                 crossorigin="anonymous"></script>
+                            <!-- lastad -->
+                            <ins class="adsbygoogle"
+                                 style="display:block"
+                                 data-ad-client="ca-pub-8421665977210633"
+                                 data-ad-slot="9012439832"
+                                 data-ad-format="auto"
+                                 data-full-width-responsive="true"></ins>
+                            <script>
+                                 (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </div>
                     </div>
+
 
                     <!-- Close Button (hidden initially) -->
                     <button id="closePopup" onclick="closeAndRedirect()" class="absolute top-2 right-2 text-gray-500 hover:text-red-500 hidden text-lg">
@@ -164,6 +167,7 @@
                     </button>
                 </div>
             </div>
+
 
             <!-- Game Options -->
             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8421665977210633"
@@ -470,7 +474,7 @@
                     <h3 class="text-lg font-bold text-cyan-500 mb-4">Contact us</h3>
                     <ul class="space-y-2">
                         <li><a href="{% url 'blog' %}" class="text-sm text-gray-600 hover:text-cyan-500">About Us</a></li>
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-cyan-500">Privacy policy</a></li>
+                        <li><a href="{% url 'privacy' %}" class="text-sm text-gray-600 hover:text-cyan-500">Privacy policy</a></li>
                         
                     </ul>
                 </div>
@@ -511,7 +515,7 @@
 
                     modal.classList.remove('hidden');
 
-                    let timeLeft = 5;
+                    let timeLeft = 8;
                     countdown.textContent = timeLeft;
 
                     const timer = setInterval(() => {
