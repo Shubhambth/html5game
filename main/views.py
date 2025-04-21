@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .models import Game , Category ,Post
+from django.http import HttpResponse
+import os
 
 
 def home(request):
@@ -64,6 +66,11 @@ def privacy(request):
 
 def disclamer(request):
     return render(request, 'disclamer.html')
+
+def ads_txt(request):
+    file_path = os.path.join(os.path.dirname(__file__), 'ads.txt')
+    with open(file_path, 'r') as f:
+        return HttpResponse(f.read(), content_type="text/plain")
 
 
 

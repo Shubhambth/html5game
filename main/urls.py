@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home , detailpage1 , allgames , gamerivew, about , blog , detailpage2 , blogdetail , privacy , disclamer
+from .views import home , detailpage1 , allgames , gamerivew, about , blog , detailpage2 , blogdetail , privacy , disclamer , ads_txt
 
 
 urlpatterns = [
@@ -13,6 +13,7 @@ urlpatterns = [
   path('blog/', blog, name='blog'),
   path('blog/<slug:slug>/', blogdetail, name='blog_detail'),
   path('privacy/', privacy, name='privacy'),
-  path('disclamer/', disclamer, name='disclamer')
+  path('disclamer/', disclamer, name='disclamer'),
+  path('ads.txt', ads_txt, name='ads_txt'),
   
 ]
