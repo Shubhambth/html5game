@@ -250,7 +250,7 @@
                     {% endif %}
 
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 flex flex-col justify-end transition-all duration-300">
-                        <a href="/" class="text-white font-semibold text-sm md:text-base group-hover:text-blue-400 transition-colors duration-200">
+                        <a href="{% url 'blog_detail' slug=post.slug %}" class="text-white font-semibold text-sm md:text-base group-hover:text-blue-400 transition-colors duration-200">
                             {{ post.title }}
                         </a>
                         <p class="text-gray-300 text-xs mt-1">{{ post.created_at }}</p>
