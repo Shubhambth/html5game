@@ -106,18 +106,8 @@
     <!-- Advertisement Block -->
     <div class="my-8">
       <div class="bg-gray-100 p-6 rounded-md text-center border border-gray-300">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8421665977210633"
-           crossorigin="anonymous"></script>
-        <!-- rectangle ads -->
-        <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-8421665977210633"
-           data-ad-slot="9922948821"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-        <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+        {{ads_code.blogdetailad1|safe}}
+        
       </div>
     </div>
 
@@ -221,7 +211,7 @@
         </div>
     </div>
   </div>
-
+  {{ads_code.blogdetailad2|safe}}
   <!-- Footer -->
   <footer class="bg-[#f4faff] py-10 text-sm text-gray-600">
     <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">

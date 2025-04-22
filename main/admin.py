@@ -1,7 +1,8 @@
 from django.contrib import admin
-from .models import Game , Post, Category
+from .models import Game , Post, Category , AdsCode
 
 admin.site.register(Game)
+admin.site.register(AdsCode)
 
 
 

@@ -61,3 +61,17 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+
+
+class AdsCode(models.Model):
+    allgamespage = models.TextField(blank=True, null=True)
+    detailpage1 = models.TextField(blank=True, null=True)
+    detailpage2 = models.TextField(blank=True, null=True)
+    blogads1 = models.TextField(blank=True, null=True)
+    blogads2 = models.TextField(blank=True, null=True)
+    gamerivew = models.TextField(blank=True, null=True)
+    blogdetailad1 = models.TextField(blank=True, null=True)
+    blogdetailad2 = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return "Ads Code"
